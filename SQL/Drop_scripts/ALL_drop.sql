@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS category CASCADE;
+DROP TABLE IF EXISTS subcategory CASCADE;
+DROP TABLE IF EXISTS itemtablenames CASCADE;
+DROP TABLE IF EXISTS category_subcategory CASCADE;
+DROP TABLE IF EXISTS subcategory_itemtable CASCADE;
