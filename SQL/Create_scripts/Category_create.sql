@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS Category;
-
-CREATE TABLE Category
-(
-  Name VARCHAR(255) PRIMARY KEY,
-  Img_Link VARCHAR(1023)
-);

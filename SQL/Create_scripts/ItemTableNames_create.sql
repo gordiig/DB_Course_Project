@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS ItemTableNames;
-
-CREATE TABLE ItemTableNames
-(
-  ID INT PRIMARY KEY,
-  Table_Name VARCHAR(255)
-);
