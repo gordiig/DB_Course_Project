@@ -34,7 +34,7 @@ CREATE TABLE Categories
 CREATE TABLE Users
 (
   ID SERIAL PRIMARY KEY,
-  User_Name VARCHAR(31) DEFAULT CONCAT('USER', cast(random() AS TEXT)) NOT NULL,
+  User_Name VARCHAR(31) DEFAULT CONCAT('USER', cast(random()*10000 AS TEXT)) NOT NULL,
   First_Name VARCHAR(63),
   Last_Name VARCHAR(63),
   Date_Of_Registration DATE DEFAULT current_date NOT NULL,
