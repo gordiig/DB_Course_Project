@@ -13,6 +13,8 @@
 		13857391204D442A0032054F /* UNIVERmag.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1385738F204D442A0032054F /* UNIVERmag.xcdatamodeld */; };
 		13857393204D442A0032054F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13857392204D442A0032054F /* Assets.xcassets */; };
 		13857396204D442A0032054F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13857394204D442A0032054F /* LaunchScreen.storyboard */; };
+		1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739D204D9A440032054F /* ShoppingItemsViewController.swift */; };
+		138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		13857392204D442A0032054F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13857395204D442A0032054F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13857397204D442A0032054F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1385739D204D9A440032054F /* ShoppingItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemsViewController.swift; sourceTree = "<group>"; };
+		1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				13857388204D442A0032054F /* AppDelegate.swift */,
 				1385738A204D442A0032054F /* ViewController.swift */,
 				1385738C204D442A0032054F /* Main.storyboard */,
+				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
+				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
 				13857392204D442A0032054F /* Assets.xcassets */,
 				13857394204D442A0032054F /* LaunchScreen.storyboard */,
 				13857397204D442A0032054F /* Info.plist */,
@@ -140,8 +146,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13857391204D442A0032054F /* UNIVERmag.xcdatamodeld in Sources */,
+				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
 				1385738B204D442A0032054F /* ViewController.swift in Sources */,
 				13857389204D442A0032054F /* AppDelegate.swift in Sources */,
+				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
