@@ -19,11 +19,27 @@ class UserInfoViewController: UIViewController
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
+    var user = User()
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        usernameLabel.text = user.username
+        firstNameLabel.text = user.firstName
+        lastNameLabel.text = user.lastName
+        emailLabel.text = user.email
+        phoneLabel.text = user.phoneNumber
+        cityLabel.text = user.city
+        dateLabel.text = formatter.string(from: user.dateOfRegistration)
+        aboutLabel.text = user.about
     }
 
     override func didReceiveMemoryWarning()
@@ -35,6 +51,18 @@ class UserInfoViewController: UIViewController
     
     @IBAction func logOutButPressed(_ sender: Any)
     {
+        let defaults = UserDefaults.standard
+        
+        defaults.removeObject(forKey: "Username")
+        defaults.removeObject(forKey: "Password")
+        
+        guard let logInVC = self.storyboard?.instantiateViewController(withIdentifier: "LogInVC") else
+        {
+            self.showAlert(withString: "Something wrong with entering LogInVC")
+            return
+        }
+        
+        self.present(logInVC, animated: true, completion: nil)
     }
     
     private func showAlert(withString str: String)
