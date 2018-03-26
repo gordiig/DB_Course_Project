@@ -79,21 +79,28 @@ class User: NSObject
     func setFromData(_ data: Data) -> Bool
     {
         let decoder = JSONDecoder()
-        do
+        
+        let newUser = try? decoder.decode([UserStruct].self, from: data)
+        let newUser2 = try? decoder.decode(UserStruct.self, from: data)
+        
+        if newUser2 == nil && newUser == nil
         {
-            let newUser = try decoder.decode([UserStruct].self, from: data)
-            self.fillFromUserStruct(userStruct: newUser.last!)
-        }
-        catch let err
-        {
-            print("ERROR in making user from newUser")
-            print("ERROR: \(err)")
-            print("loc desc: \(err.localizedDescription)")
-            
+            print("Cand'decode data to newUser!")
             return false
         }
+        else if newUser2 == nil
+        {
+            self.fillFromUserStruct(userStruct: newUser!.last!)
+            return true
+        }
+        else if newUser == nil
+        {
+            self.fillFromUserStruct(userStruct: newUser2!)
+            return true
+        }
         
-        return true
+        print("func setFromData(_ data: Data) -> Bool in User. I shouldn't be here!!!")
+        return false
     }
     
     func encodeToJSONData() -> Data?
