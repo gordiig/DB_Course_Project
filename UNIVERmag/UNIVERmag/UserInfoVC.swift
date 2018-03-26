@@ -19,7 +19,7 @@ class UserInfoViewController: UIViewController
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
-    var user = User()
+    var user = CurrentUser.getUser
     
     
     override func viewDidLoad()

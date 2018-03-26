@@ -59,6 +59,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="LogInButton" destination="3Js-Mu-mXr" id="uzn-fY-H0Z"/>
                         <outlet property="passwordTextField" destination="PbJ-SM-yc6" id="6VD-mi-YO7"/>
                         <outlet property="usernameTextField" destination="9YR-jK-ZUm" id="ZNd-7l-pud"/>
                     </connections>

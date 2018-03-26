@@ -13,6 +13,7 @@ class ViewController: UIViewController
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var LogInButton: UIButton!
     
     override func viewDidLoad()
     {
@@ -35,12 +36,14 @@ class ViewController: UIViewController
             return
         }
         
-        checkLogIn(username: username, password: password)
+        LogInButton.isEnabled = false
+        getUserInfo(username: username, password: password)
     }
     
-    private func checkLogIn(username: String, password: String)
+
+    func getUserInfo(username: String, password: String)
     {
-        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/loginconfirm/")!
+        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_user_info/")!
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
         
@@ -54,7 +57,7 @@ class ViewController: UIViewController
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Error in GET:\n \(error!.localizedDescription)")
+                    self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
                 }
                 print("Error in GET:\n \(error!.localizedDescription)")
                 return
@@ -64,17 +67,22 @@ class ViewController: UIViewController
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Error in downloaded data:\n")
+                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
                 }
                 print("Error in downloaded data:\n")
                 return
             }
             
             let ans = String(data: data, encoding: .utf8)
-            if ans == "1"
+            if ans?.first != "0"
             {
                 DispatchQueue.main.async
                 {
+                    if !CurrentUser.getUser.setFromData(data)
+                    {
+                        self.showAlert(withString: "Can't set current user!\n")
+                        return
+                    }
                     self.saveUserPassword(username: username, password: password)
                     self.goToMainVC()
                 }
@@ -84,6 +92,14 @@ class ViewController: UIViewController
                 DispatchQueue.main.async
                 {
                     self.showAlert(withString: "Wrong Username or Password!")
+                }
+            }
+            
+            defer
+            {
+                DispatchQueue.main.async
+                {
+                    self.LogInButton.isEnabled = true
                 }
             }
         }
