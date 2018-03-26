@@ -8,8 +8,18 @@
 
 import UIKit
 
-class TmpViewController: UIViewController
+class UserInfoViewController: UIViewController
 {
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var aboutLabel: UILabel!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -22,22 +32,10 @@ class TmpViewController: UIViewController
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func clrButClicked(_ sender: Any)
-    {
-        let defaults = UserDefaults.standard
-        
-        defaults.removeObject(forKey: "Username")
-        defaults.removeObject(forKey: "Password")
-        
-        guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") else
-        {
-            self.showAlert(withString: "Something wrong with entering mainVC")
-            return
-        }
-        
-        self.present(loginVC, animated: true, completion: nil)
-    }
     
+    @IBAction func logOutButPressed(_ sender: Any)
+    {
+    }
     
     private func showAlert(withString str: String)
     {
