@@ -24,12 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (username != nil) && (password != nil)
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "mainTapBarViewController")
-            
-            self.window?.rootViewController = initialVC
-            self.window?.makeKeyAndVisible()
+            readUser()
+        }
+        else
+        {
+            defaults.removeObject(forKey: "Username")
+            defaults.removeObject(forKey: "Password")
         }
         
         return true
@@ -43,10 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        self.saveUser()
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        self.readUser()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -57,8 +62,78 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+        
+        self.saveUser()
+    }
+    
+    
+    // MARK: - My works
+    func saveUser()
+    {
+        let user = CurrentUser.getUser
+        guard let data = user.encodeToJSONData() else
+        {
+            let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: "Username")
+            defaults.removeObject(forKey: "Password")
+            print("user.encodeToJSONData returned nil!")
+            return
+        }
+        
+        let fileManager = FileManager.default
+        var fileURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last!
+        fileURL.appendPathComponent("userinfo.json")
+        
+        do
+        {
+            try data.write(to: fileURL)
+        }
+        catch
+        {
+            let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: "Username")
+            defaults.removeObject(forKey: "Password")
+            print("Didn't write userinfo!")
+            return
+        }
+    }
+    
+    func readUser()
+    {
+        let defaults = UserDefaults.standard
+        let user = CurrentUser.getUser
+        
+        let fileManager = FileManager.default
+        var userinfoURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last!
+        userinfoURL.appendPathComponent("userinfo.json")
+        
+        do
+        {
+            let userinfoFile = try FileHandle(forReadingFrom: userinfoURL)
+            let data = userinfoFile.readDataToEndOfFile()
+            try fileManager.removeItem(at: userinfoURL)
+            
+            if !user.setFromData(data)
+            {
+                defaults.removeObject(forKey: "Username")
+                defaults.removeObject(forKey: "Password")
+                print("Can't set user from readed data!")
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialVC = storyboard.instantiateViewController(withIdentifier: "mainTapBarViewController")
+            self.window?.rootViewController = initialVC
+            self.window?.makeKeyAndVisible()
+        }
+        catch
+        {
+            defaults.removeObject(forKey: "Username")
+            defaults.removeObject(forKey: "Password")
+            print("Can't read from userinfo.json, or delete file!")
+        }
     }
 
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
