@@ -43,6 +43,11 @@ class User: NSObject
  
     
     // MARKL - inits
+    override init()
+    {
+        super.init()
+    }
+    
     init?(fromData data: Data)
     {
         super.init()
