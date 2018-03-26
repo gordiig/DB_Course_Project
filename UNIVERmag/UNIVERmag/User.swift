@@ -26,7 +26,7 @@ class User: NSObject
     var city = "City"
     
     // MARK: - Decodable struct
-    private struct UserStruct: Decodable
+    private struct UserStruct: Codable
     {
         var id: Int
         var user_name: String
@@ -39,6 +39,24 @@ class User: NSObject
         var phone_number: String
         var email: String
         var city: String
+        
+        init(fromUser user: User)
+        {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            
+            self.id = user.ID
+            self.user_name = user.username
+            self.first_name = user.firstName
+            self.last_name = user.lastName
+            self.date_of_registration = formatter.string(from: user.dateOfRegistration)
+            self.password = user.password
+            self.img_url = user.imgUrl
+            self.about = user.about
+            self.phone_number = user.phoneNumber
+            self.email = user.email
+            self.city = user.city
+        }
     }
  
     
@@ -76,6 +94,22 @@ class User: NSObject
         }
         
         return true
+    }
+    
+    func encodeToJSONData() -> Data?
+    {
+        let encodableUser = UserStruct(fromUser: self)
+        let encoder = JSONEncoder()
+        
+        do
+        {
+            let data = try encoder.encode(encodableUser)
+            return data
+        }
+        catch
+        {
+            return nil
+        }
     }
     
     private func fillFromUserStruct(userStruct val: UserStruct)

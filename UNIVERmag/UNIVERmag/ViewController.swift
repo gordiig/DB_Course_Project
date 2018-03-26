@@ -40,7 +40,6 @@ class ViewController: UIViewController
         getUserInfo(username: username, password: password)
     }
     
-
     func getUserInfo(username: String, password: String)
     {
         var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_user_info/")!
