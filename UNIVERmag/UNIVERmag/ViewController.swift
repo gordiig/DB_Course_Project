@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController
+{
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -34,19 +35,78 @@ class ViewController: UIViewController {
             return
         }
         
-        if username == "admin" && password == "admin"
+        checkLogIn(username: username, password: password)
+    }
+    
+    private func checkLogIn(username: String, password: String)
+    {
+        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/loginconfirm/")!
+        finalURL.appendPathComponent(username)
+        finalURL.appendPathComponent(password)
+        
+        let urlRequest = URLRequest(url: finalURL)
+        let urlSession = URLSession(configuration: .default)
+        let task = urlSession.dataTask(with: urlRequest)
         {
-            guard let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainTapBarViewController") else
+            (data, response, error) in
+            
+            if error != nil
             {
-                let alert = UIAlertController(title: "Error", message: "Something wrong with entering mainVC", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                
-                self.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in GET:\n \(error!.localizedDescription)")
+                }
+                print("Error in GET:\n \(error!.localizedDescription)")
                 return
             }
             
-            self.present(mainVC, animated: true, completion: nil)
+            guard let data = data else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in downloaded data:\n")
+                }
+                print("Error in downloaded data:\n")
+                return
+            }
+            
+            let ans = String(data: data, encoding: .utf8)
+            if ans == "1"
+            {
+                DispatchQueue.main.async
+                {
+                    self.goToMainVC()
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Wrong Username or Password!")
+                }
+            }
         }
+        
+        task.resume()
+    }
+    
+    private func showAlert(withString str: String)
+    {
+        let alert = UIAlertController(title: "Error", message: str, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func goToMainVC()
+    {
+        guard let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainTapBarViewController") else
+        {
+            self.showAlert(withString: "Something wrong with entering mainVC")
+            return
+        }
+
+        self.present(mainVC, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning()

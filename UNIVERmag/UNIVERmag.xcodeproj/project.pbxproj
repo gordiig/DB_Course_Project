@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1376412420618A74008165B6 /* WebTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376412320618A74008165B6 /* WebTask.swift */; };
+		1376412620618B9A008165B6 /* UserOrientedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376412520618B9A008165B6 /* UserOrientedTask.swift */; };
+		1376412C20618F4F008165B6 /* SearchingOrientedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1376412B20618F4F008165B6 /* SearchingOrientedTask.swift */; };
 		13857389204D442A0032054F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13857388204D442A0032054F /* AppDelegate.swift */; };
 		1385738B204D442A0032054F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385738A204D442A0032054F /* ViewController.swift */; };
 		1385738E204D442A0032054F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1385738C204D442A0032054F /* Main.storyboard */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1376412320618A74008165B6 /* WebTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTask.swift; sourceTree = "<group>"; };
+		1376412520618B9A008165B6 /* UserOrientedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOrientedTask.swift; sourceTree = "<group>"; };
+		1376412B20618F4F008165B6 /* SearchingOrientedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingOrientedTask.swift; sourceTree = "<group>"; };
 		13857385204D442A0032054F /* UNIVERmag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UNIVERmag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13857388204D442A0032054F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1385738A204D442A0032054F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +47,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13764122206189D4008165B6 /* WebTask */ = {
+			isa = PBXGroup;
+			children = (
+				1376412320618A74008165B6 /* WebTask.swift */,
+				1376412520618B9A008165B6 /* UserOrientedTask.swift */,
+				1376412B20618F4F008165B6 /* SearchingOrientedTask.swift */,
+			);
+			path = WebTask;
+			sourceTree = "<group>";
+		};
 		1385737C204D442A0032054F = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +76,7 @@
 		13857387204D442A0032054F /* UNIVERmag */ = {
 			isa = PBXGroup;
 			children = (
+				13764122206189D4008165B6 /* WebTask */,
 				13857388204D442A0032054F /* AppDelegate.swift */,
 				1385738A204D442A0032054F /* ViewController.swift */,
 				1385738C204D442A0032054F /* Main.storyboard */,
@@ -146,9 +163,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				13857391204D442A0032054F /* UNIVERmag.xcdatamodeld in Sources */,
+				1376412C20618F4F008165B6 /* SearchingOrientedTask.swift in Sources */,
 				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
 				1385738B204D442A0032054F /* ViewController.swift in Sources */,
+				1376412420618A74008165B6 /* WebTask.swift in Sources */,
 				13857389204D442A0032054F /* AppDelegate.swift in Sources */,
+				1376412620618B9A008165B6 /* UserOrientedTask.swift in Sources */,
 				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
