@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1369B0182069322B00B480D2 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1369B0172069322B00B480D2 /* Users.swift */; };
 		13857389204D442A0032054F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13857388204D442A0032054F /* AppDelegate.swift */; };
 		1385738B204D442A0032054F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385738A204D442A0032054F /* ViewController.swift */; };
 		1385738E204D442A0032054F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1385738C204D442A0032054F /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1369B0172069322B00B480D2 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		13857385204D442A0032054F /* UNIVERmag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UNIVERmag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13857388204D442A0032054F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1385738A204D442A0032054F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,12 +71,13 @@
 				1385738C204D442A0032054F /* Main.storyboard */,
 				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
 				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
-				13857392204D442A0032054F /* Assets.xcassets */,
 				13C0F0F02068FDFF00CC5084 /* UserInfoVC.swift */,
+				13857392204D442A0032054F /* Assets.xcassets */,
 				13857394204D442A0032054F /* LaunchScreen.storyboard */,
 				13857397204D442A0032054F /* Info.plist */,
 				1385738F204D442A0032054F /* UNIVERmag.xcdatamodeld */,
 				13C0F0F2206912DC00CC5084 /* User.swift */,
+				1369B0172069322B00B480D2 /* Users.swift */,
 			);
 			path = UNIVERmag;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1369B0182069322B00B480D2 /* Users.swift in Sources */,
 				13857391204D442A0032054F /* UNIVERmag.xcdatamodeld in Sources */,
 				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
 				1385738B204D442A0032054F /* ViewController.swift in Sources */,
