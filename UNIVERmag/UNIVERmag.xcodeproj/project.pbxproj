@@ -18,6 +18,7 @@
 		13857396204D442A0032054F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13857394204D442A0032054F /* LaunchScreen.storyboard */; };
 		1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739D204D9A440032054F /* ShoppingItemsViewController.swift */; };
 		138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */; };
+		13C0F0F12068FDFF00CC5084 /* TmpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F02068FDFF00CC5084 /* TmpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		13857397204D442A0032054F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1385739D204D9A440032054F /* ShoppingItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemsViewController.swift; sourceTree = "<group>"; };
 		1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemTableViewCell.swift; sourceTree = "<group>"; };
+		13C0F0F02068FDFF00CC5084 /* TmpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
 				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
 				13857392204D442A0032054F /* Assets.xcassets */,
+				13C0F0F02068FDFF00CC5084 /* TmpViewController.swift */,
 				13857394204D442A0032054F /* LaunchScreen.storyboard */,
 				13857397204D442A0032054F /* Info.plist */,
 				1385738F204D442A0032054F /* UNIVERmag.xcdatamodeld */,
@@ -166,6 +169,7 @@
 				1376412C20618F4F008165B6 /* SearchingOrientedTask.swift in Sources */,
 				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
 				1385738B204D442A0032054F /* ViewController.swift in Sources */,
+				13C0F0F12068FDFF00CC5084 /* TmpViewController.swift in Sources */,
 				1376412420618A74008165B6 /* WebTask.swift in Sources */,
 				13857389204D442A0032054F /* AppDelegate.swift in Sources */,
 				1376412620618B9A008165B6 /* UserOrientedTask.swift in Sources */,
