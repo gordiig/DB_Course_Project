@@ -50,8 +50,8 @@ class User: NSObject
         let decoder = JSONDecoder()
         do
         {
-            let newUser = try decoder.decode(UserStruct.self, from: data)
-            self.fillFromUserStruct(userStruct: newUser)
+            let newUser = try decoder.decode([UserStruct].self, from: data)
+            self.fillFromUserStruct(userStruct: newUser.last!)
         }
         catch let err
         {
