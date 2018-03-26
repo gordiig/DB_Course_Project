@@ -67,7 +67,7 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
-        <!--Item 2-->
+        <!--Clear-->
         <scene sceneID="2bu-NO-PcV">
             <objects>
                 <viewController id="IHW-mT-cKW" customClass="TmpViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
@@ -92,7 +92,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Tr1-h0-6lg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="cqK-yz-qPa"/>
+                    <tabBarItem key="tabBarItem" title="Clear" id="cqK-yz-qPa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jwB-EL-dda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
