@@ -26,7 +26,7 @@ class User: NSObject
     var city = "City"
     
     // MARK: - Decodable struct
-    struct UserStruct: Decodable
+    private struct UserStruct: Decodable
     {
         var id: Int
         var user_name: String
@@ -52,6 +52,14 @@ class User: NSObject
     {
         super.init()
         
+        if !self.setFromData(data)
+        {
+            return nil
+        }
+    }
+    
+    func setFromData(_ data: Data) -> Bool
+    {
         let decoder = JSONDecoder()
         do
         {
@@ -64,11 +72,13 @@ class User: NSObject
             print("ERROR: \(err)")
             print("loc desc: \(err.localizedDescription)")
             
-            return nil
+            return false
         }
+        
+        return true
     }
     
-    func fillFromUserStruct(userStruct val: UserStruct)
+    private func fillFromUserStruct(userStruct val: UserStruct)
     {
         self.ID = val.id
         self.username = val.user_name
