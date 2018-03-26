@@ -17,6 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let defaults = UserDefaults.standard
+        let username = defaults.object(forKey: "Username") as? String
+        let password = defaults.object(forKey: "Password") as? String
+        
+        if (username != nil) && (password != nil)
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let initialVC = storyboard.instantiateViewController(withIdentifier: "mainTapBarViewController")
+            
+            self.window?.rootViewController = initialVC
+            self.window?.makeKeyAndVisible()
+        }
+        
         return true
     }
 

@@ -17,10 +17,10 @@ class ViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     
+    // MARK: - Loggining in
     @IBAction func logInButClicked(_ sender: Any)
     {
         let username = usernameTextField.text ?? ""
@@ -75,6 +75,7 @@ class ViewController: UIViewController
             {
                 DispatchQueue.main.async
                 {
+                    self.saveUserPassword(username: username, password: password)
                     self.goToMainVC()
                 }
             }
@@ -90,6 +91,7 @@ class ViewController: UIViewController
         task.resume()
     }
     
+    // MARK: - Some privates
     private func showAlert(withString str: String)
     {
         let alert = UIAlertController(title: "Error", message: str, preferredStyle: .alert)
@@ -107,6 +109,15 @@ class ViewController: UIViewController
         }
 
         self.present(mainVC, animated: true, completion: nil)
+    }
+    
+    // TODO: Make safe login save
+    private func saveUserPassword(username: String, password: String)
+    {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(username, forKey: "Username")
+        defaults.set(password, forKey: "Password")
     }
     
     override func didReceiveMemoryWarning()

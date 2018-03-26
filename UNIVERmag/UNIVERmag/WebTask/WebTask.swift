@@ -13,7 +13,7 @@ protocol WebTask
     var baseURL: URL { get }
     var finalURL: URL { get set }
     
-    func perform() -> Data?
+    func performWebTask() -> Data?
 }
 
 // For default baseURL value
