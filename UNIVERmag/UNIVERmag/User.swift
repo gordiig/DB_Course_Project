@@ -17,7 +17,7 @@ class User: NSObject
     var firstName: String?
     var lastName: String?
     var dateOfRegistration = Date()
-    private var password = "Password"
+    var password = "Password"
     var imgUrl: URL?
     var img: UIImage?
     var about: String?
@@ -60,7 +60,7 @@ class User: NSObject
     }
  
     
-    // MARKL - inits
+    // MARK: - inits
     override init()
     {
         super.init()
@@ -76,6 +76,7 @@ class User: NSObject
         }
     }
     
+    // MARK: - JSON methods
     func setFromData(_ data: Data) -> Bool
     {
         let decoder = JSONDecoder()
@@ -119,6 +120,8 @@ class User: NSObject
         }
     }
     
+    
+    // MARK: - Some privates
     private func fillFromUserStruct(userStruct val: UserStruct)
     {
         self.ID = val.id
