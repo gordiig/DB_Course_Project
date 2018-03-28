@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class User: NSObject
+class User: NSObject, JSONable
 {
     // MARK: - Vairables
     var ID = 0
@@ -66,18 +66,18 @@ class User: NSObject
         super.init()
     }
     
-    init?(fromData data: Data)
+    required init?(fromData data: Data)
     {
         super.init()
         
-        if !self.setFromData(data)
+        if !self.decodeFromJSON(data)
         {
             return nil
         }
     }
     
     // MARK: - JSON methods
-    func setFromData(_ data: Data) -> Bool
+    func decodeFromJSON(_ data: Data) -> Bool
     {
         let decoder = JSONDecoder()
         
@@ -104,7 +104,7 @@ class User: NSObject
         return false
     }
     
-    func encodeToJSONData() -> Data?
+    func encodeToJSON() -> Data?
     {
         let encodableUser = UserStruct(fromUser: self)
         let encoder = JSONEncoder()

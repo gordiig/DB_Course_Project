@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveUser()
     {
         let user = CurrentUser.getUser
-        guard let data = user.encodeToJSONData() else
+        guard let data = user.encodeToJSON() else
         {
             let defaults = UserDefaults.standard
             defaults.removeObject(forKey: "Username")
@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let data = userinfoFile.readDataToEndOfFile()
             try fileManager.removeItem(at: userinfoURL)
             
-            if !user.setFromData(data)
+            if !user.decodeFromJSON(data)
             {
                 defaults.removeObject(forKey: "Username")
                 defaults.removeObject(forKey: "Password")
