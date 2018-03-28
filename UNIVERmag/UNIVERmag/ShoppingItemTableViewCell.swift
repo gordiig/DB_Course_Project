@@ -18,7 +18,7 @@ class ShoppingItemTableViewCell: UITableViewCell
     {
         super.awakeFromNib()
         
-        itemImage.image = #imageLiteral(resourceName: "rzhekich")
+        itemImage.image = #imageLiteral(resourceName: "le_fu")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool)
