@@ -14,7 +14,6 @@ CREATE TABLE Items
   Name VARCHAR(255) NOT NULL,
   Date_added DATE DEFAULT current_date NOT NULL,
   Price MONEY,
-  Phone_Number VARCHAR(63) NOT NULL,
   Imgs_Url VARCHAR(1023)
 );
 
