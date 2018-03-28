@@ -36,18 +36,69 @@ class ShoppingItem: NSObject, JSONable
     {
         super.init()
         
+        if !self.decodeFromJSON(data)
+        {
+            return nil
+        }
+    }
+    
+    
+    // MARK: - Factory
+    static func itemsFactory(from data: Data) -> [ShoppingItem]?
+    {
+        let decoder = JSONDecoder()
         
+        guard let newItems = try? decoder.decode([ShoppingItemStruct].self, from: data) else
+        {
+            return nil
+        }
+        
+        var ans = [ShoppingItem]()
+        
+        for item in newItems
+        {
+            let newItem = ShoppingItem()
+            newItem.fillFromShoppingItemStruct(item)
+            ans.append(newItem)
+        }
+        
+        return ans
     }
     
     
     // MARK: - JSON work
     func decodeFromJSON(_ data: Data) -> Bool
     {
-        <#code#>
+        let decoder = JSONDecoder()
+        
+        guard let newItem = try? decoder.decode([ShoppingItemStruct].self, from: data) else
+        {
+            return false
+        }
+        
+        self.fillFromShoppingItemStruct(newItem.last!)
+        return true
     }
     
-    func encodeToJSON() -> Data?
+    func encodeToJSON() -> Data?        // TODO: - TODO
     {
-        <#code#>
+        return nil
+    }
+    
+    
+    // MARK: - Some privates
+    private func fillFromShoppingItemStruct(_ val: ShoppingItemStruct)
+    {
+        self.ID = val.id
+        self.name = val.name
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        self.dateAdded = formatter.date(from: val.date_added)!
+        
+        var priceString = val.price
+        priceString.removeFirst()
+        let str = priceString as NSString
+        self.price = str.doubleValue
     }
 }
