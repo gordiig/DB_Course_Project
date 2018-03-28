@@ -77,7 +77,7 @@ class ViewController: UIViewController
             {
                 DispatchQueue.main.async
                 {
-                    if !CurrentUser.getUser.setFromData(data)
+                    if !CurrentUser.getUser.decodeFromJSON(data)
                     {
                         self.showAlert(withString: "Can't set current user!\n")
                         return

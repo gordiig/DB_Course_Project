@@ -8,17 +8,10 @@
 
 import UIKit
 
-class testItem
-{
-    var image: UIImage?
-    var title = "Title"
-    var price = 420.0
-}
-
 class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
-    var items = [testItem]()
+    var items = [ShoppingItem]()
     
     override func viewDidLoad()
     {
@@ -27,10 +20,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         
-        for _ in 0 ..< 10
-        {
-            items.append(testItem())
-        }
+        self.webTask()
     }
     
     
@@ -48,8 +38,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             return UITableViewCell()
         }
         
-        cell.itemTitleLabel.text = "Title №\(indexPath.row + 1)"
-        cell.itemPriceLabel.text = String(Float((arc4random() % 10000) / 100))
+        cell.itemTitleLabel.text = items[indexPath.row].name
+        cell.itemPriceLabel.text = String(describing: items[indexPath.row].price)
         
         return cell
     }
@@ -64,6 +54,75 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: - Web task
+    func webTask()
+    {
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/a/")!
+        let urlRequest = URLRequest(url: finalURL)
+        let urlSession = URLSession(configuration: .default)
+        let task = urlSession.dataTask(with: urlRequest)
+        {
+            (data, response, error) in
+            
+            if error != nil
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
+                }
+                print("Error in GET:\n \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+                }
+                print("Error in downloaded data:\n")
+                return
+            }
+            
+            let ans = String(data: data, encoding: .utf8)
+            if ans?.first != "0"
+            {
+                DispatchQueue.main.async
+                {
+                    guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
+                    {
+                        self.items = [ShoppingItem()]
+                        self.tableView.reloadData()
+                        return
+                    }
+                    
+                    self.items = tmpItems
+                    self.tableView.reloadData()
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Wrong Username or Password!")
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
+    
+    // MARK: - Some privates
+    private func showAlert(withString str: String)
+    {
+        let alert = UIAlertController(title: "Error", message: str, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
