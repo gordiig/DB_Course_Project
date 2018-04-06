@@ -407,7 +407,7 @@
                                             <outlet property="itemImage" destination="Rp3-no-WP3" id="0KR-5i-jSl"/>
                                             <outlet property="itemPriceLabel" destination="Qg7-gc-S6Q" id="z7Z-QH-Ghz"/>
                                             <outlet property="itemTitleLabel" destination="KcH-I2-KgK" id="1fw-GZ-kcZ"/>
-                                            <segue destination="tZ1-FX-MJD" kind="show" id="D1b-49-uOn"/>
+                                            <segue destination="tZ1-FX-MJD" kind="show" identifier="ShoppingItemInfoSegue" id="D1b-49-uOn"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -430,18 +430,16 @@
         <!--Item info-->
         <scene sceneID="p9c-ZO-g4P">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="tZ1-FX-MJD" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="tZ1-FX-MJD" customClass="ShoppingItemInfoViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kg6-lC-qp7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="701"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vpp-ot-AfO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="631"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpp-ot-AfO">
+                                <rect key="frame" x="0.0" y="64" width="375" height="637"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dwt-NV-Pa6">
-                                        <rect key="frame" x="8" y="0.0" width="359" height="631"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dwt-NV-Pa6">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="631"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="le_fu" translatesAutoresizingMaskIntoConstraints="NO" id="lhV-vY-zVs">
                                                 <rect key="frame" x="59" y="8" width="240" height="240"/>
@@ -462,28 +460,28 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TM-3n-2cW">
-                                                <rect key="frame" x="135" y="363" width="89" height="30"/>
+                                                <rect key="frame" x="143" y="363" width="89" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaY-CH-0At">
-                                                <rect key="frame" x="88" y="287" width="263" height="30"/>
+                                                <rect key="frame" x="104" y="287" width="263" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPm-ei-GC6">
-                                                <rect key="frame" x="105" y="325" width="246" height="30"/>
+                                                <rect key="frame" x="121" y="325" width="246" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fS-eh-fOZ">
-                                                <rect key="frame" x="8" y="401" width="343" height="230"/>
+                                                <rect key="frame" x="8" y="401" width="359" height="230"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -491,15 +489,37 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="631" id="npV-zI-Fos"/>
+                                            <constraint firstAttribute="width" constant="359" id="thb-Ok-TJO"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Dwt-NV-Pa6" secondAttribute="bottom" id="Cnd-NI-BI3"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dwt-NV-Pa6" secondAttribute="trailing" id="Szp-TG-1lb"/>
+                                    <constraint firstItem="Dwt-NV-Pa6" firstAttribute="top" secondItem="Vpp-ot-AfO" secondAttribute="top" id="kc9-x1-haB"/>
+                                    <constraint firstItem="Dwt-NV-Pa6" firstAttribute="leading" secondItem="Vpp-ot-AfO" secondAttribute="leading" id="vpP-Sd-UiB"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Vpp-ot-AfO" firstAttribute="top" secondItem="1yo-BK-WSq" secondAttribute="top" id="Wem-t4-HgL"/>
+                            <constraint firstItem="Vpp-ot-AfO" firstAttribute="bottom" secondItem="1yo-BK-WSq" secondAttribute="bottom" id="fdL-BD-7oH"/>
+                            <constraint firstItem="Vpp-ot-AfO" firstAttribute="leading" secondItem="1yo-BK-WSq" secondAttribute="leading" id="h8u-Zl-hbk"/>
+                            <constraint firstItem="Vpp-ot-AfO" firstAttribute="trailing" secondItem="1yo-BK-WSq" secondAttribute="trailing" id="px2-7H-Haw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1yo-BK-WSq"/>
                     </view>
                     <navigationItem key="navigationItem" title="Item info" id="5qQ-tG-v7k"/>
                     <size key="freeformSize" width="375" height="701"/>
+                    <connections>
+                        <outlet property="aboutLabel" destination="8fS-eh-fOZ" id="pg7-sw-nWT"/>
+                        <outlet property="dateLabel" destination="cPm-ei-GC6" id="6rH-PO-Esk"/>
+                        <outlet property="imageView" destination="lhV-vY-zVs" id="vhP-cQ-2Dm"/>
+                        <outlet property="priceLabel" destination="XaY-CH-0At" id="mIG-Hh-Rzh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6I-U7-RDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

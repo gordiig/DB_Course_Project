@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */; };
 		133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */; };
 		1369B0182069322B00B480D2 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1369B0172069322B00B480D2 /* CurrentUser.swift */; };
 		13857389204D442A0032054F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13857388204D442A0032054F /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInfoViewController.swift; sourceTree = "<group>"; };
 		133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
 		1369B0172069322B00B480D2 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		13857385204D442A0032054F /* UNIVERmag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UNIVERmag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +60,7 @@
 			children = (
 				1385738A204D442A0032054F /* ViewController.swift */,
 				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
+				130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */,
 				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
 				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
 				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
@@ -105,8 +108,8 @@
 				130075D820774B430060CF46 /* Protocols */,
 				130075D720774B360060CF46 /* Models */,
 				130075D620774B160060CF46 /* VC */,
-				13857388204D442A0032054F /* AppDelegate.swift */,
 				1385738C204D442A0032054F /* Main.storyboard */,
+				13857388204D442A0032054F /* AppDelegate.swift */,
 				13857392204D442A0032054F /* Assets.xcassets */,
 				13857394204D442A0032054F /* LaunchScreen.storyboard */,
 				13857397204D442A0032054F /* Info.plist */,
@@ -188,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1369B0182069322B00B480D2 /* CurrentUser.swift in Sources */,
+				130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */,
 				13857391204D442A0032054F /* UNIVERmag.xcdatamodeld in Sources */,
 				133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */,
 				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
