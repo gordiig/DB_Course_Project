@@ -125,6 +125,22 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "ShoppingItemInfoSegue"
+        {
+            if let destinationVC = segue.destination as? ShoppingItemInfoViewController, let row = tableView.indexPathForSelectedRow?.row
+            {
+                destinationVC.item = items[row]
+            }
+            else
+            {
+                showAlert(withString: "Somethin wrong with show segue!")
+            }
+        }
+    }
+    
     // MARK: - Some privates
     private func showAlert(withString str: String)
     {
