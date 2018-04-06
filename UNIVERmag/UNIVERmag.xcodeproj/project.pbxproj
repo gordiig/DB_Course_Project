@@ -53,6 +53,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		130075D620774B160060CF46 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				1385738A204D442A0032054F /* ViewController.swift */,
+				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
+				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
+				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
+				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		130075D720774B360060CF46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				13C0F0F2206912DC00CC5084 /* User.swift */,
+				1369B0172069322B00B480D2 /* CurrentUser.swift */,
+				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		130075D820774B430060CF46 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				13DCB6F2206C0A4B00446339 /* JSONable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		1385737C204D442A0032054F = {
 			isa = PBXGroup;
 			children = (
@@ -72,21 +102,15 @@
 		13857387204D442A0032054F /* UNIVERmag */ = {
 			isa = PBXGroup;
 			children = (
+				130075D820774B430060CF46 /* Protocols */,
+				130075D720774B360060CF46 /* Models */,
+				130075D620774B160060CF46 /* VC */,
 				13857388204D442A0032054F /* AppDelegate.swift */,
-				1385738A204D442A0032054F /* ViewController.swift */,
 				1385738C204D442A0032054F /* Main.storyboard */,
-				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
-				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
-				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
-				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
 				13857392204D442A0032054F /* Assets.xcassets */,
 				13857394204D442A0032054F /* LaunchScreen.storyboard */,
 				13857397204D442A0032054F /* Info.plist */,
 				1385738F204D442A0032054F /* UNIVERmag.xcdatamodeld */,
-				13C0F0F2206912DC00CC5084 /* User.swift */,
-				1369B0172069322B00B480D2 /* CurrentUser.swift */,
-				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
-				13DCB6F2206C0A4B00446339 /* JSONable.swift */,
 			);
 			path = UNIVERmag;
 			sourceTree = "<group>";
