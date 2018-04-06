@@ -12,6 +12,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 {
     @IBOutlet weak var tableView: UITableView!
     var items = [ShoppingItem]()
+    private let itemsPerPage: Int = 20
+    private var nextItemNumForWebTask = 19
     
     override func viewDidLoad()
     {
@@ -20,7 +22,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.webTask()
+        self.webTask(page: 1)
     }
     
     
@@ -32,6 +34,12 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        if ((indexPath.row+1) % itemsPerPage == 0) && (indexPath.row == nextItemNumForWebTask)
+        {
+            nextItemNumForWebTask += itemsPerPage
+            webTask(page: ((indexPath.row+1) / itemsPerPage) + 1)
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingItemTableCell") as? ShoppingItemTableViewCell else
         {
             print("Can't dequeue")
@@ -58,9 +66,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     // MARK: - Web task
-    func webTask()
+    func webTask(page: Int)
     {
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/1/")!
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/")!
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
@@ -99,7 +107,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                         return
                     }
                     
-                    self.items = tmpItems
+//                    self.items = tmpItems
+                    self.items += tmpItems
                     self.tableView.reloadData()
                 }
             }
