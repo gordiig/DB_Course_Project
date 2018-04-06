@@ -18,7 +18,6 @@ class UserInfoViewController: UIViewController
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var aboutLabel: UILabel!
     var user = CurrentUser.getUser
     
     
@@ -39,7 +38,6 @@ class UserInfoViewController: UIViewController
         phoneLabel.text = user.phoneNumber
         cityLabel.text = user.city
         dateLabel.text = formatter.string(from: user.dateOfRegistration)
-        aboutLabel.text = user.about
     }
 
     override func didReceiveMemoryWarning()

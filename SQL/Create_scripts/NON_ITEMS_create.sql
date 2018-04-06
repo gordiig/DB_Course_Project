@@ -14,7 +14,8 @@ CREATE TABLE Items
   Name VARCHAR(255) NOT NULL,
   Date_added DATE DEFAULT current_date NOT NULL,
   Price MONEY,
-  Imgs_Url VARCHAR(1023)
+  Imgs_Url VARCHAR(1023),
+  About VARCHAR(1023)
 );
 
 CREATE TABLE Subcategories
@@ -32,14 +33,12 @@ CREATE TABLE Categories
 
 CREATE TABLE Users
 (
-  ID SERIAL PRIMARY KEY,
-  User_Name VARCHAR(31) DEFAULT CONCAT('USER', cast(random()*10000 AS TEXT)) NOT NULL,
+  User_Name VARCHAR(31) DEFAULT CONCAT('USER', cast(random()*10000 AS TEXT)) PRIMARY KEY,
   First_Name VARCHAR(63),
   Last_Name VARCHAR(63),
   Date_Of_Registration DATE DEFAULT current_date NOT NULL,
   Password VARCHAR(127) NOT NULL,
   Img_URL VARCHAR(1023),
-  About VARCHAR(1023),
   Phone_Number VARCHAR(63) NOT NULL,
   EMAIL VARCHAR(127) NOT NULL,
   City VARCHAR(63) NOT NULL
@@ -49,7 +48,7 @@ CREATE TABLE Users
 CREATE TABLE Item_User
 (
   Item_ID INT PRIMARY KEY REFERENCES Items(ID),
-  User_ID INT REFERENCES Users(ID)
+  User_ID VARCHAR(31) REFERENCES Users(User_Name)
 );
 
 CREATE TABLE Item_Subcategory
