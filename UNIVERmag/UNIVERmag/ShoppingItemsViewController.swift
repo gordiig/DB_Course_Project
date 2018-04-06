@@ -60,7 +60,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - Web task
     func webTask()
     {
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/a/")!
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/1/")!
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
