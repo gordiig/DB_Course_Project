@@ -1,9 +1,9 @@
 DROP TRIGGER IF EXISTS restart_item_sequence_after_delete ON items;
 DROP TRIGGER IF EXISTS restart_subcategories_sequence_after_delete ON subcategories;
-DROP TRIGGER IF EXISTS restart_users_sequence_after_delete ON users;
+-- DROP TRIGGER IF EXISTS restart_users_sequence_after_delete ON users;
 DROP FUNCTION IF EXISTS restart_item_sequence();
 DROP FUNCTION IF EXISTS restart_subcategories_sequence();
-DROP FUNCTION IF EXISTS restart_users_sequence();
+-- DROP FUNCTION IF EXISTS restart_users_sequence();
 
 -- ITEMS
 CREATE OR REPLACE FUNCTION restart_item_sequence() RETURNS TRIGGER AS $$
@@ -37,18 +37,18 @@ CREATE TRIGGER restart_subcategories_sequence_after_delete
   AFTER DELETE ON subcategories
     EXECUTE PROCEDURE restart_subcategories_sequence();
 
--- USERS
-CREATE OR REPLACE FUNCTION restart_users_sequence() RETURNS TRIGGER AS $$
-BEGIN
-
-  IF ((select count(*) from users) = 0) THEN
-    ALTER SEQUENCE users_id_seq RESTART WITH 1;
-  END IF;
-
-  RETURN NULL;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER restart_users_sequence_after_delete
-  AFTER DELETE ON users
-    EXECUTE PROCEDURE restart_users_sequence();
+-- -- USERS
+-- CREATE OR REPLACE FUNCTION restart_users_sequence() RETURNS TRIGGER AS $$
+-- BEGIN
+--
+--   IF ((select count(*) from users) = 0) THEN
+--     ALTER SEQUENCE users_id_seq RESTART WITH 1;
+--   END IF;
+--
+--   RETURN NULL;
+-- END;
+-- $$ LANGUAGE plpgsql;
+--
+-- CREATE TRIGGER restart_users_sequence_after_delete
+--   AFTER DELETE ON users
+--     EXECUTE PROCEDURE restart_users_sequence();
