@@ -17,11 +17,10 @@ class User: NSObject, JSONable
     var lastName: String?
     var dateOfRegistration = Date()
     var password = "Password"
-    var imgUrl: URL?
-    var img: UIImage?
     var phoneNumber = "+7 (999) 999-99-99"
     var email = "zzz@zzz.zz"
     var city = "City"
+    var img: String?
     
     // MARK: - Decodable struct
     private struct UserStruct: Codable
@@ -31,7 +30,7 @@ class User: NSObject, JSONable
         var last_name: String?
         var date_of_registration: String
         var password: String
-        var img_url: URL?
+        var image: String?
         var phone_number: String
         var email: String
         var city: String
@@ -46,7 +45,7 @@ class User: NSObject, JSONable
             self.last_name = user.lastName
             self.date_of_registration = formatter.string(from: user.dateOfRegistration)
             self.password = user.password
-            self.img_url = user.imgUrl
+            self.image = user.img
             self.phone_number = user.phoneNumber
             self.email = user.email
             self.city = user.city
@@ -122,7 +121,7 @@ class User: NSObject, JSONable
         self.firstName = val.first_name
         self.lastName = val.last_name
         self.password = val.password
-        self.imgUrl = val.img_url
+        self.img = val.image
         self.phoneNumber = val.phone_number
         self.email = val.email
         self.city = val.city

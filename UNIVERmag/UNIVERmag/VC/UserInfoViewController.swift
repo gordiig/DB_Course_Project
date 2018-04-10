@@ -38,6 +38,16 @@ class UserInfoViewController: UIViewController
         phoneLabel.text = user.phoneNumber
         cityLabel.text = user.city
         dateLabel.text = formatter.string(from: user.dateOfRegistration)
+        
+        guard let img = user.img else
+        {
+            return
+        }
+        guard let data = Data(base64Encoded: img) else
+        {
+            return
+        }
+        userImage.image = UIImage(data: data)
     }
 
     override func didReceiveMemoryWarning()
