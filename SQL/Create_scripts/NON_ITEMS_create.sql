@@ -14,8 +14,8 @@ CREATE TABLE Items
   Name VARCHAR(255) NOT NULL,
   Date_added DATE DEFAULT current_date NOT NULL,
   Price MONEY,
-  Imgs_Url VARCHAR(1023),
-  About VARCHAR(1023)
+  About VARCHAR(1023),
+  Image VARCHAR(100000)
 );
 
 CREATE TABLE Subcategories
@@ -38,7 +38,7 @@ CREATE TABLE Users
   Last_Name VARCHAR(63),
   Date_Of_Registration DATE DEFAULT current_date NOT NULL,
   Password VARCHAR(127) NOT NULL,
-  Img_URL VARCHAR(1023),
+  Image VARCHAR(100000),
   Phone_Number VARCHAR(63) NOT NULL,
   EMAIL VARCHAR(127) NOT NULL,
   City VARCHAR(63) NOT NULL
