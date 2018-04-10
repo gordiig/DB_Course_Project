@@ -27,6 +27,16 @@ class ShoppingItemInfoViewController: UIViewController
         dateLabel.text = formatter.string(from: item.dateAdded)
         aboutLabel.text = item.about
         priceLabel.text = String(describing: item.price) + "₽"
+        
+        guard let img = item.img else
+        {
+            return
+        }
+        guard let data = Data(base64Encoded: img) else
+        {
+            return
+        }
+        imageView.image = UIImage(data: data)
     }
 
     

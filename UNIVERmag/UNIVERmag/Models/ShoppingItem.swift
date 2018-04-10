@@ -15,6 +15,7 @@ class ShoppingItem: NSObject, JSONable
     var price = 99.99
     var about: String?
     var imgUrls: [URL]?
+    var img: String?
     
     private struct ShoppingItemStruct: Codable
     {
@@ -23,6 +24,7 @@ class ShoppingItem: NSObject, JSONable
         var price: String
         var about: String?
         var imgUrls: String?
+        var image: String?
     }
     
     
@@ -100,5 +102,7 @@ class ShoppingItem: NSObject, JSONable
         priceString.removeFirst()
         let str = priceString as NSString
         self.price = str.doubleValue
+        
+        self.img = val.image
     }
 }

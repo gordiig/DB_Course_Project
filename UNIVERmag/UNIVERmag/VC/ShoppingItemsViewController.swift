@@ -48,7 +48,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         cell.itemTitleLabel.text = items[indexPath.row].name
         cell.itemPriceLabel.text = String(describing: items[indexPath.row].price)
-        
+        cell.imgBase64 = items[indexPath.row].img
         return cell
     }
     
