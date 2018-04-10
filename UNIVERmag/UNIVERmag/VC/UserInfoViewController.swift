@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserInfoViewController: UIViewController
+class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -39,15 +39,7 @@ class UserInfoViewController: UIViewController
         cityLabel.text = user.city
         dateLabel.text = formatter.string(from: user.dateOfRegistration)
         
-        guard let img = user.img else
-        {
-            return
-        }
-        guard let data = Data(base64Encoded: img) else
-        {
-            return
-        }
-        userImage.image = UIImage(data: data)
+        self.setPic(base64: user.img)
     }
 
     override func didReceiveMemoryWarning()
@@ -57,6 +49,7 @@ class UserInfoViewController: UIViewController
     }
     
     
+    // MARK: - Button pressed
     @IBAction func logOutButPressed(_ sender: Any)
     {
         let defaults = UserDefaults.standard
@@ -73,11 +66,121 @@ class UserInfoViewController: UIViewController
         self.present(logInVC, animated: true, completion: nil)
     }
     
-    private func showAlert(withString str: String)
+    @IBAction func changeUserPhotoButPressed(_ sender: Any)
     {
-        let alert = UIAlertController(title: "Error", message: str, preferredStyle: .alert)
+        let controller = UIImagePickerController()
+        controller.delegate = self
+        controller.sourceType = .photoLibrary
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - delegates
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+    {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    {
+        let img = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        let base64 = img.base64(format: .jpeg(0.5))
+        if base64 != nil
+        {
+            webTask(base64!)
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - WebTask
+    func webTask(_ base64: String)
+    {
+        print("--")
+        print(base64)
+        print("--")
+        let newBase64 = base64.replacingOccurrences(of: "/", with: "&")
+        
+        let username = user.username
+        let password = user.password
+        
+        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/update_user_photo/")!
+        finalURL.appendPathComponent(username)
+        finalURL.appendPathComponent(password)
+        finalURL.appendPathComponent(newBase64)
+        
+        let urlRequest = URLRequest(url: finalURL)
+        let urlSession = URLSession(configuration: .default)
+        let task = urlSession.dataTask(with: urlRequest)
+        {
+            (data, response, error) in
+            
+            if error != nil
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Can't update! Please try again!:\n \(error!.localizedDescription)")
+                }
+                print("Error in GET:\n \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+                }
+                print("Error in downloaded data:\n")
+                return
+            }
+            
+            let ans = String(data: data, encoding: .utf8)
+            if ans?.first == "1"
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(title: "Sucsess!", withString: "Sucsessfully updated photo!")
+                    self.user.img = base64
+                    self.setPic(base64: base64)
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Something went wrong! Please try again!\n")
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
+    
+    // MARK: - Some privates
+    private func showAlert(title: String = "Error", withString str: String)
+    {
+        let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    private func setPic(base64: String?)
+    {
+        guard let img = base64 else
+        {
+            return
+        }
+        guard let data = Data(base64Encoded: img) else
+        {
+            return
+        }
+        userImage.image = UIImage(data: data)
+    }
+    
 }

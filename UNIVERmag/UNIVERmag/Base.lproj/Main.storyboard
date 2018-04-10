@@ -195,6 +195,18 @@
                                                     <segue destination="aky-Vh-zvd" kind="show" id="qyr-Ac-dZt"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ERo-AN-pKj">
+                                                <rect key="frame" x="67" y="216" width="240" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                                <state key="normal" title="Change photo">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeUserPhotoButPressed:" destination="IHW-mT-cKW" eventType="touchUpInside" id="rik-ln-naf"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
