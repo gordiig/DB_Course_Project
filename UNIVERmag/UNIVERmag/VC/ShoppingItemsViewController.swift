@@ -14,6 +14,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     var items = [ShoppingItem]()
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad()
     {
@@ -21,6 +22,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         
         self.webTask(page: 1)
     }
@@ -107,9 +112,13 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                         return
                     }
                     
-//                    self.items = tmpItems
+                    if page == 1
+                    {
+                        self.items = [ShoppingItem]()
+                    }
                     self.items += tmpItems
                     self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
             }
             else
@@ -123,6 +132,22 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         task.resume()
     }
+    
+    
+    // MARK: - Refresh
+    @objc func refresh(_ sender: Any)
+    {
+        self.webTask(page: 1)
+    }
+    
+    func refreshBegin(_ newtext:String, refreshEnd:(Int) -> ())
+    {
+        DispatchQueue.global(qos: .userInitiated).async
+        {
+            self.webTask(page: 1)
+        }
+    }
+    
     
     
     // MARK: - Segue
