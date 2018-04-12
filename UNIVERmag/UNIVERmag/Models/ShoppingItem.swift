@@ -14,7 +14,6 @@ class ShoppingItem: NSObject, JSONable
     var dateAdded = Date()
     var price = 99.99
     var about: String?
-    var imgUrls: [URL]?
     var img: String?
     
     private struct ShoppingItemStruct: Codable
@@ -23,7 +22,6 @@ class ShoppingItem: NSObject, JSONable
         var date_added: String
         var price: String
         var about: String?
-        var imgUrls: String?
         var image: String?
     }
     
