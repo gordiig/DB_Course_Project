@@ -48,7 +48,7 @@ CREATE TABLE Users
 CREATE TABLE Item_User
 (
   Item_ID INT PRIMARY KEY REFERENCES Items(ID),
-  User_ID VARCHAR(31) REFERENCES Users(User_Name)
+  User_Name VARCHAR(31) REFERENCES Users(User_Name)
 );
 
 CREATE TABLE Item_Subcategory
