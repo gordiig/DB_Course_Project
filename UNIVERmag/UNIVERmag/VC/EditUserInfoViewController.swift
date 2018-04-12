@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditUserInfoViewController: UIViewController
+class EditUserInfoViewController: UIViewController, Alertable
 {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -98,7 +98,7 @@ class EditUserInfoViewController: UIViewController
                     let defaults = UserDefaults.standard
                     defaults.set(newPassword, forKey: "Password")
                     
-                    self.showConfirmation(withString: "Sucsessfully updated profile!")
+                    self.showAlert(title: "Sucsess", withString: "Sucsessfully updated profile!")
                 }
             }
             else
@@ -123,27 +123,19 @@ class EditUserInfoViewController: UIViewController
     }
     
     
-    // MARK: - Alerts
-    private func showConfirmation(withString str: String)
+    // MARK: - Alertable
+    func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
     {
-        let alert = UIAlertController(title: "Sucsess!", message: str, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        self.present(alert, animated: true, completion: nil)
+        controller.present(alert, animated: true, completion: nil)
     }
     
-    private func showAlert(withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
-        let alert = UIAlertController(title: "Error", message: str, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
+        showAlert(controller: self, title: title, withString: str)
     }
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
 }

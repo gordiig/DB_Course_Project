@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable
 {
     @IBOutlet weak var tableView: UITableView!
     var items = [ShoppingItem]()
@@ -141,13 +141,17 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    // MARK: - Some privates
-    private func showAlert(withString str: String)
+    // MARK: - Alertable
+    func showAlert(controller: UIViewController, title: String, withString str: String)
     {
-        let alert = UIAlertController(title: "Error", message: str, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        self.present(alert, animated: true, completion: nil)
+        controller.present(alert, animated: true, completion: nil)
+    }
+    func showAlert(title: String = "Error", withString str: String)
+    {
+        showAlert(controller: self, title: title, withString: str)
     }
 
 }

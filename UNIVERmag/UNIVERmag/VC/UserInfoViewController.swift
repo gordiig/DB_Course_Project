@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, Alertable
 {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -161,15 +161,21 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     
-    // MARK: - Some privates
-    private func showAlert(title: String = "Error", withString str: String)
+    // MARK: - Alertable
+    func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        self.present(alert, animated: true, completion: nil)
+        controller.present(alert, animated: true, completion: nil)
     }
     
+    func showAlert(title: String = "Error", withString str: String)
+    {
+        showAlert(controller: self, title: title, withString: str)
+    }
+    
+    // MARK: - Some privates
     private func setPic(base64: String?)
     {
         guard let img = base64 else

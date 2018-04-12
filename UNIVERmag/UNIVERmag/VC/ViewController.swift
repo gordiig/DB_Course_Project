@@ -8,9 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController
+class ViewController: UIViewController, Alertable
 {
-
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var LogInButton: UIButton!
@@ -29,10 +28,7 @@ class ViewController: UIViewController
         
         if username.isEmpty || password.isEmpty
         {
-            let alert = UIAlertController(title: "Error", message: "Enter username and password!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
+            showAlert(withString: "Enter username and password!")
             return
         }
         
@@ -106,25 +102,34 @@ class ViewController: UIViewController
         task.resume()
     }
     
-    // MARK: - Some privates
-    private func showAlert(withString str: String)
+    
+    // MARK: - Alertable
+    func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
     {
-        let alert = UIAlertController(title: "Error", message: str, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-
-        self.present(alert, animated: true, completion: nil)
+        
+        controller.present(alert, animated: true, completion: nil)
     }
     
+    func showAlert(title: String = "Error", withString str: String)
+    {
+        showAlert(controller: self, title: title, withString: str)
+    }
+    
+    
+    // MARK: - Some privates
     private func goToMainVC()
     {
         guard let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainTapBarViewController") else
         {
-            self.showAlert(withString: "Something wrong with entering mainVC")
+            self.showAlert(controller: self, title: "Error", withString: "Something wrong with entering mainVC")
             return
         }
 
         self.present(mainVC, animated: true, completion: nil)
     }
+    
     
     // TODO: Make safe login save
     private func saveUserPassword(username: String, password: String)
@@ -133,12 +138,6 @@ class ViewController: UIViewController
         
         defaults.set(username, forKey: "Username")
         defaults.set(password, forKey: "Password")
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
