@@ -444,10 +444,10 @@
             </objects>
             <point key="canvasLocation" x="2589.5999999999999" y="-300"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Item View Controller-->
         <scene sceneID="pyC-hB-kwm">
             <objects>
-                <viewController restorationIdentifier="AddItemViewController" storyboardIdentifier="AddItemViewController" hidesBottomBarWhenPushed="YES" id="md8-c6-jJn" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AddItemViewController" storyboardIdentifier="AddItemViewController" hidesBottomBarWhenPushed="YES" id="md8-c6-jJn" customClass="AddItemViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="65l-1t-Zon">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="830"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -510,6 +510,22 @@
                                                 <rect key="frame" x="123" y="530" width="129" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Submit"/>
+                                                <connections>
+                                                    <action selector="submitButPressed:" destination="md8-c6-jJn" eventType="touchUpInside" id="TXZ-X8-ZfP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RH9-DC-S0P">
+                                                <rect key="frame" x="67" y="221" width="240" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                                <state key="normal" title="Upload photo">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeUserPhotoButPressed:" destination="IHW-mT-cKW" eventType="touchUpInside" id="csO-2c-YDA"/>
+                                                    <action selector="uploadPhotoButPressed:" destination="md8-c6-jJn" eventType="touchUpInside" id="ESE-Pi-IJl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -521,6 +537,13 @@
                         <viewLayoutGuide key="safeArea" id="Q2R-XY-jEa"/>
                     </view>
                     <size key="freeformSize" width="375" height="830"/>
+                    <connections>
+                        <outlet property="aboutTextField" destination="P0D-Q8-CKr" id="uiR-8S-5PJ"/>
+                        <outlet property="imageView" destination="mrM-Gf-7h3" id="USM-ZZ-tYD"/>
+                        <outlet property="nameTextField" destination="eO3-cf-CMS" id="2ft-eZ-MPZ"/>
+                        <outlet property="priceTextField" destination="Njz-31-atX" id="xhi-or-eeP"/>
+                        <outlet property="submitBut" destination="JAJ-tA-h4i" id="opi-Cv-snN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeK-yH-8Mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
