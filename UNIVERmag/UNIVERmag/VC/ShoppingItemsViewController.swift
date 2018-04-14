@@ -138,6 +138,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @objc func refresh(_ sender: Any)
     {
         self.webTask(page: 1)
+        self.nextItemNumForWebTask = 19
     }
     
     func refreshBegin(_ newtext:String, refreshEnd:(Int) -> ())
