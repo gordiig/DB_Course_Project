@@ -535,6 +535,13 @@
                         <viewLayoutGuide key="safeArea" id="Q2R-XY-jEa"/>
                     </view>
                     <size key="freeformSize" width="375" height="830"/>
+                    <connections>
+                        <outlet property="aboutTextField" destination="apZ-mh-0Wq" id="fHS-Sc-pdK"/>
+                        <outlet property="imageView" destination="g2G-uj-S3I" id="fCo-7h-Jb2"/>
+                        <outlet property="nameTextField" destination="Kvg-D8-DDQ" id="o9F-AW-HzY"/>
+                        <outlet property="priceTextField" destination="1Gk-8j-P9h" id="Ray-LL-XUX"/>
+                        <outlet property="submitBut" destination="KmF-t7-NHJ" id="VND-Yt-M0c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeK-yH-8Mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
