@@ -10,6 +10,7 @@ import Foundation
 
 class ShoppingItem: NSObject, JSONable
 {
+    var ID = 0
     var name = "Shopping item"
     var dateAdded = Date()
     var price = 99.99
@@ -18,6 +19,7 @@ class ShoppingItem: NSObject, JSONable
     
     private struct ShoppingItemStruct: Codable
     {
+        var id: Int
         var name: String
         var date_added: String
         var price: String
@@ -89,6 +91,7 @@ class ShoppingItem: NSObject, JSONable
     // MARK: - Some privates
     private func fillFromShoppingItemStruct(_ val: ShoppingItemStruct)
     {
+        self.ID = val.id
         self.name = val.name
         self.about = val.about
         
