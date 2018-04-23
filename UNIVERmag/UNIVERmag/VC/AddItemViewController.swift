@@ -88,7 +88,8 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         let name = sendingItem.name
         let price = sendingItem.price
         let about = sendingItem.about ?? "NULL"
-        let img = sendingItem.img ?? "NULL"
+        let _img = sendingItem.img ?? "NULL"
+        let img = _img.replacingOccurrences(of: "/", with: "$")
         
         var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/upload_item/")!
         finalURL.appendPathComponent(username)
@@ -137,11 +138,18 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.showAlert(withString: "Wrong Username or Password!")
                 }
             }
-            else
+            else if ans?.first == "2"
             {
                 DispatchQueue.main.async
                 {
                     self.showAlert(withString: "Wrong parameters number!")
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Unknown response: \(ans)!")
                 }
             }
         }
