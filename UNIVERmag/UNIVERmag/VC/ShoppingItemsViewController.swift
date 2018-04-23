@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable
+class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate
 {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var items = [ShoppingItem]()
+    var showingItems = [ShoppingItem]()
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
@@ -20,6 +21,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        searchBar.delegate = self
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -34,12 +37,12 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return items.count
+        return showingItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        if ((indexPath.row+1) % itemsPerPage == 0) && (indexPath.row == nextItemNumForWebTask)
+        if indexPath.row == nextItemNumForWebTask
         {
             nextItemNumForWebTask += itemsPerPage
             webTask(page: ((indexPath.row+1) / itemsPerPage) + 1)
@@ -51,9 +54,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             return UITableViewCell()
         }
         
-        cell.itemTitleLabel.text = items[indexPath.row].name
-        cell.itemPriceLabel.text = String(describing: items[indexPath.row].price)
-        cell.imgBase64 = items[indexPath.row].img
+        cell.itemTitleLabel.text = showingItems[indexPath.row].name
+        cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
+        cell.imgBase64 = showingItems[indexPath.row].img
         return cell
     }
     
@@ -63,10 +66,27 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         cell?.isSelected = false
     }
 
-    override func didReceiveMemoryWarning()
+    
+    // MARK: - UISearchBar
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        if searchText.isEmpty
+        {
+            showingItems = items
+        }
+        else
+        {
+            showingItems = items.filter(
+                {item -> Bool in
+                    let text = searchText.lowercased()
+                    let name = item.name.lowercased()
+                    
+                    return name.contains(text)
+                }
+            )
+        }
+        
+        tableView.reloadData()
     }
     
     
@@ -111,12 +131,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                         self.tableView.reloadData()
                         return
                     }
-                    
-                    if page == 1
-                    {
-                        self.items = [ShoppingItem]()
-                    }
                     self.items += tmpItems
+                    
+                    self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
                 }
@@ -137,18 +154,11 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - Refresh
     @objc func refresh(_ sender: Any)
     {
+        self.items = [ShoppingItem]()
+        
+        self.nextItemNumForWebTask = itemsPerPage - 1
         self.webTask(page: 1)
-        self.nextItemNumForWebTask = 19
     }
-    
-    func refreshBegin(_ newtext:String, refreshEnd:(Int) -> ())
-    {
-        DispatchQueue.global(qos: .userInitiated).async
-        {
-            self.webTask(page: 1)
-        }
-    }
-    
     
     
     // MARK: - Segue
@@ -180,4 +190,16 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         showAlert(controller: self, title: title, withString: str)
     }
 
+    
+    // MARK: - DidReceiveMemoryWarning
+    override func didReceiveMemoryWarning()
+    {
+        showingItems = [ShoppingItem]()
+        
+        items = [ShoppingItem]()
+        nextItemNumForWebTask = 19
+        tableView.reloadData()
+        
+        showAlert(withString: "Did recieve memory warning! Refresh the item table.")
+    }
 }
