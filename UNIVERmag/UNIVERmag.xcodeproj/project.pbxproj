@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */; };
 		133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */; };
+		1338E1EF208E166E00984217 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338E1EE208E166E00984217 /* MyItemsViewController.swift */; };
 		134DB01F207D0D45006D7E73 /* UIImageStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */; };
 		1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352C9EB207F215200C72D21 /* AddItemViewController.swift */; };
 		1352C9EE207F259600C72D21 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352C9ED207F259600C72D21 /* Alertable.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInfoViewController.swift; sourceTree = "<group>"; };
 		133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
+		1338E1EE208E166E00984217 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageStringExtension.swift; sourceTree = "<group>"; };
 		1352C9EB207F215200C72D21 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		1352C9ED207F259600C72D21 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				1385738A204D442A0032054F /* ViewController.swift */,
 				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
 				130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */,
+				1338E1EE208E166E00984217 /* MyItemsViewController.swift */,
 				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
 				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
 				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
@@ -212,6 +215,7 @@
 				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
 				13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */,
 				1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */,
+				1338E1EF208E166E00984217 /* MyItemsViewController.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
 				13C0F0F3206912DC00CC5084 /* User.swift in Sources */,
 			);

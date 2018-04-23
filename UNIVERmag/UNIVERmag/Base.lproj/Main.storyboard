@@ -448,7 +448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqt-QM-rx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2589.5999999999999" y="-300"/>
+            <point key="canvasLocation" x="2562" y="-1192"/>
         </scene>
         <!--Add Item View Controller-->
         <scene sceneID="pyC-hB-kwm">
@@ -553,7 +553,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeK-yH-8Mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3429.5999999999999" y="-1.7991004497751126"/>
+            <point key="canvasLocation" x="3402" y="-894"/>
         </scene>
         <!--Item info-->
         <scene sceneID="p9c-ZO-g4P">
@@ -651,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6I-U7-RDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3431" y="-769"/>
+            <point key="canvasLocation" x="3402" y="-1662"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="h20-y8-SyU">
@@ -665,11 +665,84 @@
                     <connections>
                         <segue destination="SgW-Hf-uwq" kind="relationship" relationship="viewControllers" id="O3p-75-ij4"/>
                         <segue destination="esD-jM-TBo" kind="relationship" relationship="viewControllers" id="nMj-BR-RPo"/>
+                        <segue destination="R6r-Xx-RWc" kind="relationship" relationship="viewControllers" id="jH2-vi-RMC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fss-3E-QM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="855" y="33"/>
+        </scene>
+        <!--My items-->
+        <scene sceneID="t6L-oG-UEy">
+            <objects>
+                <viewController id="R6r-Xx-RWc" customClass="MyItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XEP-K9-vz9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-rm-Sht">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="DJM-9e-Q1v">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ShoppingItemTableCell" rowHeight="80" id="QvE-px-AXH" customClass="ShoppingItemTableViewCell" customModule="UNIVERmag" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QvE-px-AXH" id="jAP-lR-r3K">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="79.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tcy-Qa-Flu">
+                                                    <rect key="frame" x="15" y="5" width="69" height="69"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420 руб" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A38-dL-o8N">
+                                                    <rect key="frame" x="92" y="48" width="242" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping item title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcR-HX-pR5">
+                                                    <rect key="frame" x="92" y="5" width="268" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="itemImage" destination="tcy-Qa-Flu" id="2Gf-3n-bSY"/>
+                                            <outlet property="itemPriceLabel" destination="A38-dL-o8N" id="VmJ-Lf-VTJ"/>
+                                            <outlet property="itemTitleLabel" destination="dcR-HX-pR5" id="RqP-4J-bcT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hSu-rm-Sht" firstAttribute="trailing" secondItem="UJa-2f-dcJ" secondAttribute="trailing" id="HTH-Hp-QN8"/>
+                            <constraint firstItem="hSu-rm-Sht" firstAttribute="leading" secondItem="UJa-2f-dcJ" secondAttribute="leading" id="m2c-Y4-mdj"/>
+                            <constraint firstItem="hSu-rm-Sht" firstAttribute="top" secondItem="UJa-2f-dcJ" secondAttribute="top" id="mLf-zN-ORj"/>
+                            <constraint firstItem="hSu-rm-Sht" firstAttribute="bottom" secondItem="UJa-2f-dcJ" secondAttribute="bottom" id="n5W-ot-tj5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UJa-2f-dcJ"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="My items" id="uMf-Om-zdQ"/>
+                    <connections>
+                        <outlet property="searchBar" destination="DJM-9e-Q1v" id="30N-cS-INA"/>
+                        <outlet property="tableView" destination="hSu-rm-Sht" id="6eL-Gt-mId"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VQl-b7-ZZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2092" y="33.733133433283363"/>
         </scene>
         <!--Profile-->
         <scene sceneID="X2F-ej-im1">
@@ -707,7 +780,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Er4-Kb-60z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1804.8" y="-299.55022488755623"/>
+            <point key="canvasLocation" x="1777" y="-1192"/>
         </scene>
     </scenes>
     <resources>

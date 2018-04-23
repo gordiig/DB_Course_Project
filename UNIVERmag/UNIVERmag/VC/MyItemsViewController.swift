@@ -1,0 +1,174 @@
+//
+//  MyItemsViewController.swift
+//  UNIVERmag
+//
+//  Created by Dmitry Gorin on 23.04.2018.
+//  Copyright © 2018 gordiig. All rights reserved.
+//
+
+import UIKit
+
+class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, Alertable
+{
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    var items = [ShoppingItem]()
+    var showingItems = [ShoppingItem]()
+    private let refreshControl = UIRefreshControl()
+    
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        searchBar.delegate = self
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: - UITableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return showingItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingItemTableCell") as? ShoppingItemTableViewCell else
+        {
+            print("Can't dequeue")
+            return UITableViewCell()
+        }
+        
+        cell.itemTitleLabel.text = showingItems[indexPath.row].name
+        cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
+        cell.imgBase64 = showingItems[indexPath.row].img
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.isSelected = false
+    }
+    
+    
+    // MARK: - Web task
+    func webTask()
+    {
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/username/")!
+        let urlRequest = URLRequest(url: finalURL)
+        let urlSession = URLSession(configuration: .default)
+        let task = urlSession.dataTask(with: urlRequest)
+        {
+            (data, response, error) in
+            
+            if error != nil
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
+                }
+                print("Error in GET:\n \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+                }
+                print("Error in downloaded data:\n")
+                return
+            }
+            
+            let ans = String(data: data, encoding: .utf8)
+            if ans?.first != "0"
+            {
+                DispatchQueue.main.async
+                {
+                    guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
+                    {
+                        self.items = [ShoppingItem()]
+                        self.tableView.reloadData()
+                        return
+                    }
+                    self.items += tmpItems
+                    
+                    self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
+                    self.tableView.reloadData()
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Wrong Username or Password!")
+                }
+            }
+            
+            defer
+            {
+                self.refreshControl.endRefreshing()
+            }
+        }
+        
+        task.resume()
+    }
+    
+    
+    // MARK: - UISearchBar
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if searchText.isEmpty
+        {
+            showingItems = items
+        }
+        else
+        {
+            showingItems = items.filter(
+                {item -> Bool in
+                    let text = searchText.lowercased()
+                    let name = item.name.lowercased()
+                    
+                    return name.contains(text)
+                }
+            )
+        }
+        
+        tableView.reloadData()
+    }
+    
+    
+    // MARK: - Refresh
+    @objc func refresh(_ sender: Any)
+    {
+        self.items = [ShoppingItem]()
+        self.webTask()
+    }
+    
+    
+    // MARK: - Alertable
+    func showAlert(controller: UIViewController, title: String, withString str: String)
+    {
+        let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        controller.present(alert, animated: true, completion: nil)
+    }
+    func showAlert(title: String = "Error", withString str: String)
+    {
+        showAlert(controller: self, title: title, withString: str)
+    }
+}
