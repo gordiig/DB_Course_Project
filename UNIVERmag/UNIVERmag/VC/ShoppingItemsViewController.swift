@@ -147,7 +147,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             
             defer
             {
-                self.refreshControl.endRefreshing()
+                DispatchQueue.main.async
+                {
+                    self.refreshControl.endRefreshing()
+                }
             }
         }
         

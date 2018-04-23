@@ -665,14 +665,14 @@
                     <connections>
                         <segue destination="SgW-Hf-uwq" kind="relationship" relationship="viewControllers" id="O3p-75-ij4"/>
                         <segue destination="esD-jM-TBo" kind="relationship" relationship="viewControllers" id="nMj-BR-RPo"/>
-                        <segue destination="R6r-Xx-RWc" kind="relationship" relationship="viewControllers" id="jH2-vi-RMC"/>
+                        <segue destination="F62-Vd-tdq" kind="relationship" relationship="viewControllers" id="jH2-vi-RMC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fss-3E-QM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="855" y="33"/>
         </scene>
-        <!--My items-->
+        <!--My Items-->
         <scene sceneID="t6L-oG-UEy">
             <objects>
                 <viewController id="R6r-Xx-RWc" customClass="MyItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
@@ -680,8 +680,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-rm-Sht">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-rm-Sht">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="DJM-9e-Q1v">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -734,7 +734,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UJa-2f-dcJ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My items" id="uMf-Om-zdQ"/>
+                    <navigationItem key="navigationItem" title="My Items" id="H8Y-5f-zM2"/>
                     <connections>
                         <outlet property="searchBar" destination="DJM-9e-Q1v" id="30N-cS-INA"/>
                         <outlet property="tableView" destination="hSu-rm-Sht" id="6eL-Gt-mId"/>
@@ -742,7 +742,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQl-b7-ZZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2092" y="33.733133433283363"/>
+            <point key="canvasLocation" x="3031.1999999999998" y="33.733133433283363"/>
         </scene>
         <!--Profile-->
         <scene sceneID="X2F-ej-im1">
@@ -781,6 +781,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Er4-Kb-60z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1777" y="-1192"/>
+        </scene>
+        <!--My items-->
+        <scene sceneID="4WN-uY-u7A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F62-Vd-tdq" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My items" id="uMf-Om-zdQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qpu-PX-NRL">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="R6r-Xx-RWc" kind="relationship" relationship="rootViewController" id="2Is-1H-2Rv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n4o-yD-adA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2092" y="33.733133433283363"/>
         </scene>
     </scenes>
     <resources>

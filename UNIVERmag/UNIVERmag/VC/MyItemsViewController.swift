@@ -28,11 +28,20 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        
+        self.webTask()
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        showingItems = [ShoppingItem]()
+        
+        items = [ShoppingItem]()
+        tableView.reloadData()
+        
+        showAlert(withString: "Did recieve memory warning! Refresh the item table.")
     }
     
     
@@ -66,7 +75,10 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - Web task
     func webTask()
     {
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/username/")!
+        let currentUser = CurrentUser.getUser
+        let username = currentUser.username
+        
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/user/\(username)")!
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
@@ -100,8 +112,8 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 {
                     guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
                     {
-                        self.items = [ShoppingItem()]
-                        self.tableView.reloadData()
+                        self.showAlert(withString: "Something wrong with incame items!")
+                        print("Data: \n\(String(describing: String(data: data, encoding: .utf8)))")
                         return
                     }
                     self.items += tmpItems
@@ -120,7 +132,10 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             defer
             {
-                self.refreshControl.endRefreshing()
+                DispatchQueue.main.async
+                {
+                    self.refreshControl.endRefreshing()
+                }
             }
         }
         
