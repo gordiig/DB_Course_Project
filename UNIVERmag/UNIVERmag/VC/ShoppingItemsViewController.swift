@@ -10,6 +10,7 @@ import UIKit
 
 class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable
 {
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var items = [ShoppingItem]()
     private let itemsPerPage: Int = 20
