@@ -21,6 +21,8 @@ class ShoppingItemInfoViewController: UIViewController
     {
         super.viewDidLoad()
         
+        self.title = item.name
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-YYYY"
         

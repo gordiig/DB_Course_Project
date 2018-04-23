@@ -254,7 +254,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jwB-EL-dda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2590" y="855"/>
+            <point key="canvasLocation" x="2561" y="854"/>
         </scene>
         <!--Edit-->
         <scene sceneID="Wlr-4o-fnU">
@@ -450,10 +450,10 @@
             </objects>
             <point key="canvasLocation" x="2562" y="-1192"/>
         </scene>
-        <!--Add Item View Controller-->
+        <!--Add item-->
         <scene sceneID="pyC-hB-kwm">
             <objects>
-                <viewController restorationIdentifier="AddItemViewController" storyboardIdentifier="AddItemViewController" hidesBottomBarWhenPushed="YES" id="md8-c6-jJn" customClass="AddItemViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AddItemViewController" storyboardIdentifier="AddItemViewController" title="Add item" hidesBottomBarWhenPushed="YES" id="md8-c6-jJn" customClass="AddItemViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="65l-1t-Zon">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="830"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -553,7 +553,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeK-yH-8Mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3402" y="-894"/>
+            <point key="canvasLocation" x="3812" y="-680"/>
         </scene>
         <!--Item info-->
         <scene sceneID="p9c-ZO-g4P">
@@ -651,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6I-U7-RDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3402" y="-1662"/>
+            <point key="canvasLocation" x="3812" y="-1433"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="h20-y8-SyU">
@@ -664,8 +664,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="SgW-Hf-uwq" kind="relationship" relationship="viewControllers" id="O3p-75-ij4"/>
-                        <segue destination="esD-jM-TBo" kind="relationship" relationship="viewControllers" id="nMj-BR-RPo"/>
                         <segue destination="F62-Vd-tdq" kind="relationship" relationship="viewControllers" id="jH2-vi-RMC"/>
+                        <segue destination="esD-jM-TBo" kind="relationship" relationship="viewControllers" id="nMj-BR-RPo"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fss-3E-QM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -683,14 +683,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-rm-Sht">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="DJM-9e-Q1v">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Shoes, books, etc." id="DJM-9e-Q1v">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ShoppingItemTableCell" rowHeight="80" id="QvE-px-AXH" customClass="ShoppingItemTableViewCell" customModule="UNIVERmag" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="84" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QvE-px-AXH" id="jAP-lR-r3K">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="79.5"/>
@@ -720,6 +720,7 @@
                                             <outlet property="itemImage" destination="tcy-Qa-Flu" id="2Gf-3n-bSY"/>
                                             <outlet property="itemPriceLabel" destination="A38-dL-o8N" id="VmJ-Lf-VTJ"/>
                                             <outlet property="itemTitleLabel" destination="dcR-HX-pR5" id="RqP-4J-bcT"/>
+                                            <segue destination="tZ1-FX-MJD" kind="show" identifier="ShoppingItemInfoSegue" id="sKS-tW-d9C"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -734,7 +735,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UJa-2f-dcJ"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Items" id="H8Y-5f-zM2"/>
+                    <navigationItem key="navigationItem" title="My Items" id="H8Y-5f-zM2">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="EZ1-s6-lT6">
+                            <connections>
+                                <segue destination="md8-c6-jJn" kind="show" id="gWh-74-0TQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="DJM-9e-Q1v" id="30N-cS-INA"/>
                         <outlet property="tableView" destination="hSu-rm-Sht" id="6eL-Gt-mId"/>
@@ -742,7 +749,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQl-b7-ZZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3031.1999999999998" y="33.733133433283363"/>
+            <point key="canvasLocation" x="2561" y="33"/>
         </scene>
         <!--Profile-->
         <scene sceneID="X2F-ej-im1">
@@ -761,7 +768,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Opq-4z-6IC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1804" y="855"/>
+            <point key="canvasLocation" x="1777" y="855"/>
         </scene>
         <!--Items-->
         <scene sceneID="7RT-yK-sPA">
@@ -799,11 +806,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n4o-yD-adA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2092" y="33.733133433283363"/>
+            <point key="canvasLocation" x="1777" y="33"/>
         </scene>
     </scenes>
     <resources>
         <image name="le_fu" width="640" height="637"/>
         <image name="rzhekich" width="320" height="267"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="sKS-tW-d9C"/>
+        <segue reference="Kyz-DN-Typ"/>
+    </inferredMetricsTieBreakers>
 </document>
