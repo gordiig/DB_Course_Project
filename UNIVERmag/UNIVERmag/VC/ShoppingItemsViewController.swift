@@ -135,7 +135,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                     
                     self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
                     self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()
                 }
             }
             else
@@ -144,6 +143,11 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                 {
                     self.showAlert(withString: "Wrong Username or Password!")
                 }
+            }
+            
+            defer
+            {
+                self.refreshControl.endRefreshing()
             }
         }
         
