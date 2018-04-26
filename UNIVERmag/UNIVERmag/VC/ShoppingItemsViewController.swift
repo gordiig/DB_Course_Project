@@ -12,8 +12,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    var items = [ShoppingItem]()
     var showingItems = [ShoppingItem]()
+    var savedBeforeWebTasksItems = [ShoppingItem]()
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
@@ -23,6 +23,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         
         searchBar.delegate = self
+        searchBar.showsCancelButton = true
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,6 +46,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         if indexPath.row == nextItemNumForWebTask
         {
             nextItemNumForWebTask += itemsPerPage
+            savedBeforeWebTasksItems = showingItems
             webTask(page: ((indexPath.row+1) / itemsPerPage) + 1)
         }
         
@@ -68,32 +70,40 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 
     
     // MARK: - UISearchBar
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
-        if searchText.isEmpty
-        {
-            showingItems = items
-        }
-        else
-        {
-            showingItems = items.filter(
-                {item -> Bool in
-                    let text = searchText.lowercased()
-                    let name = item.name.lowercased()
-                    
-                    return name.contains(text)
-                }
-            )
-        }
+        savedBeforeWebTasksItems = showingItems
+        showingItems = [ShoppingItem]()
         
-        tableView.reloadData()
+        var searchStr = searchBar.text ?? "NULL"
+        if searchStr == ""
+        {
+            searchStr = "NULL"
+        }
+        nextItemNumForWebTask = itemsPerPage-1
+        webTask(page: 1, searchStr: searchStr)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
+    {
+        searchBar.text = nil
+        
+        savedBeforeWebTasksItems = showingItems
+        showingItems = [ShoppingItem]()
+        
+        print("HERE\n")
+        
+        nextItemNumForWebTask = itemsPerPage-1
+        webTask(page: 1)
     }
     
     
     // MARK: - Web task
-    func webTask(page: Int)
+    func webTask(page: Int, searchStr: String = "NULL")
     {
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/")!
+        let search_str = searchStr.lowercased()
+        
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)")!
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
@@ -105,6 +115,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                 DispatchQueue.main.async
                 {
                     self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
+                    self.showingItems = self.savedBeforeWebTasksItems
                 }
                 print("Error in GET:\n \(error!.localizedDescription)")
                 return
@@ -115,6 +126,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                 DispatchQueue.main.async
                 {
                     self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+                    self.showingItems = self.savedBeforeWebTasksItems
                 }
                 print("Error in downloaded data:\n")
                 return
@@ -127,21 +139,30 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                 {
                     guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
                     {
-                        self.items = [ShoppingItem()]
-                        self.tableView.reloadData()
+                        self.showingItems = self.savedBeforeWebTasksItems
                         return
                     }
-                    self.items += tmpItems
+                    self.showingItems += tmpItems
                     
-                    self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
-                    self.tableView.reloadData()
+                    if (searchStr != "NULL") || (page == 1)
+                    {
+                        let range = NSMakeRange(0, self.tableView.numberOfSections)
+                        let sections = NSIndexSet(indexesIn: range)
+                        self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                    }
+                    else
+                    {
+                        self.tableView.reloadData()
+                    }
                 }
             }
             else
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Wrong Username or Password!")
+                    self.showAlert(withString: "No items for your result!")
+                    self.searchBar.text = nil
+                    self.showingItems = self.savedBeforeWebTasksItems
                 }
             }
             
@@ -150,6 +171,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                 DispatchQueue.main.async
                 {
                     self.refreshControl.endRefreshing()
+                    self.savedBeforeWebTasksItems = [ShoppingItem]()
                 }
             }
         }
@@ -161,7 +183,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - Refresh
     @objc func refresh(_ sender: Any)
     {
-        self.items = [ShoppingItem]()
+        self.savedBeforeWebTasksItems = showingItems
+        self.showingItems = [ShoppingItem]()
+        self.searchBar.text = nil
         
         self.nextItemNumForWebTask = itemsPerPage - 1
         self.webTask(page: 1)
@@ -175,7 +199,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         {
             if let destinationVC = segue.destination as? ShoppingItemInfoViewController, let row = tableView.indexPathForSelectedRow?.row
             {
-                destinationVC.item = items[row]
+                destinationVC.item = showingItems[row]
             }
             else
             {
@@ -201,11 +225,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - DidReceiveMemoryWarning
     override func didReceiveMemoryWarning()
     {
+        savedBeforeWebTasksItems = [ShoppingItem]()
         showingItems = [ShoppingItem]()
-        
-        items = [ShoppingItem]()
-        nextItemNumForWebTask = 19
-        tableView.reloadData()
+        nextItemNumForWebTask = itemsPerPage - 1
         
         showAlert(withString: "Did recieve memory warning! Refresh the item table.")
     }
