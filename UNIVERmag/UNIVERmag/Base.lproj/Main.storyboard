@@ -443,10 +443,10 @@
             </objects>
             <point key="canvasLocation" x="2562" y="-1192"/>
         </scene>
-        <!--fff-->
+        <!--Upload item-->
         <scene sceneID="pyC-hB-kwm">
             <objects>
-                <viewController restorationIdentifier="AddItemViewController" storyboardIdentifier="AddItemViewController" title="fff" hidesBottomBarWhenPushed="YES" id="md8-c6-jJn" customClass="AddItemViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AddItemViewController" storyboardIdentifier="AddItemViewController" title="Upload item" hidesBottomBarWhenPushed="YES" id="md8-c6-jJn" customClass="AddItemViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="65l-1t-Zon">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="830"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -509,6 +509,19 @@
                                                 <state key="normal" title="Submit"/>
                                                 <connections>
                                                     <action selector="submitButPressed:" destination="md8-c6-jJn" eventType="touchUpInside" id="bEb-a0-JK4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twv-NY-lDN">
+                                                <rect key="frame" x="67" y="224" width="240" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                                <state key="normal" title="Change photo">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeUserPhotoButPressed:" destination="IHW-mT-cKW" eventType="touchUpInside" id="0vC-m7-h8Y"/>
+                                                    <action selector="uploadPhotoButPressed:" destination="md8-c6-jJn" eventType="touchUpInside" id="aos-Eo-Y0e"/>
                                                 </connections>
                                             </button>
                                         </subviews>
