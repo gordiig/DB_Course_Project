@@ -65,6 +65,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         sendingItem.price = NSString(string: price).doubleValue
         sendingItem.about = about
         
+        submitBut.isEnabled = false
         webTask()
     }
     
@@ -150,6 +151,14 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
                 DispatchQueue.main.async
                 {
                     self.showAlert(withString: "Unknown response: \(ans)!")
+                }
+            }
+            
+            defer
+            {
+                DispatchQueue.main.async
+                {
+                    self.submitBut.isEnabled = true
                 }
             }
         }
