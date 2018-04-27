@@ -127,14 +127,18 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.items += tmpItems
                     
                     self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
-                    self.tableView.reloadData()
+                    
+                    // self.tableView.reloadData()
+                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                    let sections = NSIndexSet(indexesIn: range)
+                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
             }
             else
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Wrong Username or Password!")
+                    self.showAlert(title: "No items found", withString: "It seems you haven't uploaded any items. It's easy, just press the \"+\" button on the top bar!")
                 }
             }
             
@@ -193,7 +197,11 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.items.remove(at: row)
                     
                     self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
-                    self.tableView.reloadData()
+                    
+                    // self.tableView.reloadData()
+                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                    let sections = NSIndexSet(indexesIn: range)
+                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
             }
             else
@@ -228,7 +236,10 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
             )
         }
         
-        tableView.reloadData()
+        // tableView.reloadData()
+        let range = NSMakeRange(0, self.tableView.numberOfSections)
+        let sections = NSIndexSet(indexesIn: range)
+        self.tableView.reloadSections(sections as IndexSet, with: .automatic)
     }
     
     
