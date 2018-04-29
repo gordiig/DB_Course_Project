@@ -16,6 +16,7 @@ class ShoppingItem: NSObject, JSONable
     var price = 99.99
     var about: String?
     var img: String?
+    var uploaderUserName: String?
     
     private struct ShoppingItemStruct: Codable
     {
@@ -25,6 +26,8 @@ class ShoppingItem: NSObject, JSONable
         var price: String
         var about: String?
         var image: String?
+        var item_id: Int?
+        var user_name: String?
     }
     
     
@@ -94,6 +97,7 @@ class ShoppingItem: NSObject, JSONable
         self.ID = val.id
         self.name = val.name
         self.about = val.about
+        self.uploaderUserName = val.user_name
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
