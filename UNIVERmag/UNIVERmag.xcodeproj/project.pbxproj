@@ -24,6 +24,7 @@
 		138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */; };
 		13C0F0F12068FDFF00CC5084 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */; };
 		13C0F0F3206912DC00CC5084 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F2206912DC00CC5084 /* User.swift */; };
+		13C69E372095A6AE00B9BC66 /* SomeUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C69E362095A6AE00B9BC66 /* SomeUserViewController.swift */; };
 		13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F0206C083E00446339 /* ShoppingItem.swift */; };
 		13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F2206C0A4B00446339 /* JSONable.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemTableViewCell.swift; sourceTree = "<group>"; };
 		13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		13C0F0F2206912DC00CC5084 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		13C69E362095A6AE00B9BC66 /* SomeUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeUserViewController.swift; sourceTree = "<group>"; };
 		13DCB6F0206C083E00446339 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		13DCB6F2206C0A4B00446339 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +73,7 @@
 				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
 				1338E1EE208E166E00984217 /* MyItemsViewController.swift */,
 				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
+				13C69E362095A6AE00B9BC66 /* SomeUserViewController.swift */,
 				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
 				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
 				1352C9EB207F215200C72D21 /* AddItemViewController.swift */,
@@ -216,6 +219,7 @@
 				13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */,
 				1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */,
 				1338E1EF208E166E00984217 /* MyItemsViewController.swift in Sources */,
+				13C69E372095A6AE00B9BC66 /* SomeUserViewController.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
 				13C0F0F3206912DC00CC5084 /* User.swift in Sources */,
 			);
