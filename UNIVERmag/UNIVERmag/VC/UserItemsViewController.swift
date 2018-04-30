@@ -29,14 +29,14 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        
+        let username = user.username
+        self.webTask(username: username)
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         self.title = "\(user.username)'s items"
-        
-        let username = user.username
-        self.webTask(username: username)
     }
 
     override func didReceiveMemoryWarning()
