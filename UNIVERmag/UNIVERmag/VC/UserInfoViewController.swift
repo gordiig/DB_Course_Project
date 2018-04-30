@@ -21,6 +21,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var changePhotoBut: UIButton!
     @IBOutlet weak var editProfileBut: UIButton!
     @IBOutlet weak var logOutBut: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var user = CurrentUser.getUser
     
     
@@ -43,6 +44,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             let tmpName = user.username
             if tmpName != "Debug"
             {
+                activityIndicator.startAnimating()
                 webTask(username: user.username)
             }
         }
@@ -221,6 +223,14 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 DispatchQueue.main.async
                 {
                     self.showAlert(withString: "No such user, or another error occured!\n")
+                }
+            }
+            
+            defer
+            {
+                DispatchQueue.main.async
+                {
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }

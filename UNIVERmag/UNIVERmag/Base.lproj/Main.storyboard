@@ -207,6 +207,11 @@
                                                     <action selector="changeUserPhotoButPressed:" destination="IHW-mT-cKW" eventType="touchUpInside" id="rik-ln-naf"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="0QX-Ih-nTq">
+                                                <rect key="frame" x="169" y="292" width="37" height="37"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="color" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -235,6 +240,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="730"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="0QX-Ih-nTq" id="0ek-sy-Nfb"/>
                         <outlet property="changePhotoBut" destination="ERo-AN-pKj" id="Cgp-Jb-DL4"/>
                         <outlet property="cityLabel" destination="rI1-vg-Txi" id="6s4-a9-bvi"/>
                         <outlet property="dateLabel" destination="QRH-OS-iGK" id="hx3-xK-iAG"/>
