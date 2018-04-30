@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, Alertable
+class UserItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, Alertable
 {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -29,7 +29,9 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
-        self.webTask()
+        let currentUser = CurrentUser.getUser
+        let username = currentUser.username
+        self.webTask(username: username)
     }
 
     override func didReceiveMemoryWarning()
@@ -81,11 +83,8 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     // MARK: - Web task
-    func webTask()
+    func webTask(username: String)
     {
-        let currentUser = CurrentUser.getUser
-        let username = currentUser.username
-        
         let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/user/\(username)")!
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
@@ -158,7 +157,7 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         let currentUser = CurrentUser.getUser
         let username = currentUser.username
-        let password = currentUser.password
+        let password = currentUser.password!
         
         let idToDelete = items[row].ID
         
@@ -247,7 +246,10 @@ class MyItemsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @objc func refresh(_ sender: Any)
     {
         self.items = [ShoppingItem]()
-        self.webTask()
+        
+        let currentUser = CurrentUser.getUser
+        let username = currentUser.username
+        self.webTask(username: username)
     }
     
     
