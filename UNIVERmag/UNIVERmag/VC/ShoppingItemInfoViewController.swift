@@ -55,6 +55,6 @@ class ShoppingItemInfoViewController: UIViewController
         }
         destVC.user = User()
         
-        present(destVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(destVC, animated: true)
     }
 }
