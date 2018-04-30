@@ -54,6 +54,7 @@ class ShoppingItemInfoViewController: UIViewController
             return
         }
         destVC.user = User()
+        destVC.user.username = (uploaderBut.titleLabel?.text)!
         
         self.navigationController?.pushViewController(destVC, animated: true)
     }
