@@ -715,7 +715,7 @@
         <!--My Items-->
         <scene sceneID="t6L-oG-UEy">
             <objects>
-                <viewController restorationIdentifier="UserItemsVC" storyboardIdentifier="UserItemsVC" id="R6r-Xx-RWc" customClass="MyItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MyItemsVC" storyboardIdentifier="MyItemsVC" id="R6r-Xx-RWc" customClass="MyItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XEP-K9-vz9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -783,7 +783,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addBut" destination="EZ1-s6-lT6" id="UMU-Zn-gxr"/>
                         <outlet property="searchBar" destination="DJM-9e-Q1v" id="30N-cS-INA"/>
                         <outlet property="tableView" destination="hSu-rm-Sht" id="6eL-Gt-mId"/>
                     </connections>
@@ -848,6 +847,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n4o-yD-adA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1777" y="33"/>
+        </scene>
+        <!--My Items-->
+        <scene sceneID="PEm-Lx-JnQ">
+            <objects>
+                <viewController restorationIdentifier="UserItemsVC" storyboardIdentifier="UserItemsVC" id="5m7-Tq-LNe" customClass="UserItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r31-4h-eD4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jBY-wm-9AA">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Shoes, books, etc." id="UCk-y3-IdG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ShoppingItemTableCell" rowHeight="80" id="Nnc-5q-Txg" customClass="ShoppingItemTableViewCell" customModule="UNIVERmag" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="84" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nnc-5q-Txg" id="PfV-6E-ydT">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="79.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yW0-aR-52h">
+                                                    <rect key="frame" x="15" y="5" width="69" height="69"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420 руб" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbc-O3-JJv">
+                                                    <rect key="frame" x="92" y="48" width="242" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping item title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsh-Xh-oe9">
+                                                    <rect key="frame" x="92" y="5" width="268" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="itemImage" destination="yW0-aR-52h" id="z0W-WI-3Ju"/>
+                                            <outlet property="itemPriceLabel" destination="zbc-O3-JJv" id="CkF-f9-h7z"/>
+                                            <outlet property="itemTitleLabel" destination="Xsh-Xh-oe9" id="MiW-xU-RSB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jBY-wm-9AA" firstAttribute="trailing" secondItem="Fms-g5-bf3" secondAttribute="trailing" id="Aoa-bB-uQk"/>
+                            <constraint firstItem="jBY-wm-9AA" firstAttribute="leading" secondItem="Fms-g5-bf3" secondAttribute="leading" id="LO6-VV-mwF"/>
+                            <constraint firstItem="jBY-wm-9AA" firstAttribute="bottom" secondItem="Fms-g5-bf3" secondAttribute="bottom" id="Usk-12-6UW"/>
+                            <constraint firstItem="jBY-wm-9AA" firstAttribute="top" secondItem="Fms-g5-bf3" secondAttribute="top" id="k4A-a2-Mmu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Fms-g5-bf3"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Items" id="8pg-WU-TgQ"/>
+                    <connections>
+                        <outlet property="searchBar" destination="UCk-y3-IdG" id="82K-la-Cvc"/>
+                        <outlet property="tableView" destination="jBY-wm-9AA" id="DhH-tM-nBv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4e2-zo-0GD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3255" y="34"/>
         </scene>
     </scenes>
     <resources>
