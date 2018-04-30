@@ -46,14 +46,14 @@ class EditUserInfoViewController: UIViewController, Alertable
         
         let firstName = (firstNameTextField.text ?? user.firstName) ?? "NULL"
         let lastName = (lastNameTextField.text ?? user.lastName) ?? "NULL"
-        let newPassword = passwordTextField.text ?? user.password
+        let newPassword = passwordTextField.text ?? user.password!
         let phone = phoneTextField.text ?? user.phoneNumber
         let email = emailTextField.text ?? user.email
         let city = cityTextField.text ?? user.city
         
         var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/update_user_info/")!
         finalURL.appendPathComponent(username)
-        finalURL.appendPathComponent(password)
+        finalURL.appendPathComponent(password!)
         var lastComponent = "\(firstName)&\(lastName)&\(newPassword)&\(phone)&\(email)&\(city)"
         finalURL.appendPathComponent(lastComponent)
         

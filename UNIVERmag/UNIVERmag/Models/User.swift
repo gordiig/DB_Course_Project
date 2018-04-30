@@ -16,7 +16,7 @@ class User: NSObject, JSONable
     var firstName: String?
     var lastName: String?
     var dateOfRegistration = Date()
-    var password = "Password"
+    var password: String?
     var phoneNumber = "+7 (999) 999-99-99"
     var email = "zzz@zzz.zz"
     var city = "City"
@@ -29,7 +29,7 @@ class User: NSObject, JSONable
         var first_name: String?
         var last_name: String?
         var date_of_registration: String
-        var password: String
+        var password: String?
         var image: String?
         var phone_number: String
         var email: String

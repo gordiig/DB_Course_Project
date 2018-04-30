@@ -94,7 +94,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/upload_item/")!
         finalURL.appendPathComponent(username)
-        finalURL.appendPathComponent(password)
+        finalURL.appendPathComponent(password!)
         let lastComponent = "\(name)&\(price)&\(about)&\(img)"
         finalURL.appendPathComponent(lastComponent)
         
