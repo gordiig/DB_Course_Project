@@ -130,4 +130,23 @@ class User: NSObject, JSONable
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.dateOfRegistration = dateFormatter.date(from: val.date_of_registration)!
     }
+    
+    
+    // MARK: - operators
+    static func == (lhs: User, rhs: User) -> Bool
+    {
+        if (lhs.username == rhs.username) && (lhs.firstName == rhs.firstName) && (lhs.lastName == rhs.lastName) &&
+            (lhs.password == rhs.password) && (lhs.img == rhs.img) && (lhs.phoneNumber == rhs.phoneNumber) &&
+            (lhs.email == rhs.email) && (lhs.city == rhs.city)
+        {
+            return true
+        }
+        
+        return false
+    }
+    
+    static func != (lhs: User, rhs: User) -> Bool
+    {
+        return !(lhs == rhs)
+    }
 }
