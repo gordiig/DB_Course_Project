@@ -14,6 +14,7 @@ class ShoppingItemInfoViewController: UIViewController
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var uploaderBut: UIButton!
     
     var item = ShoppingItem()
     
@@ -29,6 +30,8 @@ class ShoppingItemInfoViewController: UIViewController
         dateLabel.text = formatter.string(from: item.dateAdded)
         aboutLabel.text = item.about
         priceLabel.text = String(describing: item.price) + "₽"
+        
+        uploaderBut.setTitle(item.uploaderUserName ?? "Debug", for: .normal)
         
         guard let img = item.img else
         {
