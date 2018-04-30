@@ -15,7 +15,6 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
     var items = [ShoppingItem]()
     var showingItems = [ShoppingItem]()
     var user = User()
-    @IBOutlet weak var addBut: UIBarButtonItem!
     private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad()
@@ -31,12 +30,8 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.refreshControl = refreshControl
         
         let username = user.username
+        self.title = "\(username)'s items"
         self.webTask(username: username)
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        self.title = "\(user.username)'s items"
     }
 
     override func didReceiveMemoryWarning()
