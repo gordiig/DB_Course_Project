@@ -91,6 +91,20 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         present(controller, animated: true, completion: nil)
     }
     
+    @IBAction func showAllButPressed(_ sender: Any)
+    {
+        let storyboard = self.storyboard
+        
+        guard let destVC = storyboard?.instantiateViewController(withIdentifier: "UserItemsVC") as? UserItemsViewController else
+        {
+            showAlert(withString: "Error with instantiation UserItemsVC\n")
+            return
+        }
+        destVC.user = self.user
+        
+        self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    
     
     // MARK: - delegates
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController)

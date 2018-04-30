@@ -216,6 +216,9 @@
                                                 <rect key="frame" x="67" y="529" width="240" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Show all user's items"/>
+                                                <connections>
+                                                    <action selector="showAllButPressed:" destination="IHW-mT-cKW" eventType="touchUpInside" id="i8x-G9-Pli"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -712,7 +715,7 @@
         <!--My Items-->
         <scene sceneID="t6L-oG-UEy">
             <objects>
-                <viewController id="R6r-Xx-RWc" customClass="MyItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="UserItemsVC" storyboardIdentifier="UserItemsVC" id="R6r-Xx-RWc" customClass="UserItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XEP-K9-vz9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -851,7 +854,7 @@
         <image name="rzhekich" width="320" height="267"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="D1b-49-uOn"/>
-        <segue reference="Kyz-DN-Typ"/>
+        <segue reference="sKS-tW-d9C"/>
+        <segue reference="gWh-74-0TQ"/>
     </inferredMetricsTieBreakers>
 </document>
