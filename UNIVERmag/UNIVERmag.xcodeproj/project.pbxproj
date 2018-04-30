@@ -22,6 +22,7 @@
 		13857396204D442A0032054F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13857394204D442A0032054F /* LaunchScreen.storyboard */; };
 		1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739D204D9A440032054F /* ShoppingItemsViewController.swift */; };
 		138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */; };
+		13A0264120976240003FADF7 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A0264020976240003FADF7 /* MyItemsViewController.swift */; };
 		13C0F0F12068FDFF00CC5084 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */; };
 		13C0F0F3206912DC00CC5084 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F2206912DC00CC5084 /* User.swift */; };
 		13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F0206C083E00446339 /* ShoppingItem.swift */; };
@@ -46,6 +47,7 @@
 		13857397204D442A0032054F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1385739D204D9A440032054F /* ShoppingItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemsViewController.swift; sourceTree = "<group>"; };
 		1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemTableViewCell.swift; sourceTree = "<group>"; };
+		13A0264020976240003FADF7 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		13C0F0F2206912DC00CC5084 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		13DCB6F0206C083E00446339 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */,
 				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
 				1338E1EE208E166E00984217 /* UserItemsViewController.swift */,
+				13A0264020976240003FADF7 /* MyItemsViewController.swift */,
 				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
 				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
 				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
@@ -205,6 +208,7 @@
 				1369B0182069322B00B480D2 /* CurrentUser.swift in Sources */,
 				130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */,
 				13857391204D442A0032054F /* UNIVERmag.xcdatamodeld in Sources */,
+				13A0264120976240003FADF7 /* MyItemsViewController.swift in Sources */,
 				133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */,
 				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
 				1385738B204D442A0032054F /* ViewController.swift in Sources */,
