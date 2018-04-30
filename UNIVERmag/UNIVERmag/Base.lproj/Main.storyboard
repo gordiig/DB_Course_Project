@@ -483,12 +483,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqt-QM-rx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="WeP-D5-Bd5">
-                    <rectEdge key="edges" left="YES"/>
-                    <connections>
-                        <action selector="endgePanPerformed:" destination="XBM-T2-P4f" id="hjK-k6-BAE"/>
-                    </connections>
-                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2560.8000000000002" y="-1192.3538230884558"/>
         </scene>

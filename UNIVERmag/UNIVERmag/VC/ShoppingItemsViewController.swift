@@ -19,6 +19,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
+    private var panRecognizer = UISwipeGestureRecognizer()
     
     override func viewDidLoad()
     {
@@ -36,13 +37,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         menuLeading.constant = -228
         
         self.webTask(page: 1)
-    }
-    
-    
-    // MARK: - Gesture
-    @IBAction func endgePanPerformed(_ sender: UIScreenEdgePanGestureRecognizer)
-    {
-        
     }
     
     
