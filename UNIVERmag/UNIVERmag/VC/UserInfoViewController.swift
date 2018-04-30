@@ -43,6 +43,16 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         dateLabel.text = formatter.string(from: user.dateOfRegistration)
         
         self.setPic(base64: user.img)
+        
+        if user.username != CurrentUser.getUser.username
+        {
+            changePhotoBut.isEnabled = false
+            changePhotoBut.isHidden = true
+            editProfileBut.isEnabled = false
+            editProfileBut.isHidden = true
+            logOutBut.isEnabled = false
+            logOutBut.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning()
