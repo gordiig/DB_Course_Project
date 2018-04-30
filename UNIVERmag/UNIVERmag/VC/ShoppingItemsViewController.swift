@@ -13,7 +13,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
-    @IBOutlet weak var menuLeading: NSLayoutConstraint!
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
     private let itemsPerPage: Int = 20
@@ -34,7 +33,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
-        menuLeading.constant = -228
+        menuBlurView.frame.origin.x = -228
         
         self.webTask(page: 1)
     }
@@ -43,7 +42,20 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - Menu works
     @IBAction func menuButPressed(_ sender: UIBarButtonItem)
     {
-        
+        if menuBlurView.frame.origin.x == 0
+        {
+            UIView.animate(withDuration: 0.2)
+            {
+                self.menuBlurView.frame.origin.x = -228
+            }
+        }
+        else
+        {
+            UIView.animate(withDuration: 0.2)
+            {
+                self.menuBlurView.frame.origin.x = 0
+            }
+        }
     }
     
     
