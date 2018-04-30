@@ -43,8 +43,8 @@ class MyItemsViewController: UserItemsViewController
             if error != nil
             {
                 DispatchQueue.main.async
-                    {
-                        self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
+                {
+                    self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
                 }
                 print("Error in GET:\n \(error!.localizedDescription)")
                 return
@@ -53,8 +53,8 @@ class MyItemsViewController: UserItemsViewController
             guard let data = data else
             {
                 DispatchQueue.main.async
-                    {
-                        self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+                {
+                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
                 }
                 print("Error in downloaded data:\n")
                 return
@@ -64,27 +64,26 @@ class MyItemsViewController: UserItemsViewController
             if ans?.first == "0"
             {
                 DispatchQueue.main.async
-                    {
-                        self.items.remove(at: row)
-                        
-                        self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
-                        
-                        // self.tableView.reloadData()
-                        let range = NSMakeRange(0, self.tableView.numberOfSections)
-                        let sections = NSIndexSet(indexesIn: range)
-                        self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                {
+                    self.items.remove(at: row)
+                    
+                    self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
+                    
+                    // self.tableView.reloadData()
+                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                    let sections = NSIndexSet(indexesIn: range)
+                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
             }
             else
             {
                 DispatchQueue.main.async
-                    {
-                        self.showAlert(withString: "Error while deleting item!\n")
+                {
+                    self.showAlert(withString: "Error while deleting item!\n")
                 }
             }
         }
         
         task.resume()
     }
-
 }
