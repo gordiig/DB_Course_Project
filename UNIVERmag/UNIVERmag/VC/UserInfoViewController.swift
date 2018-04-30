@@ -29,10 +29,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
+        
         if user != CurrentUser.getUser
         {
             changePhotoBut.isEnabled = false
