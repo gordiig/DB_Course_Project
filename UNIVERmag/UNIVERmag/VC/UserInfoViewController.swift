@@ -44,7 +44,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         self.setPic(base64: user.img)
         
-        if user.username != CurrentUser.getUser.username
+        if user != CurrentUser.getUser
         {
             changePhotoBut.isEnabled = false
             changePhotoBut.isHidden = true
