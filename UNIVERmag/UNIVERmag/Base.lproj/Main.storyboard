@@ -783,6 +783,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBut" destination="EZ1-s6-lT6" id="UMU-Zn-gxr"/>
                         <outlet property="searchBar" destination="DJM-9e-Q1v" id="30N-cS-INA"/>
                         <outlet property="tableView" destination="hSu-rm-Sht" id="6eL-Gt-mId"/>
                     </connections>
