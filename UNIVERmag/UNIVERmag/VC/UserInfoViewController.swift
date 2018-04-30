@@ -98,7 +98,6 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             return
         }
         destVC.user = self.user
-        destVC.addBut.isEnabled = false
         
         self.navigationController?.pushViewController(destVC, animated: true)
     }
