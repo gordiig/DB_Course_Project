@@ -52,6 +52,12 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             editProfileBut.isHidden = true
             logOutBut.isEnabled = false
             logOutBut.isHidden = true
+            
+            let tmpName = user.username
+            if tmpName != "Debug"
+            {
+                webTask(username: user.username)
+            }
         }
     }
 
@@ -112,9 +118,9 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: - WebTask
     func webTask(_ base64: String)
     {
-        print("--")
-        print(base64)
-        print("--")
+//        print("--")
+//        print(base64)
+//        print("--")
         let newBase64 = base64.replacingOccurrences(of: "/", with: "&")
         
         let username = user.username
@@ -122,7 +128,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/update_user_photo/")!
         finalURL.appendPathComponent(username)
-        finalURL.appendPathComponent(password)
+        finalURL.appendPathComponent(password!)
         finalURL.appendPathComponent(newBase64)
         
         let urlRequest = URLRequest(url: finalURL)
@@ -173,6 +179,62 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         task.resume()
     }
     
+    func webTask(username: String)
+    {
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_safe_user_info/\(username)")!
+        
+        let urlRequest = URLRequest(url: finalURL)
+        let urlSession = URLSession(configuration: .default)
+        let task = urlSession.dataTask(with: urlRequest)
+        {
+            (data, response, error) in
+            
+            if error != nil
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error with getting user info!\n \(error!.localizedDescription)")
+                }
+                print("Error in GET:\n \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+                }
+                print("Error in downloaded data:\n")
+                return
+            }
+            
+            let ans = String(data: data, encoding: .utf8)
+            if ans?.first != "0"
+            {
+                DispatchQueue.main.async
+                {
+                    guard let tmpUser = User(fromData: data) else
+                    {
+                        self.showAlert(withString: "Error with decoding data\n")
+                        self.navigationController?.popViewController(animated: true)
+                        return
+                    }
+                    
+                    self.user = tmpUser
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "No such user, or another error occured!\n")
+                }
+            }
+        }
+        
+        task.resume()
+    }
     
     // MARK: - Alertable
     func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
