@@ -44,4 +44,17 @@ class ShoppingItemInfoViewController: UIViewController
         imageView.image = UIImage(data: data)
     }
 
+    
+    @IBAction func userButPressed(_ sender: Any)
+    {
+        let storyboard = self.storyboard
+        guard let destVC = storyboard?.instantiateViewController(withIdentifier: "UserInfoVC") as? UserInfoViewController else
+        {
+            print("Err")
+            return
+        }
+        destVC.user = User()
+        
+        present(destVC, animated: true, completion: nil)
+    }
 }

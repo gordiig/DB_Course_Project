@@ -18,6 +18,9 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var changePhotoBut: UIButton!
+    @IBOutlet weak var editProfileBut: UIButton!
+    @IBOutlet weak var logOutBut: UIButton!
     var user = CurrentUser.getUser
     
     

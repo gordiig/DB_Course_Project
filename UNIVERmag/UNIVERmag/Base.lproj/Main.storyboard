@@ -235,11 +235,14 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="730"/>
                     <connections>
+                        <outlet property="changePhotoBut" destination="ERo-AN-pKj" id="Cgp-Jb-DL4"/>
                         <outlet property="cityLabel" destination="rI1-vg-Txi" id="6s4-a9-bvi"/>
                         <outlet property="dateLabel" destination="QRH-OS-iGK" id="hx3-xK-iAG"/>
+                        <outlet property="editProfileBut" destination="S3d-3f-f6R" id="qPO-PW-OTT"/>
                         <outlet property="emailLabel" destination="6OD-O7-8va" id="Z3F-Ph-75c"/>
                         <outlet property="firstNameLabel" destination="8L2-2q-Npm" id="Ov0-mM-Ckb"/>
                         <outlet property="lastNameLabel" destination="xlb-6S-2hP" id="8Uy-XB-tCL"/>
+                        <outlet property="logOutBut" destination="yQX-hQ-SlJ" id="orU-eO-I8R"/>
                         <outlet property="phoneLabel" destination="tCp-OF-PEQ" id="IBN-y5-Ipe"/>
                         <outlet property="userImage" destination="x8Y-QU-3An" id="T7q-8a-x2e"/>
                         <outlet property="usernameLabel" destination="Ec2-3O-WaZ" id="Qqx-ng-cvf"/>
@@ -627,6 +630,9 @@
                                                 <state key="normal" title="Username">
                                                     <color key="titleColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="userButPressed:" destination="tZ1-FX-MJD" eventType="touchUpInside" id="BTU-aR-MRR"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uploader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocq-di-wfM">
                                                 <rect key="frame" x="8" y="363" width="89" height="30"/>
