@@ -14,6 +14,7 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBar: UISearchBar!
     var items = [ShoppingItem]()
     var showingItems = [ShoppingItem]()
+    var user = CurrentUser.getUser
     private let refreshControl = UIRefreshControl()
     
     
@@ -29,8 +30,9 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
-        let currentUser = CurrentUser.getUser
-        let username = currentUser.username
+        self.title = "\(user.username)'s items"
+        
+        let username = user.username
         self.webTask(username: username)
     }
 
@@ -71,14 +73,6 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
     {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = false
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
-    {
-        if editingStyle == .delete
-        {
-            self.deleteWebTask(indexPath.row)
-        }
     }
     
     
