@@ -212,6 +212,11 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="color" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </activityIndicatorView>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuG-Zs-HA9">
+                                                <rect key="frame" x="67" y="529" width="240" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Show all user's items"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -250,13 +255,14 @@
                         <outlet property="lastNameLabel" destination="xlb-6S-2hP" id="8Uy-XB-tCL"/>
                         <outlet property="logOutBut" destination="yQX-hQ-SlJ" id="orU-eO-I8R"/>
                         <outlet property="phoneLabel" destination="tCp-OF-PEQ" id="IBN-y5-Ipe"/>
+                        <outlet property="showAllBut" destination="vuG-Zs-HA9" id="9zw-oB-s6x"/>
                         <outlet property="userImage" destination="x8Y-QU-3An" id="T7q-8a-x2e"/>
                         <outlet property="usernameLabel" destination="Ec2-3O-WaZ" id="Qqx-ng-cvf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jwB-EL-dda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2561" y="854"/>
+            <point key="canvasLocation" x="2560.8000000000002" y="852.77361319340332"/>
         </scene>
         <!--Edit-->
         <scene sceneID="Wlr-4o-fnU">

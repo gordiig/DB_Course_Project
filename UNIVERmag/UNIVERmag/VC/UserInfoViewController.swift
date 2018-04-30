@@ -22,6 +22,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var editProfileBut: UIButton!
     @IBOutlet weak var logOutBut: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var showAllBut: UIButton!
     var user = CurrentUser.getUser
     
     
@@ -40,6 +41,9 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             editProfileBut.isHidden = true
             logOutBut.isEnabled = false
             logOutBut.isHidden = true
+            
+            showAllBut.isEnabled = true
+            showAllBut.isHidden = false
             
             let tmpName = user.username
             if tmpName != "Debug"
