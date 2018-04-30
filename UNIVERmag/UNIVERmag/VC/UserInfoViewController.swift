@@ -31,19 +31,6 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewWillAppear(_ animated: Bool)
     {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        
-        usernameLabel.text = user.username
-        firstNameLabel.text = user.firstName
-        lastNameLabel.text = user.lastName
-        emailLabel.text = user.email
-        phoneLabel.text = user.phoneNumber
-        cityLabel.text = user.city
-        dateLabel.text = formatter.string(from: user.dateOfRegistration)
-        
-        self.setPic(base64: user.img)
-        
         if user != CurrentUser.getUser
         {
             changePhotoBut.isEnabled = false
@@ -58,6 +45,10 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             {
                 webTask(username: user.username)
             }
+        }
+        else
+        {
+            fillFromUser(user)
         }
     }
 
@@ -222,6 +213,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     }
                     
                     self.user = tmpUser
+                    self.fillFromUser(self.user)
                 }
             }
             else
@@ -262,6 +254,22 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             return
         }
         userImage.image = UIImage(data: data)
+    }
+    
+    private func fillFromUser(_ user: User)
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        usernameLabel.text = user.username
+        firstNameLabel.text = user.firstName
+        lastNameLabel.text = user.lastName
+        emailLabel.text = user.email
+        phoneLabel.text = user.phoneNumber
+        cityLabel.text = user.city
+        dateLabel.text = formatter.string(from: user.dateOfRegistration)
+        
+        self.setPic(base64: user.img)
     }
     
 }
