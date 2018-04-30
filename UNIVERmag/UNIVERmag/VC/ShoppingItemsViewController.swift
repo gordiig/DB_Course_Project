@@ -33,7 +33,16 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
+        menuLeading.constant = -228
+        
         self.webTask(page: 1)
+    }
+    
+    
+    // MARK: - Gesture
+    @IBAction func endgePanPerformed(_ sender: UIScreenEdgePanGestureRecognizer)
+    {
+        
     }
     
     
