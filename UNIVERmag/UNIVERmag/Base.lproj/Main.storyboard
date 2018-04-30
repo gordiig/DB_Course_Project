@@ -469,7 +469,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Items" id="9YQ-YT-cUx">
                         <barButtonItem key="backBarButtonItem" title="Items" id="3ZH-WJ-iN7"/>
-                        <barButtonItem key="leftBarButtonItem" title="Category" id="tk8-QJ-el5"/>
+                        <barButtonItem key="leftBarButtonItem" title="Category" id="tk8-QJ-el5">
+                            <connections>
+                                <action selector="menuButPressed:" destination="XBM-T2-P4f" id="LpT-W7-zVT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="z2m-rb-JN9">
                             <connections>
                                 <segue destination="md8-c6-jJn" kind="show" id="Kyz-DN-Typ"/>

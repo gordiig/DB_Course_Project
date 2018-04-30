@@ -40,6 +40,13 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
+    // MARK: - Menu works
+    @IBAction func menuButPressed(_ sender: UIBarButtonItem)
+    {
+        
+    }
+    
+    
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
