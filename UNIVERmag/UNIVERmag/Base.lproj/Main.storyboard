@@ -715,7 +715,7 @@
         <!--My Items-->
         <scene sceneID="t6L-oG-UEy">
             <objects>
-                <viewController restorationIdentifier="UserItemsVC" storyboardIdentifier="UserItemsVC" id="R6r-Xx-RWc" customClass="UserItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="UserItemsVC" storyboardIdentifier="UserItemsVC" id="R6r-Xx-RWc" customClass="MyItemsViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XEP-K9-vz9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
