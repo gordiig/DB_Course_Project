@@ -91,8 +91,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         savedBeforeWebTasksItems = showingItems
         showingItems = [ShoppingItem]()
         
-        print("HERE\n")
-        
         nextItemNumForWebTask = itemsPerPage-1
         webTask(page: 1)
     }
@@ -142,6 +140,11 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                         self.showingItems = self.savedBeforeWebTasksItems
                         return
                     }
+                    
+                    if page == 1
+                    {
+                        self.showingItems = [ShoppingItem]()
+                    }
                     self.showingItems += tmpItems
                     
                     if (searchStr != "NULL") || (page == 1)
@@ -184,7 +187,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @objc func refresh(_ sender: Any)
     {
         self.savedBeforeWebTasksItems = showingItems
-        self.showingItems = [ShoppingItem]()
+//        self.showingItems = [ShoppingItem]()
         self.searchBar.text = nil
         
         self.nextItemNumForWebTask = itemsPerPage - 1

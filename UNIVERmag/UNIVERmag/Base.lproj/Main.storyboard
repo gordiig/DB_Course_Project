@@ -587,7 +587,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpp-ot-AfO">
-                                <rect key="frame" x="0.0" y="20" width="375" height="681"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="637"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dwt-NV-Pa6">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="701"/>
@@ -927,7 +927,7 @@
         <image name="rzhekich" width="320" height="267"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b9L-oO-kPH"/>
-        <segue reference="gWh-74-0TQ"/>
+        <segue reference="D1b-49-uOn"/>
+        <segue reference="Kyz-DN-Typ"/>
     </inferredMetricsTieBreakers>
 </document>
