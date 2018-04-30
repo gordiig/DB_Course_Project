@@ -12,6 +12,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var menuBlurView: UIVisualEffectView!
+    @IBOutlet weak var menuLeading: NSLayoutConstraint!
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
     private let itemsPerPage: Int = 20

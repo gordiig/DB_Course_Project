@@ -440,8 +440,32 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2A8-aV-Awy">
+                                <rect key="frame" x="0.0" y="64" width="228" height="554"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o3r-3b-V6q">
+                                    <rect key="frame" x="0.0" y="0.0" width="228" height="554"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyF-SM-Ado">
+                                            <rect key="frame" x="91" y="23" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="228" id="NzP-V9-PaY"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2A8-aV-Awy" firstAttribute="bottom" secondItem="4ZD-8C-yNd" secondAttribute="bottom" id="7pq-oe-B12"/>
+                            <constraint firstItem="4ZD-8C-yNd" firstAttribute="trailing" secondItem="2A8-aV-Awy" secondAttribute="trailing" constant="147" id="ROo-6B-gzF"/>
+                            <constraint firstItem="2A8-aV-Awy" firstAttribute="top" secondItem="4ZD-8C-yNd" secondAttribute="top" id="UpS-57-VeJ"/>
+                            <constraint firstItem="2A8-aV-Awy" firstAttribute="leading" secondItem="4ZD-8C-yNd" secondAttribute="leading" id="fhb-pK-2ba"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4ZD-8C-yNd"/>
                     </view>
                     <navigationItem key="navigationItem" title="Items" id="9YQ-YT-cUx">
@@ -453,13 +477,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="menuBlurView" destination="2A8-aV-Awy" id="jnK-vZ-06a"/>
+                        <outlet property="menuLeading" destination="fhb-pK-2ba" id="ses-C4-1LH"/>
                         <outlet property="searchBar" destination="Pjs-Tn-R3C" id="dCP-mq-VaD"/>
                         <outlet property="tableView" destination="qSy-OY-rxJ" id="GdS-HX-hCL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqt-QM-rx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2562" y="-1192"/>
+            <point key="canvasLocation" x="2560.8000000000002" y="-1192.3538230884558"/>
         </scene>
         <!--Upload item-->
         <scene sceneID="pyC-hB-kwm">
