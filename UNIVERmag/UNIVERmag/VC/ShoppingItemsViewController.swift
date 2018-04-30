@@ -44,17 +44,17 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         if menuBlurView.frame.origin.x == 0
         {
-            UIView.animate(withDuration: 0.2)
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations:
             {
                 self.menuBlurView.frame.origin.x = -228
-            }
+            }, completion: nil)
         }
         else
         {
-            UIView.animate(withDuration: 0.2)
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations:
             {
                 self.menuBlurView.frame.origin.x = 0
-            }
+            }, completion: nil)
         }
     }
     
