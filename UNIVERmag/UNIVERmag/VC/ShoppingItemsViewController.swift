@@ -18,7 +18,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
-    var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
+    private var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
+    private var panRecognizer: UIPanGestureRecognizer!
     
     override func viewDidLoad()
     {
@@ -33,9 +34,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
-        edgePanRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(edgePanRecognizer(_:)))
-        edgePanRecognizer.edges = .left
-        self.view.addGestureRecognizer(edgePanRecognizer)
+        panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panRecognizerHandler(_:)))
+        self.view.addGestureRecognizer(panRecognizer)
+        
         menuBlurView.frame.origin.x = -228
         
         self.webTask(page: 1)
@@ -61,11 +62,11 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    @objc func edgePanRecognizer(_ sender: UIScreenEdgePanGestureRecognizer)
+    @objc func panRecognizerHandler(_ sender: UIPanGestureRecognizer)
     {
         guard let panView = sender.view else
         {
-            showAlert(withString: "Something wrong with Pan view!\n")
+            showAlert(withString: "Something wrong with Pan view\n")
             return
         }
         
@@ -73,12 +74,12 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         if sender.state == .began || sender.state == .changed
         {
-            let coef: CGFloat = menuBlurView.frame.origin.x >= 0 ? 150 : 50
+            let coef: CGFloat = trans.x > 0 ? 150 : 50
             menuBlurView.frame.origin.x += trans.x / coef
         }
         else if sender.state == .ended
         {
-            let destX = sender.translation(in: panView.superview).x > 0 ? 0 : -menuBlurView.frame.width
+            let destX = trans.x > 0 ? 0 : -menuBlurView.frame.width
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations:
             {
                 self.menuBlurView.frame.origin.x = destX
