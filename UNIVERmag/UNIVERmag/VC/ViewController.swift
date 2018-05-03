@@ -32,6 +32,13 @@ class ViewController: UIViewController, Alertable
             return
         }
         
+        // FOR NO_INTERNET_DEBUG
+        if username == "noCon" && password == "noCon"
+        {
+            self.saveUserPassword(username: username, password: password)
+            self.goToMainVC()
+        }
+        
         LogInButton.isEnabled = false
         getUserInfo(username: username, password: password)
     }
