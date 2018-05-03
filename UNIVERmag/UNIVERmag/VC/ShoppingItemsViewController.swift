@@ -18,7 +18,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
-    private var panRecognizer = UISwipeGestureRecognizer()
+    var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
     
     override func viewDidLoad()
     {
@@ -33,6 +33,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
+        edgePanRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(edgePanRecognizer(_:)))
+        edgePanRecognizer.edges = .left
+        self.view.addGestureRecognizer(edgePanRecognizer)
         menuBlurView.frame.origin.x = -228
         
         self.webTask(page: 1)
@@ -58,6 +61,30 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    @objc func edgePanRecognizer(_ sender: UIScreenEdgePanGestureRecognizer)
+    {
+        guard let panView = sender.view else
+        {
+            showAlert(withString: "Something wrong with Pan view!\n")
+            return
+        }
+        
+        let trans = sender.translation(in: panView.superview)
+        
+        if sender.state == .began || sender.state == .changed
+        {
+            let coef: CGFloat = menuBlurView.frame.origin.x >= 0 ? 150 : 50
+            menuBlurView.frame.origin.x += trans.x / coef
+        }
+        else if sender.state == .ended
+        {
+            let destX = sender.translation(in: panView.superview).x > 0 ? 0 : -menuBlurView.frame.width
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations:
+            {
+                self.menuBlurView.frame.origin.x = destX
+            }, completion: nil)
+        }
+    }
     
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
