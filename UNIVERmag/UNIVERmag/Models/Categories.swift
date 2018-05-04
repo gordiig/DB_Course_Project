@@ -47,10 +47,10 @@ class Category: JSONable
             return false
         }
         
-        self.name = newCategories[0].Category_Name
+        self.name = newCategories[0].category_name
         for newCat in newCategories
         {
-            subcategories.append(Subcategory(ID: newCat.Subcategory_ID, name: newCat.Subcategory_Name))
+            subcategories.append(Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name))
         }
         
         return true
@@ -74,13 +74,13 @@ class Category: JSONable
         {
             for ansCat in ans
             {
-                if ansCat.name == newCat.Category_Name
+                if ansCat.name == newCat.category_name
                 {
-                    ansCat.subcategories.append(Subcategory(ID: newCat.Subcategory_ID, name: newCat.Subcategory_Name))
+                    ansCat.subcategories.append(Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name))
                 }
                 else
                 {
-                    ans.append(Category(name: newCat.Category_Name, subcategories: [Subcategory(ID: newCat.Subcategory_ID, name: newCat.Subcategory_Name)]))
+                    ans.append(Category(name: newCat.category_name, subcategories: [Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name)]))
                 }
             }
         }
@@ -91,7 +91,7 @@ class Category: JSONable
 
 struct JSONCategory : Codable
 {
-    var Subcategory_ID: Int
-    var Subcategory_Name: String
-    var Category_Name: String
+    var subcategory_id: Int
+    var subcategory_name: String
+    var category_name: String
 }
