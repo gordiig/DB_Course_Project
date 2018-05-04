@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate
+class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource
 {
+    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
@@ -21,6 +22,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
     private var panRecognizer: UIPanGestureRecognizer!
     
+    var pickArr = ["Apple", "Banana", "Cherry", "Durian", "Orange", "Watermelon"]
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -30,6 +33,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
         
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
@@ -86,6 +92,24 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             }, completion: nil)
         }
     }
+    
+    
+    // MARK: - UIPickerView
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
+        return pickArr.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        return pickArr[row]
+    }
+    
     
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
