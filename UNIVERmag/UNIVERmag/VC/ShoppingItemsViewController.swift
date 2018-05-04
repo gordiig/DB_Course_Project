@@ -26,21 +26,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private var panRecognizer: UIPanGestureRecognizer!
     
     var pickArr = [Category]()
-    {
-        didSet
-        {
-            catNames = [String]()
-            for cat in pickArr
-            {
-                catNames.append(cat.name)
-                for sub in cat.subcategories
-                {
-                    catNames.append(sub.name)
-                }
-            }
-        }
-    }
-    private(set) var catNames = [String]()
     
     override func viewDidLoad()
     {
@@ -127,26 +112,55 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         addBut.isEnabled = true
     }
     
+    
     // MARK: - UIPickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
-        return 1
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
-        var ans = 0
-        for cat in pickArr
+        if component == 0
         {
-            ans += cat.subcategories.count + 1  // +1 For category itself
+            return pickArr.count + 1
+        }
+        else if component == 1
+        {
+            let row = pickerView.selectedRow(inComponent: 0)
+            if row == 0
+            {
+                return 0
+            }
+            return pickArr.count == 0 ? 0 : (pickArr[row-1].subcategories.count + 1)
         }
         
-        return ans
+        return 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
-        return catNames[row]
+        if component == 0
+        {
+            return row == 0 ? "All" : pickArr[row-1].name
+        }
+        else
+        {
+            let fRow = pickerView.selectedRow(inComponent: 0)
+            if fRow == 0
+            {
+                return nil
+            }
+            return row == 0 ? "All" : pickArr[fRow-1].subcategories[row-1].name
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        if component == 0
+        {
+            pickerView.reloadComponent(1)
+        }
     }
     
     
