@@ -72,16 +72,20 @@ class Category: JSONable
         var ans = [Category]()
         for newCat in newCategories
         {
+            var key = true 
             for ansCat in ans
             {
                 if ansCat.name == newCat.category_name
                 {
                     ansCat.subcategories.append(Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name))
+                    key = false
+                    break
                 }
-                else
-                {
-                    ans.append(Category(name: newCat.category_name, subcategories: [Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name)]))
-                }
+            }
+            
+            if key
+            {
+                ans.append(Category(name: newCat.category_name, subcategories: [Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name)]))
             }
         }
         
