@@ -25,7 +25,22 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
     private var panRecognizer: UIPanGestureRecognizer!
     
-    var pickArr = ["Apple", "Banana", "Cherry", "Durian", "Orange", "Watermelon"]
+    var pickArr = [Category]()
+    {
+        didSet
+        {
+            catNames = [String]()
+            for cat in pickArr
+            {
+                catNames.append(cat.name)
+                for sub in cat.subcategories
+                {
+                    catNames.append(sub.name)
+                }
+            }
+        }
+    }
+    private(set) var catNames = [String]()
     
     override func viewDidLoad()
     {
@@ -49,6 +64,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         menuBlurView.frame.origin.x = -228
         
         self.webTask(page: 1)
+        self.webTaskCat()
     }
     
     
@@ -119,12 +135,18 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
-        return pickArr.count
+        var ans = 0
+        for cat in pickArr
+        {
+            ans += cat.subcategories.count + 1  // +1 For category itself
+        }
+        
+        return ans
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
-        return pickArr[row]
+        return catNames[row]
     }
     
     
@@ -275,6 +297,60 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         task.resume()
     }
     
+    func webTaskCat()
+    {
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_subcategories/all/")!
+        let urlRequest = URLRequest(url: finalURL)
+        let urlSession = URLSession(configuration: .default)
+        let task = urlSession.dataTask(with: urlRequest)
+        {
+            (data, response, error) in
+            
+            if error != nil
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Can't get categories:\n \(error!.localizedDescription)")
+                }
+                print("Error in GET:\n \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in downloaded data (cat)!\n")
+                }
+                print("Error in downloaded data:\n")
+                return
+            }
+            
+            let ans = String(data: data, encoding: .utf8)
+            if ans?.first != "0"
+            {
+                DispatchQueue.main.async
+                {
+                    guard let pickArr = Category.categoriesFabric(fromData: data) else
+                    {
+                        self.showAlert(withString: "Error with decoding categories!\n")
+                        return
+                    }
+                    self.pickArr = pickArr
+                    self.pickerView.reloadAllComponents()
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "No categories!")
+                }
+            }
+        }
+        
+        task.resume()
+    }
     
     // MARK: - Refresh
     @objc func refresh(_ sender: Any)
