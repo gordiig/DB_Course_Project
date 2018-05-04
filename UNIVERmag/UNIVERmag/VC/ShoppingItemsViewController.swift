@@ -10,6 +10,8 @@ import UIKit
 
 class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource
 {
+    @IBOutlet weak var maxPriceField: UITextField!
+    @IBOutlet weak var minPriceField: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
