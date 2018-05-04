@@ -465,19 +465,19 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oAf-mn-rAq">
+                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="at least" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oAf-mn-rAq">
                                             <rect key="frame" x="8" y="39" width="97" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6e-nx-ylT">
+                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="at most" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6e-nx-ylT">
                                             <rect key="frame" x="123" y="39" width="97" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                         </textField>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EIU-IM-5JV">
                                             <rect key="frame" x="0.0" y="99" width="228" height="1"/>
@@ -511,7 +511,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="maxPriceField" destination="H6e-nx-ylT" id="wTu-0H-8Zl"/>
                         <outlet property="menuBlurView" destination="2A8-aV-Awy" id="jnK-vZ-06a"/>
+                        <outlet property="minPriceField" destination="oAf-mn-rAq" id="DT3-rS-qEu"/>
                         <outlet property="pickerView" destination="coN-Zp-cca" id="FCf-UC-AUC"/>
                         <outlet property="searchBar" destination="Pjs-Tn-R3C" id="dCP-mq-VaD"/>
                         <outlet property="tableView" destination="qSy-OY-rxJ" id="GdS-HX-hCL"/>
