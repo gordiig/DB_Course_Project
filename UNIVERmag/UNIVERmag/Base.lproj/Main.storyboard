@@ -511,6 +511,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBut" destination="z2m-rb-JN9" id="Zeb-cF-JZ5"/>
                         <outlet property="maxPriceField" destination="H6e-nx-ylT" id="wTu-0H-8Zl"/>
                         <outlet property="menuBlurView" destination="2A8-aV-Awy" id="jnK-vZ-06a"/>
                         <outlet property="minPriceField" destination="oAf-mn-rAq" id="DT3-rS-qEu"/>

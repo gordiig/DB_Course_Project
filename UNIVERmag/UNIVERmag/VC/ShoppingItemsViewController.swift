@@ -10,6 +10,7 @@ import UIKit
 
 class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource
 {
+    @IBOutlet weak var addBut: UIBarButtonItem!
     @IBOutlet weak var maxPriceField: UITextField!
     @IBOutlet weak var minPriceField: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -60,6 +61,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             {
                 self.menuBlurView.frame.origin.x = -228
             }, completion: nil)
+            menuDidDissapear()
         }
         else
         {
@@ -67,6 +69,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             {
                 self.menuBlurView.frame.origin.x = 0
             }, completion: nil)
+            menuDidAppear()
         }
     }
     
@@ -88,6 +91,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         else if sender.state == .ended
         {
             let destX = trans.x > 0 ? 0 : -menuBlurView.frame.width
+            let _ = trans.x > 0 ? menuDidAppear() : menuDidDissapear()
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations:
             {
                 self.menuBlurView.frame.origin.x = destX
@@ -95,6 +99,17 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    func menuDidAppear()
+    {
+        tableView.isUserInteractionEnabled = false
+        addBut.isEnabled = false
+    }
+    
+    func menuDidDissapear()
+    {
+        tableView.isUserInteractionEnabled = true
+        addBut.isEnabled = true
+    }
     
     // MARK: - UIPickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int
