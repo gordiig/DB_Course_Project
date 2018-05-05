@@ -16,10 +16,11 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
+    @IBOutlet weak var menuTableView: UITableView!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
-    var categoriesArr = [Category]()
+    var categoriesArr = Categories()
     
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
@@ -38,6 +39,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
         
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
@@ -115,28 +119,64 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return showingItems.count
+        if tableView == self.tableView
+        {
+            return showingItems.count
+        }
+        else
+        {
+            return categoriesArr.catAndSubcatCount
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        if indexPath.row == nextItemNumForWebTask
+        if tableView == self.tableView
         {
-            nextItemNumForWebTask += itemsPerPage
-            savedBeforeWebTasksItems = showingItems
-            webTask(page: ((indexPath.row+1) / itemsPerPage) + 1)
+            if indexPath.row == nextItemNumForWebTask
+            {
+                nextItemNumForWebTask += itemsPerPage
+                savedBeforeWebTasksItems = showingItems
+                webTask(page: ((indexPath.row+1) / itemsPerPage) + 1)
+            }
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingItemTableCell") as? ShoppingItemTableViewCell else
+            {
+                print("Can't dequeue")
+                return UITableViewCell()
+            }
+            
+            cell.itemTitleLabel.text = showingItems[indexPath.row].name
+            cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
+            cell.imgBase64 = showingItems[indexPath.row].img
+            
+            return cell
         }
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingItemTableCell") as? ShoppingItemTableViewCell else
+        else
         {
-            print("Can't dequeue")
-            return UITableViewCell()
+            if categoriesArr.categoriesIndexesInOneLayer.contains(indexPath.row)
+            {
+                guard let cell = menuTableView.dequeueReusableCell(withIdentifier: "categoryTableViewCell") as? CategoryTableViewCell else
+                {
+                    print("Can't dequeue")
+                    return UITableViewCell()
+                }
+                cell.nameLabel.text = categoriesArr.inOneLayer[indexPath.row].name
+                
+                return cell
+            }
+            else
+            {
+                guard let cell = menuTableView.dequeueReusableCell(withIdentifier: "subcategoryTableViewCell") as? SubcategoryTableViewCell else
+                {
+                    print("Can't dequeue")
+                    return UITableViewCell()
+                }
+                cell.nameLabel.text = categoriesArr.inOneLayer[indexPath.row].name
+                
+                return cell
+            }
         }
-        
-        cell.itemTitleLabel.text = showingItems[indexPath.row].name
-        cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
-        cell.imgBase64 = showingItems[indexPath.row].img
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
@@ -293,12 +333,13 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             {
                 DispatchQueue.main.async
                 {
-                    guard let pickArr = Category.categoriesFabric(fromData: data) else
+                    guard let pickArr = Categories(fromData: data) else
                     {
                         self.showAlert(withString: "Error with decoding categories!\n")
                         return
                     }
                     self.categoriesArr = pickArr
+                    self.menuTableView.reloadData()
                 }
             }
             else
