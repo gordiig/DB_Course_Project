@@ -181,8 +181,17 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.isSelected = false
+        if tableView == self.tableView
+        {
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.isSelected = false
+        }
+        else
+        {
+            let cell = menuTableView.cellForRow(at: indexPath)
+            cell?.isSelected = false
+            cell?.accessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
+        }
     }
 
     
@@ -358,7 +367,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @objc func refresh(_ sender: Any)
     {
         self.savedBeforeWebTasksItems = showingItems
-//        self.showingItems = [ShoppingItem]()
         self.searchBar.text = nil
         
         self.nextItemNumForWebTask = itemsPerPage - 1
