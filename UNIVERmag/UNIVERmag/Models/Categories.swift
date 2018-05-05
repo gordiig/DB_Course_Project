@@ -22,6 +22,7 @@ class Subcategory
 
 class Category: Subcategory, JSONable
 {
+    // MARK: - Variables
     var subcategories: [Subcategory] = [Subcategory]()
     
     var subcatIDs: [Int]
@@ -34,6 +35,8 @@ class Category: Subcategory, JSONable
         return ans
     }
     
+    
+    // MARK: - inits
     init(name: String, subcategories: [Subcategory] = [Subcategory]())
     {
         super.init(ID: 0, name: name)
@@ -53,6 +56,8 @@ class Category: Subcategory, JSONable
         }
     }
     
+    
+    // MARK: - JSONable
     func decodeFromJSON(_ data: Data) -> Bool
     {
         let decoder = JSONDecoder()
@@ -75,6 +80,8 @@ class Category: Subcategory, JSONable
         return nil
     }
     
+    
+    // MARK: - Fabric (mb delete)
     static func categoriesFabric(fromData data: Data) -> [Category]?
     {
         let decoder = JSONDecoder()
@@ -109,6 +116,7 @@ class Category: Subcategory, JSONable
 
 class Categories: JSONable
 {
+    // MARK: - Variables and subscript
     var categories = [Category]()
     
     var catCount: Int {return categories.count}
@@ -138,6 +146,8 @@ class Categories: JSONable
         return inOneLayer[index]
     }
     
+    
+    // MARK: - inits
     init(_ cat: [Category] = [Category]())
     {
         self.categories = cat
@@ -151,6 +161,8 @@ class Categories: JSONable
         }
     }
     
+    
+    // MARK: - JSONable
     func decodeFromJSON(_ data: Data) -> Bool
     {
         let decoder = JSONDecoder()
@@ -185,6 +197,8 @@ class Categories: JSONable
     {
         return nil
     }
+    
+    
     
 }
 
