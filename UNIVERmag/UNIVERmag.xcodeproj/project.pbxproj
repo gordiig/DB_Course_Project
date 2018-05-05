@@ -91,7 +91,6 @@
 				13C0F0F2206912DC00CC5084 /* User.swift */,
 				1369B0172069322B00B480D2 /* CurrentUser.swift */,
 				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
-				134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */,
 				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
 				13DD0C7D209E052800F21435 /* Money.swift */,
 			);
@@ -143,6 +142,7 @@
 		13DD0C7F209E067600F21435 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
