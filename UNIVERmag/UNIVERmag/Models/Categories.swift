@@ -10,7 +10,7 @@ import Foundation
 
 class Subcategory
 {
-    var ID: Int
+    var ID: Int?
     var name: String
     
     init(ID: Int, name: String)
@@ -20,9 +20,8 @@ class Subcategory
     }
 }
 
-class Category: JSONable
+class Category: Subcategory, JSONable
 {
-    var name: String = "Catname"
     var subcategories: [Subcategory] = [Subcategory]()
     
     var subcatIDs: [Int]
@@ -30,7 +29,7 @@ class Category: JSONable
         var ans = [Int]()
         for sub in subcategories
         {
-            ans.append(sub.ID)
+            ans.append(sub.ID!)
         }
         return ans
     }
@@ -38,11 +37,13 @@ class Category: JSONable
     init(name: String, subcategories: [Subcategory] = [Subcategory]())
     {
         self.name = name
+        self.ID = nil
         self.subcategories = subcategories
     }
     
     required init?(fromData data: Data)
     {
+        ID = nil
         if self.decodeFromJSON(data)
         {
             return nil
@@ -103,7 +104,37 @@ class Category: JSONable
     }
 }
 
-
+class Categories
+{
+    var categories = [Category]()
+    
+    var catCount: Int {return categories.count}
+    var catAndSubcatCount: Int
+    {
+        var ans = 0
+        for cat in categories
+        {
+            ans += 1 + cat.subcatIDs.count
+        }
+        return ans
+    }
+    
+    var inOneLayer: [Subcategory]
+    {
+        var ans = [Subcategory]()
+        for cat in categories
+        {
+            ans.append(cat as Subcategory)
+            ans += cat.subcategories
+        }
+        return ans
+    }
+    
+    subscript(index: Int) -> Subcategory
+    {
+        return inOneLayer[index]
+    }
+}
 
 struct JSONCategory : Codable
 {
