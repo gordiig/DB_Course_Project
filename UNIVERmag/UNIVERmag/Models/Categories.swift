@@ -25,6 +25,16 @@ class Category: JSONable
     var name: String = "Catname"
     var subcategories: [Subcategory] = [Subcategory]()
     
+    var subcatIDs: [Int]
+    {
+        var ans = [Int]()
+        for sub in subcategories
+        {
+            ans.append(sub.ID)
+        }
+        return ans
+    }
+    
     init(name: String, subcategories: [Subcategory] = [Subcategory]())
     {
         self.name = name
@@ -92,6 +102,8 @@ class Category: JSONable
         return ans
     }
 }
+
+
 
 struct JSONCategory : Codable
 {
