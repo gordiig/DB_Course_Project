@@ -85,10 +85,7 @@
 				13A0264020976240003FADF7 /* MyItemsViewController.swift */,
 				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
 				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
-				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
 				1352C9EB207F215200C72D21 /* AddItemViewController.swift */,
-				1390BC5F209E368900831E01 /* CategoryTableViewCell.swift */,
-				1390BC61209E36F700831E01 /* SubcategoryTableViewCell.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -133,6 +130,7 @@
 		13857387204D442A0032054F /* UNIVERmag */ = {
 			isa = PBXGroup;
 			children = (
+				1390BC63209E3F4A00831E01 /* TableViewCells */,
 				13DD0C7F209E067600F21435 /* Extensions */,
 				130075D820774B430060CF46 /* Protocols */,
 				130075D720774B360060CF46 /* Models */,
@@ -145,6 +143,16 @@
 				1385738F204D442A0032054F /* UNIVERmag.xcdatamodeld */,
 			);
 			path = UNIVERmag;
+			sourceTree = "<group>";
+		};
+		1390BC63209E3F4A00831E01 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				1390BC5F209E368900831E01 /* CategoryTableViewCell.swift */,
+				1390BC61209E36F700831E01 /* SubcategoryTableViewCell.swift */,
+				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		13DD0C7F209E067600F21435 /* Extensions */ = {
