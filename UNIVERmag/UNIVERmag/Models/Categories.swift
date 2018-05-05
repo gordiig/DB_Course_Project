@@ -138,7 +138,7 @@ class Categories: JSONable
         return inOneLayer[index]
     }
     
-    init(_ cat: [Category])
+    init(_ cat: [Category] = [Category]())
     {
         self.categories = cat
     }
