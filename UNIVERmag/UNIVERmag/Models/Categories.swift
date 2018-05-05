@@ -36,13 +36,16 @@ class Category: Subcategory, JSONable
     
     init(name: String, subcategories: [Subcategory] = [Subcategory]())
     {
-        self.name = name
+        super.init(ID: 0, name: name)
+        
         self.ID = nil
         self.subcategories = subcategories
     }
     
     required init?(fromData data: Data)
     {
+        super.init(ID: 0, name: "")
+        
         ID = nil
         if self.decodeFromJSON(data)
         {
@@ -104,7 +107,7 @@ class Category: Subcategory, JSONable
     }
 }
 
-class Categories
+class Categories: JSONable
 {
     var categories = [Category]()
     
@@ -134,6 +137,55 @@ class Categories
     {
         return inOneLayer[index]
     }
+    
+    init(_ cat: [Category])
+    {
+        self.categories = cat
+    }
+    
+    required init?(fromData data: Data)
+    {
+        if !decodeFromJSON(data)
+        {
+            return nil
+        }
+    }
+    
+    func decodeFromJSON(_ data: Data) -> Bool
+    {
+        let decoder = JSONDecoder()
+        guard let newCategories = try? decoder.decode([JSONCategory].self, from: data) else
+        {
+            return false
+        }
+        
+        for newCat in newCategories
+        {
+            var key = true
+            for ansCat in self.categories
+            {
+                if ansCat.name == newCat.category_name
+                {
+                    ansCat.subcategories.append(Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name))
+                    key = false
+                    break
+                }
+            }
+            
+            if key
+            {
+                self.categories.append(Category(name: newCat.category_name, subcategories: [Subcategory(ID: newCat.subcategory_id, name: newCat.subcategory_name)]))
+            }
+        }
+        
+        return true
+    }
+    
+    func encodeToJSON() -> Data?
+    {
+        return nil
+    }
+    
 }
 
 struct JSONCategory : Codable
