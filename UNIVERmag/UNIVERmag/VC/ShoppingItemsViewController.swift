@@ -8,19 +8,18 @@
 
 import UIKit
 
-class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource
+class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate
 {
     @IBOutlet weak var addBut: UIBarButtonItem!
     @IBOutlet weak var maxPriceField: UITextField!
     @IBOutlet weak var minPriceField: UITextField!
-    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
-    var pickArr = [Category]()
+    var categoriesArr = [Category]()
     
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
@@ -39,9 +38,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        pickerView.delegate = self
-        pickerView.dataSource = self
         
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
@@ -116,57 +112,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
-    // MARK: - UIPickerView
-    func numberOfComponents(in pickerView: UIPickerView) -> Int
-    {
-        return 2
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
-        if component == 0
-        {
-            return pickArr.count + 1
-        }
-        else if component == 1
-        {
-            let row = pickerView.selectedRow(inComponent: 0)
-            if row == 0
-            {
-                return 0
-            }
-            return pickArr.count == 0 ? 0 : (pickArr[row-1].subcategories.count + 1)
-        }
-        
-        return 0
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-    {
-        if component == 0
-        {
-            return row == 0 ? "All" : pickArr[row-1].name
-        }
-        else
-        {
-            let fRow = pickerView.selectedRow(inComponent: 0)
-            if fRow == 0
-            {
-                return nil
-            }
-            return row == 0 ? "All" : pickArr[fRow-1].subcategories[row-1].name
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
-        if component == 0
-        {
-            pickerView.reloadComponent(1)
-        }
-    }
-    
-    
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -233,7 +178,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         let search_str = searchStr.lowercased()
         
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)")!
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)/price/-1/-1/categories/all")!
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
@@ -353,8 +298,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                         self.showAlert(withString: "Error with decoding categories!\n")
                         return
                     }
-                    self.pickArr = pickArr
-                    self.pickerView.reloadAllComponents()
+                    self.categoriesArr = pickArr
                 }
             }
             else
