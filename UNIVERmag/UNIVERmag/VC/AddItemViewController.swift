@@ -59,10 +59,15 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
             showAlert(withString: "Enter price!")
             return
         }
+        guard let money = Money(string: price) else
+        {
+            showAlert(withString: "Something wrong with money!")
+            return
+        }
         let about = aboutTextField.text
         
         sendingItem.name = name
-        sendingItem.price = NSString(string: price).doubleValue
+        sendingItem.price = money
         sendingItem.about = about
         
         submitBut.isEnabled = false

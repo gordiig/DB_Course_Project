@@ -13,7 +13,7 @@ class ShoppingItem: NSObject, JSONable
     var ID = 0
     var name = "Shopping item"
     var dateAdded = Date()
-    var price = 99.99
+    var price = Money(0)
     var about: String?
     var img: String?
     var uploaderUserName: String?
@@ -105,8 +105,9 @@ class ShoppingItem: NSObject, JSONable
         
         var priceString = val.price
         priceString.removeFirst()
-        let str = priceString as NSString
-        self.price = str.doubleValue
+        
+        let intPrice = Int(val.price)!
+        self.price = Money(cents: intPrice)
         
         self.img = val.image
     }
