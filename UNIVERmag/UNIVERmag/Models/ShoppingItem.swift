@@ -17,17 +17,19 @@ class ShoppingItem: NSObject, JSONable
     var about: String?
     var img: String?
     var uploaderUserName: String?
+    var subcategoryID: Int?
     
     private struct ShoppingItemStruct: Codable
     {
         var id: Int
         var name: String
         var date_added: String
-        var price: String
+        var price: Int
         var about: String?
         var image: String?
         var item_id: Int?
         var user_name: String?
+        var subcategory_id: Int?
     }
     
     
@@ -103,11 +105,9 @@ class ShoppingItem: NSObject, JSONable
         formatter.dateFormat = "yyyy-MM-dd"
         self.dateAdded = formatter.date(from: val.date_added)!
         
-        var priceString = val.price
-        priceString.removeFirst()
+        self.price = Money(cents: val.price)
         
-        let intPrice = Int(val.price)!
-        self.price = Money(cents: intPrice)
+        self.subcategoryID = val.subcategory_id
         
         self.img = val.image
     }
