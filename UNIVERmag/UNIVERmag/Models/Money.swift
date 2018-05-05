@@ -35,6 +35,14 @@ class Money: NSObject
         self.normalize()
     }
     
+    init(cents: Int)
+    {
+        super.init()
+        
+        self.cents = cents
+        normalize()
+    }
+    
     init(_ money: Double)
     {
         super.init()
