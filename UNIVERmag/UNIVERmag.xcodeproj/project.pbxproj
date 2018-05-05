@@ -28,6 +28,7 @@
 		13C0F0F3206912DC00CC5084 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F2206912DC00CC5084 /* User.swift */; };
 		13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F0206C083E00446339 /* ShoppingItem.swift */; };
 		13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F2206C0A4B00446339 /* JSONable.swift */; };
+		13DD0C7E209E052800F21435 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C7D209E052800F21435 /* Money.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		13C0F0F2206912DC00CC5084 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		13DCB6F0206C083E00446339 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		13DCB6F2206C0A4B00446339 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
+		13DD0C7D209E052800F21435 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
 				134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */,
 				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
+				13DD0C7D209E052800F21435 /* Money.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -123,6 +126,7 @@
 		13857387204D442A0032054F /* UNIVERmag */ = {
 			isa = PBXGroup;
 			children = (
+				13DD0C7F209E067600F21435 /* Extensions */,
 				130075D820774B430060CF46 /* Protocols */,
 				130075D720774B360060CF46 /* Models */,
 				130075D620774B160060CF46 /* VC */,
@@ -134,6 +138,13 @@
 				1385738F204D442A0032054F /* UNIVERmag.xcdatamodeld */,
 			);
 			path = UNIVERmag;
+			sourceTree = "<group>";
+		};
+		13DD0C7F209E067600F21435 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +232,7 @@
 				134DB01F207D0D45006D7E73 /* UIImageStringExtension.swift in Sources */,
 				1352C9EE207F259600C72D21 /* Alertable.swift in Sources */,
 				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
+				13DD0C7E209E052800F21435 /* Money.swift in Sources */,
 				13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */,
 				1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */,
 				1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */,
