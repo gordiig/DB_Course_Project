@@ -12,32 +12,27 @@ class Money: NSObject
 {
     var dollars: Int = 0
     var cents: Int = 0
-    private(set) var powForCents = 0
     var currencySign = "₽"
+    
+    var doubleValue: Double
+    {
+        return self.toDouble()
+    }
     
     override public var description: String
     {
-        var ans = "\(dollars)."
-        for _ in 0 ..< powForCents-1
-        {
-            ans += "0"
-        }
-        ans += "\(cents)\(currencySign)"
-        
+        let ans = "\(dollars).\(cents)\(currencySign)"
         return ans
     }
     
-    init(_ dollar: Int, cents: Int = 0, powerForCents: Int = 1)
+    init(_ dollar: Int, cents: Int = 0)
     {
         super.init()
         
         self.dollars = dollar
         self.cents = cents
         
-        if powerForCents >= 1
-        {
-            self.powForCents = powerForCents
-        }
+        self.normalize()
     }
     
     init(_ money: Double)
@@ -46,24 +41,41 @@ class Money: NSObject
         
         let sep = money.integersSeparatedByPoint()
         dollars = sep.dollars
-        cents = sep.cents
-        powForCents = sep.powerForCents
-    }
-    
-    func toDecimal() -> Decimal
-    {
-        let newFloat = Decimal(cents) / pow(10, powForCents)
         
-        var ans = Decimal(abs(dollars)) + newFloat
-        ans *= Decimal(abs(dollars) / dollars)
-        
-        return ans
+        if sep.powerForCents < 1 || sep.powerForCents > 2
+        {
+            cents = 0
+        }
+        else
+        {
+            cents = sep.cents
+        }
     }
     
     func toDouble() -> Double
     {
-        let decimal = self.toDecimal()
-        let ans = (decimal as NSDecimalNumber).doubleValue
+        let ans = Double(dollars) + Double(cents)/100
         return ans
     }
+    
+    func toCents() -> Int
+    {
+        return dollars * 100 + cents
+    }
+    
+    func normalize()
+    {
+        while cents >= 100
+        {
+            var del = 100
+            while cents / del > 10
+            {
+                del *= 10
+            }
+            
+            dollars += (cents / del) * (del / 100)
+            cents = cents % del
+        }
+    }
+    
 }
