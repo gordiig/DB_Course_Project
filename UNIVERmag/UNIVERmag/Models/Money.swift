@@ -60,6 +60,40 @@ class Money: NSObject
         }
     }
     
+    init?(string: String)
+    {
+        super.init()
+        
+        let str = string.replacingOccurrences(of: ",", with: ".")
+        let splitted = str.split(separator: ".")
+        
+        guard let dollars = Int(splitted[0]) else
+        {
+            return nil
+        }
+        self.dollars = dollars
+        
+        if splitted.count == 1
+        {
+            return
+        }
+        
+        if splitted[1] == ""
+        {
+            self.cents = 0
+            return
+        }
+        
+        guard let cents = Int(splitted[1]) else
+        {
+            return nil
+        }
+        self.cents = cents
+        
+        self.normalize()
+    }
+    
+    
     func toDouble() -> Double
     {
         let ans = Double(dollars) + Double(cents)/100
@@ -70,6 +104,7 @@ class Money: NSObject
     {
         return dollars * 100 + cents
     }
+    
     
     func normalize()
     {
