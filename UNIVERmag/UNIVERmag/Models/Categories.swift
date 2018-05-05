@@ -119,28 +119,6 @@ class Categories: JSONable
     // MARK: - Variables and subscript
     var categories = [Category]()
     
-    var catCount: Int {return categories.count}
-    var catAndSubcatCount: Int
-    {
-        var ans = 0
-        for cat in categories
-        {
-            ans += 1 + cat.subcatIDs.count
-        }
-        return ans
-    }
-    
-    var inOneLayer: [Subcategory]
-    {
-        var ans = [Subcategory]()
-        for cat in categories
-        {
-            ans.append(cat as Subcategory)
-            ans += cat.subcategories
-        }
-        return ans
-    }
-    
     subscript(index: Int) -> Subcategory
     {
         return inOneLayer[index]
@@ -199,6 +177,48 @@ class Categories: JSONable
     }
     
     
+    // MARK: - counts
+    var catCount: Int
+    {
+        return categories.count
+    }
+    
+    var catAndSubcatCount: Int
+    {
+        var ans = 0
+        for cat in categories
+        {
+            ans += 1 + cat.subcatIDs.count
+        }
+        return ans
+    }
+    
+    
+    // MARK: - One level array work
+    var inOneLayer: [Subcategory]
+    {
+        var ans = [Subcategory]()
+        for cat in categories
+        {
+            ans.append(cat as Subcategory)
+            ans += cat.subcategories
+        }
+        return ans
+    }
+    
+    var categoriesIndexesInOneLayer: [Int]
+    {
+        let oneLayer = self.inOneLayer
+        var ans = [Int]()
+        for i in 0 ..< oneLayer.count
+        {
+            if oneLayer[i].ID == nil
+            {
+                ans.append(i)
+            }
+        }
+        return ans
+    }
     
 }
 
