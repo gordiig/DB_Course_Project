@@ -13,7 +13,7 @@ CREATE TABLE Items
   ID SERIAL PRIMARY KEY,
   Name VARCHAR(255) NOT NULL,
   Date_added DATE DEFAULT current_date NOT NULL,
-  Price MONEY,
+  Price INTEGER,
   About VARCHAR(1023),
   Image VARCHAR(100000)
 );
