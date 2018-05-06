@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate
+class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable, UISearchBarDelegate, UITextFieldDelegate
 {
     @IBOutlet weak var addBut: UIBarButtonItem!
     @IBOutlet weak var maxPriceField: UITextField!
@@ -53,6 +53,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         menuTableView.delegate = self
         menuTableView.dataSource = self
+        
+        maxPriceField.delegate = self
+        minPriceField.delegate = self
         
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
@@ -249,6 +252,22 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         nextItemNumForWebTask = itemsPerPage-1
         webTask(page: 1)
+    }
+    
+    
+    // MARK: - UITextField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        var allowedStr = "0123456789."
+        let text = textField.text ?? ""
+        if text.contains(".")
+        {
+            allowedStr.removeLast()
+        }
+        
+        let allowedCharacters = CharacterSet(charactersIn: allowedStr)
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
     }
     
     
