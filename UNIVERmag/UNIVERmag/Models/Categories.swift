@@ -193,6 +193,11 @@ class Categories: JSONable
         return ans
     }
     
+    var subcatCount: Int
+    {
+        return catAndSubcatCount - catCount
+    }
+    
     
     // MARK: - One level array work
     var inOneLayer: [Subcategory]
