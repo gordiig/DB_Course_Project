@@ -21,6 +21,17 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
     var categoriesArr = Categories()
+    {
+        didSet
+        {
+            selectedSubcats = [Bool]()
+            for _ in 0 ..< categoriesArr.catAndSubcatCount
+            {
+                selectedSubcats.append(false)
+            }
+        }
+    }
+    var selectedSubcats = [Bool]()
     
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
@@ -194,6 +205,9 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             let accessoryType: UITableViewCellAccessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
             cell?.accessoryType = accessoryType
             
+            let boolVal = accessoryType == .checkmark ? true : false
+            selectedSubcats[indexPath.row] = boolVal
+            
             let oneLayer = categoriesArr.inOneLayer
             if oneLayer[indexPath.row].ID == nil
             {
@@ -203,6 +217,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                 {
                     cell = menuTableView.cellForRow(at: IndexPath(row: index, section: 0))
                     cell?.accessoryType = accessoryType
+                    selectedSubcats[index] = boolVal
                     index += 1
                 }
             }
@@ -242,7 +257,27 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         let search_str = searchStr.lowercased()
         
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)/price/-1/-1/categories/all")!
+        var subcatIDs = ""
+        let oneLayer = categoriesArr.inOneLayer
+        for i in 0 ..< selectedSubcats.count
+        {
+            if selectedSubcats[i] && oneLayer[i].ID != nil
+            {
+                subcatIDs += "\(oneLayer[i].ID!),"
+            }
+        }
+        if subcatIDs.isEmpty
+        {
+            subcatIDs = "all"
+        }
+        else
+        {
+            subcatIDs.removeLast()
+        }
+        
+        print(subcatIDs)
+        
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)/price/-1/-1/categories/\(subcatIDs)")!
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
