@@ -382,10 +382,12 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @objc func refresh(_ sender: Any)
     {
         self.savedBeforeWebTasksItems = showingItems
+        
         self.searchBar.text = nil
         
         self.nextItemNumForWebTask = itemsPerPage - 1
         self.webTask(page: 1)
+        self.webTaskCat()
     }
     
     
