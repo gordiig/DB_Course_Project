@@ -188,9 +188,24 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         else
         {
-            let cell = menuTableView.cellForRow(at: indexPath)
+            var cell = menuTableView.cellForRow(at: indexPath)
             cell?.isSelected = false
-            cell?.accessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
+            
+            let accessoryType: UITableViewCellAccessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
+            cell?.accessoryType = accessoryType
+            
+            let oneLayer = categoriesArr.inOneLayer
+            if oneLayer[indexPath.row].ID == nil
+            {
+                var index = indexPath.row + 1
+                let maxIndex = oneLayer.count
+                while index < maxIndex && oneLayer[index].ID != nil
+                {
+                    cell = menuTableView.cellForRow(at: IndexPath(row: index, section: 0))
+                    cell?.accessoryType = accessoryType
+                    index += 1
+                }
+            }
         }
     }
 
