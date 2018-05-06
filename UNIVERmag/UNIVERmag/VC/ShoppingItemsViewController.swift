@@ -276,6 +276,22 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         let search_str = searchStr.lowercased()
         
+        let minText = minPriceField.text ?? "."
+        var minPrice = -1
+        if minText != "." && !minText.isEmpty
+        {
+            let mon = Money(string: minText)!
+            minPrice = mon.toCents()
+        }
+        
+        let maxText = maxPriceField.text ?? "."
+        var maxPrice = -1
+        if maxText != "." && !maxText.isEmpty
+        {
+            let mon = Money(string: maxText)!
+            maxPrice = mon.toCents()
+        }
+        
         var subcatIDs = ""
         let oneLayer = categoriesArr.inOneLayer
         for i in 0 ..< selectedSubcats.count
@@ -294,9 +310,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             subcatIDs.removeLast()
         }
         
-        print(subcatIDs)
-        
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)/price/-1/-1/categories/\(subcatIDs)")!
+        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)/price/\(minPrice)/\(maxPrice)/categories/\(subcatIDs)")!
+        print(finalURL.absoluteString)
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
