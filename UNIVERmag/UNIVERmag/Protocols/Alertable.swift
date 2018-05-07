@@ -11,13 +11,5 @@ import UIKit
 
 protocol Alertable
 {
-    func showAlert(controller: UIViewController, title: String, withString str: String)
-}
-
-extension Alertable
-{
-    func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
-    {
-        showAlert(controller: controller, title: title, withString: str)
-    }
+    func showAlert(title: String, withString str: String)
 }
