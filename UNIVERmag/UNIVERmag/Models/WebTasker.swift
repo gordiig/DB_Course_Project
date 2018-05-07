@@ -124,13 +124,11 @@ class WebTasker
                         errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                         succsessHandler: @escaping (Data) -> Void, failHandler: @escaping () -> Void, deferBody: @escaping () -> Void)
     {
+        let lastComponent = "\(name)&\(price)&\(about)&\(img)"
         var finalURL = baseURL.appendingPathComponent("upload_item")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
-        finalURL.appendPathComponent(name)
-        finalURL.appendPathComponent("\(price)")
-        finalURL.appendPathComponent(about)
-        finalURL.appendPathComponent(img)
+        finalURL.appendPathComponent(lastComponent)
         
         webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
