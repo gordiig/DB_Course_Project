@@ -11,5 +11,5 @@ import UIKit
 
 protocol VCAlertDelegate: Alertable
 {
-    var alertDelegate: UIViewController? { get set }
+    var alertDelegate: Alertable? { get set }
 }
