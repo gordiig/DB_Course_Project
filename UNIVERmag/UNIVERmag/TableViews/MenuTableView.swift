@@ -25,6 +25,23 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     }
     var selectedSubcats = [Bool]()
     
+    override init(frame: CGRect, style: UITableViewStyle)
+    {
+        super.init(frame: frame, style: style)
+        
+        self.delegate = self
+        self.dataSource = self
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        
+        self.delegate = self
+        self.dataSource = self
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return categories.catAndSubcatCount
