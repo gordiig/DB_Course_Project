@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, Alertable
+class ViewController: UIViewController, Alertable, UITextFieldDelegate
 {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -17,8 +17,31 @@ class ViewController: UIViewController, Alertable
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
+    
+    // MARK: - UITextField works
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        if textField == usernameTextField
+        {
+            passwordTextField.becomeFirstResponder()
+        }
+        else
+        {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
     
     // MARK: - Loggining in (Web task)
     @IBAction func logInButClicked(_ sender: Any)
