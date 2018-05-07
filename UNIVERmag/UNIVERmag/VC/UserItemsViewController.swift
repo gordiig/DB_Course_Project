@@ -160,6 +160,11 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.reloadSections(sections as IndexSet, with: .automatic)
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        self.view.endEditing(true)
+    }
+    
     
     // MARK: - Refresh
     @objc func refresh(_ sender: Any)
