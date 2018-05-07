@@ -149,6 +149,7 @@ class Categories: JSONable
             return false
         }
         
+        self.categories = [Category]()
         for newCat in newCategories
         {
             var key = true
