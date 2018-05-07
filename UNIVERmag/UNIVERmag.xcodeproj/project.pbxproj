@@ -28,6 +28,7 @@
 		13A0264120976240003FADF7 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A0264020976240003FADF7 /* MyItemsViewController.swift */; };
 		13C0F0F12068FDFF00CC5084 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */; };
 		13C0F0F3206912DC00CC5084 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F2206912DC00CC5084 /* User.swift */; };
+		13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEF8A620A036EC00A6442B /* MenuTableView.swift */; };
 		13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F0206C083E00446339 /* ShoppingItem.swift */; };
 		13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F2206C0A4B00446339 /* JSONable.swift */; };
 		13DD0C7E209E052800F21435 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C7D209E052800F21435 /* Money.swift */; };
@@ -58,6 +59,7 @@
 		13A0264020976240003FADF7 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		13C0F0F2206912DC00CC5084 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		13CEF8A620A036EC00A6442B /* MenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
 		13DCB6F0206C083E00446339 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		13DCB6F2206C0A4B00446339 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		13DD0C7D209E052800F21435 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		13857387204D442A0032054F /* UNIVERmag */ = {
 			isa = PBXGroup;
 			children = (
+				13CEF8A520A036C200A6442B /* TableViews */,
 				1390BC63209E3F4A00831E01 /* TableViewCells */,
 				13DD0C7F209E067600F21435 /* Extensions */,
 				130075D820774B430060CF46 /* Protocols */,
@@ -153,6 +156,14 @@
 				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		13CEF8A520A036C200A6442B /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				13CEF8A620A036EC00A6442B /* MenuTableView.swift */,
+			);
+			path = TableViews;
 			sourceTree = "<group>";
 		};
 		13DD0C7F209E067600F21435 /* Extensions */ = {
@@ -256,6 +267,7 @@
 				13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */,
 				1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
+				13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */,
 				1390BC62209E36F700831E01 /* SubcategoryTableViewCell.swift in Sources */,
 				13C0F0F3206912DC00CC5084 /* User.swift in Sources */,
 			);
