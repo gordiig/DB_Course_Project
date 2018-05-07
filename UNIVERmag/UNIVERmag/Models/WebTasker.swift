@@ -110,15 +110,11 @@ class WebTasker
                                errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                                succsessHandler: @escaping (Data) -> Void, failHandler: @escaping () -> Void, deferBody: @escaping () -> Void)
     {
+        let lastComponent = "\(firstName)&\(lastName)&\(newPassword)&\(phone)&\(email)&\(city)"
         var finalURL = baseURL.appendingPathComponent("update_user_info")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
-        finalURL.appendPathComponent(firstName)
-        finalURL.appendPathComponent(lastName)
-        finalURL.appendPathComponent(newPassword)
-        finalURL.appendPathComponent(phone)
-        finalURL.appendPathComponent(email)
-        finalURL.appendPathComponent(city)
+        finalURL.appendPathComponent(lastComponent)
         
         webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
