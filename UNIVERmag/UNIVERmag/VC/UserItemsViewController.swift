@@ -200,15 +200,11 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     // MARK: - Alertable
-    func showAlert(controller: UIViewController, title: String, withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        controller.present(alert, animated: true, completion: nil)
-    }
-    func showAlert(title: String = "Error", withString str: String)
-    {
-        showAlert(controller: self, title: title, withString: str)
+        self.present(alert, animated: true, completion: nil)
     }
 }
