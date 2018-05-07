@@ -100,7 +100,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/upload_item/")!
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password!)
-        let lastComponent = "\(name)&\(price)&\(about)&\(img)"
+        let lastComponent = "\(name)&\(price.toCents())&\(about)&\(img)"
         finalURL.appendPathComponent(lastComponent)
         
         let urlRequest = URLRequest(url: finalURL)
@@ -130,32 +130,18 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
             
             let ans = String(data: data, encoding: .utf8)
-            if ans?.first == "0"
+            if ans?.first != "0"
             {
                 DispatchQueue.main.async
                 {
                     self.showAlert(title: "Succsess!", withString: "Sucsessfully uploaded an item!")
                 }
             }
-            else if ans?.first == "1"
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Wrong Username or Password!")
-                }
-            }
-            else if ans?.first == "2"
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Wrong parameters number!")
-                }
-            }
             else
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Unknown response: \(ans)!")
+                    self.showAlert(withString: "Error while uploading!\n")
                 }
             }
             
