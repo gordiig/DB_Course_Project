@@ -8,8 +8,10 @@
 
 import UIKit
 
-class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
+class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource, VCAlertDelegate
 {
+    var alertDelegate: Alertable?
+    
     var categories = CurrentCategories.cur
     {
         didSet
@@ -19,6 +21,8 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     }
     var selectedSubcats = [Bool]()
     
+    
+    // MARK: - inits
     override init(frame: CGRect, style: UITableViewStyle)
     {
         super.init(frame: frame, style: style)
@@ -36,6 +40,7 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     }
 
 
+    // MARK: - UITableView delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return categories.catAndSubcatCount
@@ -47,6 +52,10 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         {
             guard let cell = self.dequeueReusableCell(withIdentifier: "categoryTableViewCell") as? CategoryTableViewCell else
             {
+                if alertDelegate != nil
+                {
+                    showAlert(title: "Error", withString: "Error occured in dequing category cell!\n")
+                }
                 return UITableViewCell()
             }
             cell.nameLabel.text = categories.inOneLayer[indexPath.row].name
@@ -58,6 +67,10 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         {
             guard let cell = self.dequeueReusableCell(withIdentifier: "subcategoryTableViewCell") as? SubcategoryTableViewCell else
             {
+                if alertDelegate != nil
+                {
+                    showAlert(title: "Error", withString: "Error occured in dequing subcategory cell!\n")
+                }
                 return UITableViewCell()
             }
             cell.nameLabel.text = categories.inOneLayer[indexPath.row].name
@@ -94,6 +107,8 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    
+    // MARK: - Overrides
     override func reloadData()
     {
         super.reloadData()
@@ -103,6 +118,13 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         {
             selectedSubcats.append(false)
         }
+    }
+
+    
+    // MARK:- Alertable
+    func showAlert(title: String, withString str: String)
+    {
+        alertDelegate?.showAlert(title: title, withString: str)
     }
 }
 

@@ -40,6 +40,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         
+        menuTableView.alertDelegate = self
+        
         maxPriceField.delegate = self
         minPriceField.delegate = self
         
@@ -234,138 +236,116 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             subcatIDs.removeLast()
         }
         
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)/price/\(minPrice)/\(maxPrice)/categories/\(subcatIDs)")!
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
+                self.showingItems = self.savedBeforeWebTasksItems
+            }
+        }
+        
+        let dataErrorHandler: () -> Void =
         {
-            (data, response, error) in
-            
-            if error != nil
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
+                self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+                self.showingItems = self.savedBeforeWebTasksItems
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
                 {
-                    self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
                     self.showingItems = self.savedBeforeWebTasksItems
+                    return
                 }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
+                
+                if page == 1
                 {
-                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
-                    self.showingItems = self.savedBeforeWebTasksItems
+                    self.showingItems = [ShoppingItem]()
                 }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first != "0"
-            {
-                DispatchQueue.main.async
+                self.showingItems += tmpItems
+                
+                if (searchStr != "NULL") || (page == 1)
                 {
-                    guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
-                    {
-                        self.showingItems = self.savedBeforeWebTasksItems
-                        return
-                    }
-                    
-                    if page == 1
-                    {
-                        self.showingItems = [ShoppingItem]()
-                    }
-                    self.showingItems += tmpItems
-                    
-                    if (searchStr != "NULL") || (page == 1)
-                    {
-                        let range = NSMakeRange(0, self.tableView.numberOfSections)
-                        let sections = NSIndexSet(indexesIn: range)
-                        self.tableView.reloadSections(sections as IndexSet, with: .automatic)
-                    }
-                    else
-                    {
-                        self.tableView.reloadData()
-                    }
+                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                    let sections = NSIndexSet(indexesIn: range)
+                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
-            }
-            else
-            {
-                DispatchQueue.main.async
+                else
                 {
-                    self.showAlert(withString: "No items for your result!")
-                    self.searchBar.text = nil
-                    self.showingItems = self.savedBeforeWebTasksItems
-                }
-            }
-            
-            defer
-            {
-                DispatchQueue.main.async
-                {
-                    self.refreshControl.endRefreshing()
-                    self.savedBeforeWebTasksItems = [ShoppingItem]()
+                    self.tableView.reloadData()
                 }
             }
         }
         
-        task.resume()
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "No items for your result!")
+                self.searchBar.text = nil
+                self.showingItems = self.savedBeforeWebTasksItems
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.refreshControl.endRefreshing()
+                self.savedBeforeWebTasksItems = [ShoppingItem]()
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
     
     func webTaskCat()
     {
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_subcategories/all/")!
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
-        {
-            (data, response, error) in
-            
-            if error != nil
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Can't get categories:\n \(error!.localizedDescription)")
-                }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error in downloaded data (cat)!\n")
-                }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first != "0"
-            {
-                DispatchQueue.main.async
-                {
-                    if !self.categoriesArr.decodeFromJSON(data)
-                    {
-                        self.showAlert(withString: "Problems with decoding categories!")
-                    }
-                    self.menuTableView.reloadData()
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "No categories!")
-                }
+                self.showAlert(withString: "Can't get categories:\n \(error!.localizedDescription)")
             }
         }
         
-        task.resume()
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data (cat)!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                if !self.categoriesArr.decodeFromJSON(data)
+                {
+                    self.showAlert(withString: "Problems with decoding categories!")
+                }
+                self.menuTableView.reloadData()
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "No categories!")
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: {})
     }
     
     // MARK: - Refresh
@@ -398,16 +378,12 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     // MARK: - Alertable
-    func showAlert(controller: UIViewController, title: String, withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        controller.present(alert, animated: true, completion: nil)
-    }
-    func showAlert(title: String = "Error", withString str: String)
-    {
-        showAlert(controller: self, title: title, withString: str)
+        self.present(alert, animated: true, completion: nil)
     }
 
     

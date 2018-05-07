@@ -37,105 +37,86 @@ class EditUserInfoViewController: UIViewController, Alertable
     }
     
     
-    // MARK: - Button press
+    // MARK: - Button press (Web task)
     @IBAction func submitButPressed(_ sender: Any)
     {
         let user = CurrentUser.getUser
         let username = user.username
-        let password = user.password
+        guard let password = user.password else
+        {
+            showAlert(withString: "Log in first!")
+            return
+        }
         
         let firstName = (firstNameTextField.text ?? user.firstName) ?? "NULL"
         let lastName = (lastNameTextField.text ?? user.lastName) ?? "NULL"
-        let newPassword = passwordTextField.text ?? user.password!
+        let newPassword = passwordTextField.text ?? password
         let phone = phoneTextField.text ?? user.phoneNumber
         let email = emailTextField.text ?? user.email
         let city = cityTextField.text ?? user.city
         
-        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/update_user_info/")!
-        finalURL.appendPathComponent(username)
-        finalURL.appendPathComponent(password!)
-        var lastComponent = "\(firstName)&\(lastName)&\(newPassword)&\(phone)&\(email)&\(city)"
-        finalURL.appendPathComponent(lastComponent)
-        
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
-        {
-            (data, response, error) in
-            
-            if error != nil
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Can't update! Please try again!:\n \(error!.localizedDescription)")
-                }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
-                }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first == "1"
-            {
-                DispatchQueue.main.async
-                {
-                    user.firstName = firstName
-                    user.lastName = lastName
-                    user.city = city
-                    user.email = email
-                    user.phoneNumber = phone
-                    user.password = newPassword
-                    
-                    let defaults = UserDefaults.standard
-                    defaults.set(newPassword, forKey: "Password")
-                    
-                    self.showAlert(title: "Sucsess", withString: "Sucsessfully updated profile!")
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Something went wrong! Please try again!\n")
-                }
-            }
-            
-            defer
-            {
-                DispatchQueue.main.async
-                {
-                    self.submitButton.isEnabled = true
-                }
+                self.showAlert(withString: "Can't update! Please try again!:\n \(error!.localizedDescription)")
             }
         }
         
-        submitButton.isEnabled = false
-        task.resume()
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                user.firstName = firstName
+                user.lastName = lastName
+                user.city = city
+                user.email = email
+                user.phoneNumber = phone
+                user.password = newPassword
+                
+                let defaults = UserDefaults.standard
+                defaults.set(newPassword, forKey: "Password")
+                
+                self.showAlert(title: "Sucsess", withString: "Sucsessfully updated profile!")
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error occured while updating user info\n")
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.submitButton.isEnabled = true
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.updateUserInfoWebTask(username: username, password: password, firstName: firstName, lastName: lastName, newPassword: newPassword, phone: phone, email: email, city: city, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
     
     
     // MARK: - Alertable
-    func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        controller.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    func showAlert(title: String = "Error", withString str: String)
-    {
-        showAlert(controller: self, title: title, withString: str)
-    }
-    
     
 }

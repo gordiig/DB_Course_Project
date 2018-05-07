@@ -89,7 +89,11 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         let user = CurrentUser.getUser
         let username = user.username
-        let password = user.password
+        guard let password = user.password else
+        {
+            showAlert(withString: "Log in first!")
+            return
+        }
         
         let name = sendingItem.name
         let price = sendingItem.price
@@ -97,93 +101,57 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         let _img = sendingItem.img ?? "NULL"
         let img = _img.replacingOccurrences(of: "/", with: "$")
         
-        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/upload_item/")!
-        finalURL.appendPathComponent(username)
-        finalURL.appendPathComponent(password!)
-        let lastComponent = "\(name)&\(price)&\(about)&\(img)"
-        finalURL.appendPathComponent(lastComponent)
-        
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
-        {
-            (data, response, error) in
-            
-            if error != nil
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error occured while sending item!:\n \(error!.localizedDescription)")
-                }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error in downloaded data!\n")
-                }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first == "0"
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(title: "Succsess!", withString: "Sucsessfully uploaded an item!")
-                }
-            }
-            else if ans?.first == "1"
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Wrong Username or Password!")
-                }
-            }
-            else if ans?.first == "2"
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Wrong parameters number!")
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Unknown response: \(ans)!")
-                }
-            }
-            
-            defer
-            {
-                DispatchQueue.main.async
-                {
-                    self.submitBut.isEnabled = true
-                }
+                self.showAlert(withString: "Error occured while sending item!:\n \(error!.localizedDescription)")
             }
         }
         
-        task.resume()
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                self.showAlert(title: "Succsess!", withString: "Sucsessfully uploaded an item!")
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error while uploading!\n")
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.submitBut.isEnabled = true
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.addItemWebTask(username: username, password: password, name: name, price: price.toCents(), about: about, img: img, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
     
     
     // MARK: - Alertable
-    func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        controller.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    func showAlert(title: String = "Error", withString str: String)
-    {
-        showAlert(controller: self, title: title, withString: str)
-    }
-    
 }

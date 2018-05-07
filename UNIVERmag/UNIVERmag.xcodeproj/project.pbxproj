@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */; };
+		131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131068C820A057EC0080B4C8 /* WebTasker.swift */; };
+		131068CC20A076090080B4C8 /* CurrentWebTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131068CB20A076090080B4C8 /* CurrentWebTasker.swift */; };
 		1311F2DD209CBF2C0037E6EF /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311F2DC209CBF2C0037E6EF /* Categories.swift */; };
 		133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */; };
 		1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338E1EE208E166E00984217 /* UserItemsViewController.swift */; };
@@ -30,6 +32,7 @@
 		13C0F0F3206912DC00CC5084 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F2206912DC00CC5084 /* User.swift */; };
 		13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEF8A620A036EC00A6442B /* MenuTableView.swift */; };
 		13CEF8A920A037B000A6442B /* CurrentCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEF8A820A037B000A6442B /* CurrentCategories.swift */; };
+		13CEF8AC20A046E200A6442B /* VCAlertDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEF8AB20A046E200A6442B /* VCAlertDelegate.swift */; };
 		13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F0206C083E00446339 /* ShoppingItem.swift */; };
 		13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F2206C0A4B00446339 /* JSONable.swift */; };
 		13DD0C7E209E052800F21435 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C7D209E052800F21435 /* Money.swift */; };
@@ -38,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInfoViewController.swift; sourceTree = "<group>"; };
+		131068C820A057EC0080B4C8 /* WebTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTasker.swift; sourceTree = "<group>"; };
+		131068CB20A076090080B4C8 /* CurrentWebTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWebTasker.swift; sourceTree = "<group>"; };
 		1311F2DC209CBF2C0037E6EF /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
 		1338E1EE208E166E00984217 /* UserItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemsViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +67,7 @@
 		13C0F0F2206912DC00CC5084 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		13CEF8A620A036EC00A6442B /* MenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
 		13CEF8A820A037B000A6442B /* CurrentCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCategories.swift; sourceTree = "<group>"; };
+		13CEF8AB20A046E200A6442B /* VCAlertDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAlertDelegate.swift; sourceTree = "<group>"; };
 		13DCB6F0206C083E00446339 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		13DCB6F2206C0A4B00446339 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		13DD0C7D209E052800F21435 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
@@ -98,11 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				13C0F0F2206912DC00CC5084 /* User.swift */,
-				1369B0172069322B00B480D2 /* CurrentUser.swift */,
 				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
 				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
-				13CEF8A820A037B000A6442B /* CurrentCategories.swift */,
 				13DD0C7D209E052800F21435 /* Money.swift */,
+				131068C820A057EC0080B4C8 /* WebTasker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -114,6 +119,16 @@
 				1352C9ED207F259600C72D21 /* Alertable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		131068CA20A075D20080B4C8 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				1369B0172069322B00B480D2 /* CurrentUser.swift */,
+				13CEF8A820A037B000A6442B /* CurrentCategories.swift */,
+				131068CB20A076090080B4C8 /* CurrentWebTasker.swift */,
+			);
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 		1385737C204D442A0032054F = {
@@ -135,6 +150,8 @@
 		13857387204D442A0032054F /* UNIVERmag */ = {
 			isa = PBXGroup;
 			children = (
+				131068CA20A075D20080B4C8 /* Singletons */,
+				13CEF8AA20A046C600A6442B /* Delegates */,
 				13CEF8A520A036C200A6442B /* TableViews */,
 				1390BC63209E3F4A00831E01 /* TableViewCells */,
 				13DD0C7F209E067600F21435 /* Extensions */,
@@ -167,6 +184,14 @@
 				13CEF8A620A036EC00A6442B /* MenuTableView.swift */,
 			);
 			path = TableViews;
+			sourceTree = "<group>";
+		};
+		13CEF8AA20A046C600A6442B /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				13CEF8AB20A046E200A6442B /* VCAlertDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		13DD0C7F209E067600F21435 /* Extensions */ = {
@@ -256,6 +281,7 @@
 				13CEF8A920A037B000A6442B /* CurrentCategories.swift in Sources */,
 				13A0264120976240003FADF7 /* MyItemsViewController.swift in Sources */,
 				133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */,
+				13CEF8AC20A046E200A6442B /* VCAlertDelegate.swift in Sources */,
 				1311F2DD209CBF2C0037E6EF /* Categories.swift in Sources */,
 				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
 				1385738B204D442A0032054F /* ViewController.swift in Sources */,
@@ -266,9 +292,11 @@
 				1352C9EE207F259600C72D21 /* Alertable.swift in Sources */,
 				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
 				13DD0C7E209E052800F21435 /* Money.swift in Sources */,
+				131068CC20A076090080B4C8 /* CurrentWebTasker.swift in Sources */,
 				13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */,
 				1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */,
 				13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */,
+				131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */,
 				1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
 				13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */,
