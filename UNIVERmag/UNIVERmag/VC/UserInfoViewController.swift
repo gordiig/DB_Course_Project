@@ -126,131 +126,105 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: - WebTask
     func webTask(_ base64: String)
     {
-//        print("--")
-//        print(base64)
-//        print("--")
         let newBase64 = base64.replacingOccurrences(of: "/", with: "&")
         
         let username = user.username
-        let password = user.password
-        
-        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/update_user_photo/")!
-        finalURL.appendPathComponent(username)
-        finalURL.appendPathComponent(password!)
-        finalURL.appendPathComponent(newBase64)
-        
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
+        guard let password = user.password else
         {
-            (data, response, error) in
-            
-            if error != nil
+            showAlert(withString: "Login first!")
+            return
+        }
+     
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Can't update! Please try again!:\n \(error!.localizedDescription)")
-                }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
-                }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first == "1"
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(title: "Sucsess!", withString: "Sucsessfully updated photo!")
-                    self.user.img = base64
-                    self.setPic(base64: base64)
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Something went wrong! Please try again!\n")
-                }
+                self.showAlert(withString: "Can't update! Please try again!:\n \(error!.localizedDescription)")
             }
         }
         
-        task.resume()
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                self.showAlert(title: "Sucsess!", withString: "Sucsessfully updated photo!")
+                self.user.img = base64
+                self.setPic(base64: base64)
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Something went wrong! Please try again!\n")
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.updateUserPhotoWebTask(username: username, password: password, base64: newBase64, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: {})
     }
     
     func webTask(username: String)
     {
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_safe_user_info/\(username)")!
-        
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
-        {
-            (data, response, error) in
-            
-            if error != nil
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error with getting user info!\n \(error!.localizedDescription)")
-                }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
-                }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first != "0"
-            {
-                DispatchQueue.main.async
-                {
-                    guard let tmpUser = User(fromData: data) else
-                    {
-                        self.showAlert(withString: "Error with decoding data\n")
-                        self.navigationController?.popViewController(animated: true)
-                        return
-                    }
-                    
-                    self.user = tmpUser
-                    self.fillFromUser(self.user)
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "No such user, or another error occured!\n")
-                }
-            }
-            
-            defer
-            {
-                DispatchQueue.main.async
-                {
-                    self.activityIndicator.stopAnimating()
-                }
+                self.showAlert(withString: "Error with getting user info!\n \(error!.localizedDescription)")
             }
         }
         
-        task.resume()
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                guard let tmpUser = User(fromData: data) else
+                {
+                    self.showAlert(withString: "Error with decoding data\n")
+                    self.navigationController?.popViewController(animated: true)
+                    return
+                }
+                
+                self.user = tmpUser
+                self.fillFromUser(self.user)
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "No such user, or another error occured!\n")
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.activityIndicator.stopAnimating()
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.getSafeUserInfoWebTask(username: username, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
     
     // MARK: - Alertable
