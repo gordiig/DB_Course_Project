@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */; };
+		131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131068C820A057EC0080B4C8 /* WebTasker.swift */; };
 		1311F2DD209CBF2C0037E6EF /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311F2DC209CBF2C0037E6EF /* Categories.swift */; };
 		133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */; };
 		1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338E1EE208E166E00984217 /* UserItemsViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInfoViewController.swift; sourceTree = "<group>"; };
+		131068C820A057EC0080B4C8 /* WebTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTasker.swift; sourceTree = "<group>"; };
 		1311F2DC209CBF2C0037E6EF /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
 		1338E1EE208E166E00984217 /* UserItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemsViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
 				13CEF8A820A037B000A6442B /* CurrentCategories.swift */,
 				13DD0C7D209E052800F21435 /* Money.swift */,
+				131068C820A057EC0080B4C8 /* WebTasker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */,
 				1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */,
 				13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */,
+				131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */,
 				1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
 				13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */,
