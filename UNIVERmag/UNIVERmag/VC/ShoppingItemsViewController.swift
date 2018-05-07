@@ -311,7 +311,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/\(page)/search/\(search_str)/price/\(minPrice)/\(maxPrice)/categories/\(subcatIDs)")!
-        print(finalURL.absoluteString)
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
         let task = urlSession.dataTask(with: urlRequest)
