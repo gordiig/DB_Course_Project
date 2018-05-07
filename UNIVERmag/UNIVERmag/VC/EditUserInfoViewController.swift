@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditUserInfoViewController: UIViewController, Alertable
+class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelegate
 {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -21,6 +21,13 @@ class EditUserInfoViewController: UIViewController, Alertable
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
+        phoneTextField.delegate = self
+        cityTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -34,6 +41,19 @@ class EditUserInfoViewController: UIViewController, Alertable
         phoneTextField.text = user.phoneNumber
         cityTextField.text = user.city
         passwordTextField.text = user.password
+    }
+    
+    
+    // MARK: - UITextField
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        self.view.endEditing(true)
     }
     
     
