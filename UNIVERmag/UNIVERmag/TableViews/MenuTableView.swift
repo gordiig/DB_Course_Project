@@ -14,12 +14,6 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     {
         didSet
         {
-            selectedSubcats = [Bool]()
-            for _ in 0 ..< categories.catAndSubcatCount
-            {
-                selectedSubcats.append(false)
-            }
-            
             self.reloadData()
         }
     }
@@ -40,8 +34,8 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         self.delegate = self
         self.dataSource = self
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return categories.catAndSubcatCount
@@ -51,7 +45,7 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     {
         if categories.categoriesIndexesInOneLayer.contains(indexPath.row)
         {
-            guard let cell = self.dequeueReusableCell(withIdentifier: "categoriesTableView") as? CategoryTableViewCell else
+            guard let cell = self.dequeueReusableCell(withIdentifier: "categoryTableViewCell") as? CategoryTableViewCell else
             {
                 return UITableViewCell()
             }
@@ -61,7 +55,7 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         }
         else
         {
-            guard let cell = self.dequeueReusableCell(withIdentifier: "subcategoriesTableView") as? SubcategoryTableViewCell else
+            guard let cell = self.dequeueReusableCell(withIdentifier: "subcategoryTableViewCell") as? SubcategoryTableViewCell else
             {
                 return UITableViewCell()
             }
@@ -75,9 +69,10 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     {
         let oneLayer = categories.inOneLayer
         var cell = self.cellForRow(at: indexPath)
+        cell?.isSelected = false
         
-        let accessoryType: UITableViewCellAccessoryType = cell?.accessoryType == .none ? .checkmark : .none
-        let boolVal = accessoryType == .none ? true : false
+        let accessoryType: UITableViewCellAccessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
+        let boolVal = accessoryType == .checkmark ? true : false
         
         cell?.accessoryType = accessoryType
         selectedSubcats[indexPath.row] = boolVal
@@ -87,7 +82,7 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
             var index = indexPath.row + 1
             let maxIndex = oneLayer.count
             
-            while index < maxIndex && oneLayer[index].ID == nil
+            while index < maxIndex && oneLayer[index].ID != nil
             {
                 cell = self.cellForRow(at: IndexPath(row: index, section: 0))
                 cell?.accessoryType = accessoryType
@@ -95,7 +90,17 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
                 index += 1
             }
         }
+    }
+    
+    override func reloadData()
+    {
+        super.reloadData()
         
+        selectedSubcats = [Bool]()
+        for _ in 0 ..< categories.catAndSubcatCount
+        {
+            selectedSubcats.append(false)
+        }
     }
 }
 
