@@ -156,6 +156,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - UISearchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
+        self.view.endEditing(true)
+        
         savedBeforeWebTasksItems = showingItems
         showingItems = [ShoppingItem]()
         
@@ -171,12 +173,13 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         searchBar.text = nil
+        self.view.endEditing(true)
         
-        savedBeforeWebTasksItems = showingItems
-        showingItems = [ShoppingItem]()
-        
-        nextItemNumForWebTask = itemsPerPage-1
-        webTask(page: 1)
+//        savedBeforeWebTasksItems = showingItems
+//        showingItems = [ShoppingItem]()
+//
+//        nextItemNumForWebTask = itemsPerPage-1
+//        webTask(page: 1)
     }
     
     
@@ -193,6 +196,11 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         let allowedCharacters = CharacterSet(charactersIn: allowedStr)
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        self.view.endEditing(true)
     }
     
     
