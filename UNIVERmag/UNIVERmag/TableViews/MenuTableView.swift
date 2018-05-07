@@ -50,6 +50,7 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
             cell.nameLabel.text = categories.inOneLayer[indexPath.row].name
+            cell.accessoryType = selectedSubcats[indexPath.row] ? .checkmark : .none
             
             return cell
         }
@@ -60,6 +61,7 @@ class MenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource
                 return UITableViewCell()
             }
             cell.nameLabel.text = categories.inOneLayer[indexPath.row].name
+            cell.accessoryType = selectedSubcats[indexPath.row] ? .checkmark : .none
             
             return cell
         }
