@@ -61,7 +61,7 @@ class MyItemsViewController: UserItemsViewController
             }
             
             let ans = String(data: data, encoding: .utf8)
-            if ans?.first == "0"
+            if ans?.first != "0"
             {
                 DispatchQueue.main.async
                 {

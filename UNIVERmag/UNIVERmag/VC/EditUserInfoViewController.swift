@@ -84,7 +84,7 @@ class EditUserInfoViewController: UIViewController, Alertable
             }
             
             let ans = String(data: data, encoding: .utf8)
-            if ans?.first == "1"
+            if ans?.first != "0"
             {
                 DispatchQueue.main.async
                 {
@@ -105,7 +105,7 @@ class EditUserInfoViewController: UIViewController, Alertable
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Something went wrong! Please try again!\n")
+                    self.showAlert(withString: "Error occured while updating user info\n")
                 }
             }
             
