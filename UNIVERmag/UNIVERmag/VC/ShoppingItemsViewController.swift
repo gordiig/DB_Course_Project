@@ -16,22 +16,11 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
-    @IBOutlet weak var menuTableView: UITableView!
+    @IBOutlet weak var menuTableView: MenuTableView!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
-    var categoriesArr = Categories()
-    {
-        didSet
-        {
-            selectedSubcats = [Bool]()
-            for _ in 0 ..< categoriesArr.catAndSubcatCount
-            {
-                selectedSubcats.append(false)
-            }
-        }
-    }
-    var selectedSubcats = [Bool]()
+    var categoriesArr = CurrentCategories.cur
     
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
@@ -50,9 +39,6 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        menuTableView.delegate = self
-        menuTableView.dataSource = self
         
         maxPriceField.delegate = self
         minPriceField.delegate = self
@@ -133,98 +119,35 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if tableView == self.tableView
-        {
-            return showingItems.count
-        }
-        else
-        {
-            return categoriesArr.catAndSubcatCount
-        }
+        return showingItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        if tableView == self.tableView
+        if indexPath.row == nextItemNumForWebTask
         {
-            if indexPath.row == nextItemNumForWebTask
-            {
-                nextItemNumForWebTask += itemsPerPage
-                savedBeforeWebTasksItems = showingItems
-                webTask(page: ((indexPath.row+1) / itemsPerPage) + 1)
-            }
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingItemTableCell") as? ShoppingItemTableViewCell else
-            {
-                print("Can't dequeue")
-                return UITableViewCell()
-            }
-            
-            cell.itemTitleLabel.text = showingItems[indexPath.row].name
-            cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
-            cell.imgBase64 = showingItems[indexPath.row].img
-            
-            return cell
+            nextItemNumForWebTask += itemsPerPage
+            savedBeforeWebTasksItems = showingItems
+            webTask(page: ((indexPath.row+1) / itemsPerPage) + 1)
         }
-        else
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingItemTableCell") as? ShoppingItemTableViewCell else
         {
-            if categoriesArr.categoriesIndexesInOneLayer.contains(indexPath.row)
-            {
-                guard let cell = menuTableView.dequeueReusableCell(withIdentifier: "categoryTableViewCell") as? CategoryTableViewCell else
-                {
-                    print("Can't dequeue")
-                    return UITableViewCell()
-                }
-                cell.nameLabel.text = categoriesArr.inOneLayer[indexPath.row].name
-                
-                return cell
-            }
-            else
-            {
-                guard let cell = menuTableView.dequeueReusableCell(withIdentifier: "subcategoryTableViewCell") as? SubcategoryTableViewCell else
-                {
-                    print("Can't dequeue")
-                    return UITableViewCell()
-                }
-                cell.nameLabel.text = categoriesArr.inOneLayer[indexPath.row].name
-                
-                return cell
-            }
+            print("Can't dequeue")
+            return UITableViewCell()
         }
+        
+        cell.itemTitleLabel.text = showingItems[indexPath.row].name
+        cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
+        cell.imgBase64 = showingItems[indexPath.row].img
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if tableView == self.tableView
-        {
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.isSelected = false
-        }
-        else
-        {
-            var cell = menuTableView.cellForRow(at: indexPath)
-            cell?.isSelected = false
-            
-            let accessoryType: UITableViewCellAccessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
-            cell?.accessoryType = accessoryType
-            
-            let boolVal = accessoryType == .checkmark ? true : false
-            selectedSubcats[indexPath.row] = boolVal
-            
-            let oneLayer = categoriesArr.inOneLayer
-            if oneLayer[indexPath.row].ID == nil
-            {
-                var index = indexPath.row + 1
-                let maxIndex = oneLayer.count
-                while index < maxIndex && oneLayer[index].ID != nil
-                {
-                    cell = menuTableView.cellForRow(at: IndexPath(row: index, section: 0))
-                    cell?.accessoryType = accessoryType
-                    selectedSubcats[index] = boolVal
-                    index += 1
-                }
-            }
-        }
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.isSelected = false
     }
 
     
@@ -294,6 +217,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         var subcatIDs = ""
         let oneLayer = categoriesArr.inOneLayer
+        let selectedSubcats = menuTableView.selectedSubcats
         for i in 0 ..< selectedSubcats.count
         {
             if selectedSubcats[i] && oneLayer[i].ID != nil
@@ -425,12 +349,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             {
                 DispatchQueue.main.async
                 {
-                    guard let pickArr = Categories(fromData: data) else
+                    if !self.categoriesArr.decodeFromJSON(data)
                     {
-                        self.showAlert(withString: "Error with decoding categories!\n")
-                        return
+                        self.showAlert(withString: "Problems with decoding categories!")
                     }
-                    self.categoriesArr = pickArr
                     self.menuTableView.reloadData()
                 }
             }
