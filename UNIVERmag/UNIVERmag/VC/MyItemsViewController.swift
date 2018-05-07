@@ -29,7 +29,11 @@ class MyItemsViewController: UserItemsViewController
     {
         let currentUser = CurrentUser.getUser
         let username = currentUser.username
-        let password = currentUser.password!
+        guard let password = currentUser.password else
+        {
+            showAlert(withString: "Log in first!")
+            return
+        }
         
         let idToDelete = items[row].ID
         
