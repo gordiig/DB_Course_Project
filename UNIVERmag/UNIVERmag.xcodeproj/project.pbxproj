@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */; };
+		131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131068C820A057EC0080B4C8 /* WebTasker.swift */; };
+		131068CC20A076090080B4C8 /* CurrentWebTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131068CB20A076090080B4C8 /* CurrentWebTasker.swift */; };
+		1311F2DD209CBF2C0037E6EF /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311F2DC209CBF2C0037E6EF /* Categories.swift */; };
 		133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */; };
 		1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338E1EE208E166E00984217 /* UserItemsViewController.swift */; };
 		134DB01F207D0D45006D7E73 /* UIImageStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */; };
@@ -22,15 +25,25 @@
 		13857396204D442A0032054F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13857394204D442A0032054F /* LaunchScreen.storyboard */; };
 		1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739D204D9A440032054F /* ShoppingItemsViewController.swift */; };
 		138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */; };
+		1390BC60209E368900831E01 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390BC5F209E368900831E01 /* CategoryTableViewCell.swift */; };
+		1390BC62209E36F700831E01 /* SubcategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390BC61209E36F700831E01 /* SubcategoryTableViewCell.swift */; };
 		13A0264120976240003FADF7 /* MyItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A0264020976240003FADF7 /* MyItemsViewController.swift */; };
 		13C0F0F12068FDFF00CC5084 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */; };
 		13C0F0F3206912DC00CC5084 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0F0F2206912DC00CC5084 /* User.swift */; };
+		13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEF8A620A036EC00A6442B /* MenuTableView.swift */; };
+		13CEF8A920A037B000A6442B /* CurrentCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEF8A820A037B000A6442B /* CurrentCategories.swift */; };
+		13CEF8AC20A046E200A6442B /* VCAlertDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEF8AB20A046E200A6442B /* VCAlertDelegate.swift */; };
 		13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F0206C083E00446339 /* ShoppingItem.swift */; };
 		13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F2206C0A4B00446339 /* JSONable.swift */; };
+		13DD0C7E209E052800F21435 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C7D209E052800F21435 /* Money.swift */; };
+		13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInfoViewController.swift; sourceTree = "<group>"; };
+		131068C820A057EC0080B4C8 /* WebTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTasker.swift; sourceTree = "<group>"; };
+		131068CB20A076090080B4C8 /* CurrentWebTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWebTasker.swift; sourceTree = "<group>"; };
+		1311F2DC209CBF2C0037E6EF /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
 		1338E1EE208E166E00984217 /* UserItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemsViewController.swift; sourceTree = "<group>"; };
 		134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageStringExtension.swift; sourceTree = "<group>"; };
@@ -47,11 +60,18 @@
 		13857397204D442A0032054F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1385739D204D9A440032054F /* ShoppingItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemsViewController.swift; sourceTree = "<group>"; };
 		1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemTableViewCell.swift; sourceTree = "<group>"; };
+		1390BC5F209E368900831E01 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		1390BC61209E36F700831E01 /* SubcategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryTableViewCell.swift; sourceTree = "<group>"; };
 		13A0264020976240003FADF7 /* MyItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemsViewController.swift; sourceTree = "<group>"; };
 		13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		13C0F0F2206912DC00CC5084 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		13CEF8A620A036EC00A6442B /* MenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableView.swift; sourceTree = "<group>"; };
+		13CEF8A820A037B000A6442B /* CurrentCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCategories.swift; sourceTree = "<group>"; };
+		13CEF8AB20A046E200A6442B /* VCAlertDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAlertDelegate.swift; sourceTree = "<group>"; };
 		13DCB6F0206C083E00446339 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItem.swift; sourceTree = "<group>"; };
 		13DCB6F2206C0A4B00446339 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
+		13DD0C7D209E052800F21435 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleToIntegers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +95,6 @@
 				13A0264020976240003FADF7 /* MyItemsViewController.swift */,
 				13C0F0F02068FDFF00CC5084 /* UserInfoViewController.swift */,
 				133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */,
-				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
 				1352C9EB207F215200C72D21 /* AddItemViewController.swift */,
 			);
 			path = VC;
@@ -85,9 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				13C0F0F2206912DC00CC5084 /* User.swift */,
-				1369B0172069322B00B480D2 /* CurrentUser.swift */,
 				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
-				134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */,
+				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
+				13DD0C7D209E052800F21435 /* Money.swift */,
+				131068C820A057EC0080B4C8 /* WebTasker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -99,6 +119,16 @@
 				1352C9ED207F259600C72D21 /* Alertable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		131068CA20A075D20080B4C8 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				1369B0172069322B00B480D2 /* CurrentUser.swift */,
+				13CEF8A820A037B000A6442B /* CurrentCategories.swift */,
+				131068CB20A076090080B4C8 /* CurrentWebTasker.swift */,
+			);
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 		1385737C204D442A0032054F = {
@@ -120,6 +150,11 @@
 		13857387204D442A0032054F /* UNIVERmag */ = {
 			isa = PBXGroup;
 			children = (
+				131068CA20A075D20080B4C8 /* Singletons */,
+				13CEF8AA20A046C600A6442B /* Delegates */,
+				13CEF8A520A036C200A6442B /* TableViews */,
+				1390BC63209E3F4A00831E01 /* TableViewCells */,
+				13DD0C7F209E067600F21435 /* Extensions */,
 				130075D820774B430060CF46 /* Protocols */,
 				130075D720774B360060CF46 /* Models */,
 				130075D620774B160060CF46 /* VC */,
@@ -131,6 +166,41 @@
 				1385738F204D442A0032054F /* UNIVERmag.xcdatamodeld */,
 			);
 			path = UNIVERmag;
+			sourceTree = "<group>";
+		};
+		1390BC63209E3F4A00831E01 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				1390BC5F209E368900831E01 /* CategoryTableViewCell.swift */,
+				1390BC61209E36F700831E01 /* SubcategoryTableViewCell.swift */,
+				1385739F204D9AE40032054F /* ShoppingItemTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		13CEF8A520A036C200A6442B /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				13CEF8A620A036EC00A6442B /* MenuTableView.swift */,
+			);
+			path = TableViews;
+			sourceTree = "<group>";
+		};
+		13CEF8AA20A046C600A6442B /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				13CEF8AB20A046E200A6442B /* VCAlertDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		13DD0C7F209E067600F21435 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */,
+				13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,19 +278,29 @@
 				1369B0182069322B00B480D2 /* CurrentUser.swift in Sources */,
 				130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */,
 				13857391204D442A0032054F /* UNIVERmag.xcdatamodeld in Sources */,
+				13CEF8A920A037B000A6442B /* CurrentCategories.swift in Sources */,
 				13A0264120976240003FADF7 /* MyItemsViewController.swift in Sources */,
 				133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */,
+				13CEF8AC20A046E200A6442B /* VCAlertDelegate.swift in Sources */,
+				1311F2DD209CBF2C0037E6EF /* Categories.swift in Sources */,
 				138573A0204D9AE40032054F /* ShoppingItemTableViewCell.swift in Sources */,
 				1385738B204D442A0032054F /* ViewController.swift in Sources */,
 				13C0F0F12068FDFF00CC5084 /* UserInfoViewController.swift in Sources */,
 				13857389204D442A0032054F /* AppDelegate.swift in Sources */,
 				134DB01F207D0D45006D7E73 /* UIImageStringExtension.swift in Sources */,
+				1390BC60209E368900831E01 /* CategoryTableViewCell.swift in Sources */,
 				1352C9EE207F259600C72D21 /* Alertable.swift in Sources */,
 				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
+				13DD0C7E209E052800F21435 /* Money.swift in Sources */,
+				131068CC20A076090080B4C8 /* CurrentWebTasker.swift in Sources */,
 				13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */,
 				1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */,
+				13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */,
+				131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */,
 				1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
+				13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */,
+				1390BC62209E36F700831E01 /* SubcategoryTableViewCell.swift in Sources */,
 				13C0F0F3206912DC00CC5084 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

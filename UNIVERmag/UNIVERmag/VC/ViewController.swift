@@ -20,7 +20,7 @@ class ViewController: UIViewController, Alertable
     }
     
     
-    // MARK: - Loggining in
+    // MARK: - Loggining in (Web task)
     @IBAction func logInButClicked(_ sender: Any)
     {
         let username = usernameTextField.text ?? ""
@@ -32,89 +32,77 @@ class ViewController: UIViewController, Alertable
             return
         }
         
+        // FOR NO_INTERNET_DEBUG
+        if username == "noCon" && password == "noCon"
+        {
+            self.saveUserPassword(username: username, password: password)
+            self.goToMainVC()
+        }
+        
         LogInButton.isEnabled = false
         getUserInfo(username: username, password: password)
     }
     
     func getUserInfo(username: String, password: String)
     {
-        var finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_user_info/")!
-        finalURL.appendPathComponent(username)
-        finalURL.appendPathComponent(password)
-        
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
-        {
-            (data, response, error) in
-            
-            if error != nil
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
-                }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
-                }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first != "0"
-            {
-                DispatchQueue.main.async
-                {
-                    if !CurrentUser.getUser.decodeFromJSON(data)
-                    {
-                        self.showAlert(withString: "Can't set current user!\n")
-                        return
-                    }
-                    self.saveUserPassword(username: username, password: password)
-                    self.goToMainVC()
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Wrong Username or Password!")
-                }
-            }
-            
-            defer
-            {
-                DispatchQueue.main.async
-                {
-                    self.LogInButton.isEnabled = true
-                }
+                self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
             }
         }
         
-        task.resume()
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                if !CurrentUser.getUser.decodeFromJSON(data)
+                {
+                    self.showAlert(withString: "Can't set current user!\n")
+                    return
+                }
+                self.saveUserPassword(username: username, password: password)
+                self.goToMainVC()
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Wrong Username or Password!")
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.LogInButton.isEnabled = true
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.loginTask(username: username, password: password, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
     
     
     // MARK: - Alertable
-    func showAlert(controller: UIViewController, title: String = "Error", withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        controller.present(alert, animated: true, completion: nil)
-    }
-    
-    func showAlert(title: String = "Error", withString str: String)
-    {
-        showAlert(controller: self, title: title, withString: str)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -123,7 +111,7 @@ class ViewController: UIViewController, Alertable
     {
         guard let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "mainTapBarViewController") else
         {
-            self.showAlert(controller: self, title: "Error", withString: "Something wrong with entering mainVC")
+            self.showAlert(title: "Error", withString: "Something wrong with entering mainVC")
             return
         }
 

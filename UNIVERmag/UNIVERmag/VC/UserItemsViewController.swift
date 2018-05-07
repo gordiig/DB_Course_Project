@@ -77,72 +77,61 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - Web task
     func webTask(username: String)
     {
-        let finalURL = URL(string: "https://sql-handler.herokuapp.com/handler/get_shopping_items/user/\(username)")!
-        let urlRequest = URLRequest(url: finalURL)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest)
-        {
-            (data, response, error) in
-            
-            if error != nil
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
             {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
-                }
-                print("Error in GET:\n \(error!.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
-                }
-                print("Error in downloaded data:\n")
-                return
-            }
-            
-            let ans = String(data: data, encoding: .utf8)
-            if ans?.first != "0"
-            {
-                DispatchQueue.main.async
-                {
-                    guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
-                    {
-                        self.showAlert(withString: "Something wrong with incame items!")
-                        print("Data: \n\(String(describing: String(data: data, encoding: .utf8)))")
-                        return
-                    }
-                    self.items += tmpItems
-                    
-                    self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
-                    
-                    // self.tableView.reloadData()
-                    let range = NSMakeRange(0, self.tableView.numberOfSections)
-                    let sections = NSIndexSet(indexesIn: range)
-                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async
-                {
-                    self.showAlert(title: "No items found", withString: "It seems you haven't uploaded any items. It's easy, just press the \"+\" button on the top bar!")
-                }
-            }
-            
-            defer
-            {
-                DispatchQueue.main.async
-                {
-                    self.refreshControl.endRefreshing()
-                }
+                self.showAlert(withString: "Can't get userinfo. Please try again!:\n \(error!.localizedDescription)")
             }
         }
         
-        task.resume()
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
+                {
+                    self.showAlert(withString: "Something wrong with incame items!")
+                    print("Data: \n\(String(describing: String(data: data, encoding: .utf8)))")
+                    return
+                }
+                self.items += tmpItems
+                
+                self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
+                
+                // self.tableView.reloadData()
+                let range = NSMakeRange(0, self.tableView.numberOfSections)
+                let sections = NSIndexSet(indexesIn: range)
+                self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(title: "No items found", withString: "It seems you haven't uploaded any items. It's easy, just press the \"+\" button on the top bar!")
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.refreshControl.endRefreshing()
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.userItemsWebTask(username: username, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
     
     
@@ -200,15 +189,11 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     // MARK: - Alertable
-    func showAlert(controller: UIViewController, title: String, withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
-        controller.present(alert, animated: true, completion: nil)
-    }
-    func showAlert(title: String = "Error", withString str: String)
-    {
-        showAlert(controller: self, title: title, withString: str)
+        self.present(alert, animated: true, completion: nil)
     }
 }
