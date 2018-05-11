@@ -15,6 +15,7 @@ class ShoppingItemInfoViewController: UIViewController
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var uploaderBut: UIButton!
+    @IBOutlet weak var editBut: UIBarButtonItem!
     
     var item = ShoppingItem()
     
@@ -31,6 +32,7 @@ class ShoppingItemInfoViewController: UIViewController
         aboutLabel.text = item.about
         priceLabel.text = String(describing: item.price) + "₽"
         
+        editBut.isEnabled = (item.uploaderUserName == CurrentUser.getUser.username) ? true : false
         uploaderBut.setTitle(item.uploaderUserName ?? "Debug", for: .normal)
         
         guard let img = item.img else
