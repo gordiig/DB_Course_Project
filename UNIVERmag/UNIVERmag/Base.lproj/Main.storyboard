@@ -786,11 +786,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1yo-BK-WSq"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Item info" id="5qQ-tG-v7k"/>
+                    <navigationItem key="navigationItem" title="Item info" id="5qQ-tG-v7k">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="edit" id="z6k-7S-kv3"/>
+                    </navigationItem>
                     <size key="freeformSize" width="375" height="701"/>
                     <connections>
                         <outlet property="aboutLabel" destination="8fS-eh-fOZ" id="pg7-sw-nWT"/>
                         <outlet property="dateLabel" destination="cPm-ei-GC6" id="6rH-PO-Esk"/>
+                        <outlet property="editBut" destination="z6k-7S-kv3" id="e8Q-rN-XfP"/>
                         <outlet property="imageView" destination="lhV-vY-zVs" id="vhP-cQ-2Dm"/>
                         <outlet property="priceLabel" destination="XaY-CH-0At" id="mIG-Hh-Rzh"/>
                         <outlet property="uploaderBut" destination="Smd-j4-Zer" id="n6y-1p-LFf"/>
