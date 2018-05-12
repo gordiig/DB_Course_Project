@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShoppingItemInfoViewController: UIViewController
+class ShoppingItemInfoViewController: UIViewController, Alertable
 {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var aboutLabel: UILabel!
@@ -59,5 +59,30 @@ class ShoppingItemInfoViewController: UIViewController
         destVC.user.username = (uploaderBut.titleLabel?.text)!
         
         self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "EditItemSegue"
+        {
+            if let destVC = segue.destination as? EditItemViewController
+            {
+                destVC.item = self.item
+            }
+            else
+            {
+                self.showAlert(withString: "Something wrong with segue!")
+            }
+        }
+    }
+    
+    
+    func showAlert(title: String = "Error", withString str: String)
+    {
+        let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
