@@ -14,12 +14,17 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
-    @IBOutlet weak var aboutTextField: UILabel!
+    @IBOutlet weak var aboutTextField: UITextView!
     @IBOutlet weak var submitBut: UIButton!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        aboutTextField.layer.cornerRadius = 5
+        aboutTextField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        aboutTextField.layer.borderWidth = 0.5
+        aboutTextField.clipsToBounds = true
         
         nameTextField.delegate = self
         priceTextField.delegate = self
@@ -28,8 +33,8 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     override func viewWillAppear(_ animated: Bool)
     {
         nameTextField.text = item.name
-        priceTextField.text = String(describing: item.price.toDouble())
-        aboutTextField.text = item.about
+        priceTextField.text = String(item.price.toDouble())
+        aboutTextField.text = item.about ?? ""
     }
     
     
