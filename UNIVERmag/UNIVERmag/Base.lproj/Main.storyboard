@@ -802,7 +802,7 @@
                     <navigationItem key="navigationItem" title="Item info" id="5qQ-tG-v7k">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="edit" id="z6k-7S-kv3">
                             <connections>
-                                <segue destination="f1x-YV-eR0" kind="show" id="qrC-vX-4NE"/>
+                                <segue destination="f1x-YV-eR0" kind="show" identifier="EditItemSegue" id="qrC-vX-4NE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
