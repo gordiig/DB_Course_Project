@@ -30,7 +30,7 @@ class ShoppingItemInfoViewController: UIViewController
         
         dateLabel.text = formatter.string(from: item.dateAdded)
         aboutLabel.text = item.about
-        priceLabel.text = String(describing: item.price) + "₽"
+        priceLabel.text = String(describing: item.price)
         
         editBut.isEnabled = (item.uploaderUserName == CurrentUser.getUser.username) ? true : false
         uploaderBut.setTitle(item.uploaderUserName ?? "Debug", for: .normal)
