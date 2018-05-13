@@ -28,7 +28,7 @@ class WebTasker
         finalURL.appendPathComponent("categories")
         finalURL.appendPathComponent("\(subcatIDs)")
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Categories web task
@@ -40,7 +40,7 @@ class WebTasker
         var finalURL = baseURL.appendingPathComponent("get_subcategories")
         finalURL.appendPathComponent(cats)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Login web task
@@ -52,7 +52,7 @@ class WebTasker
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Shopping Items web task
@@ -64,7 +64,7 @@ class WebTasker
         finalURL.appendPathComponent("user")
         finalURL.appendPathComponent(username)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Delete web task
@@ -77,7 +77,7 @@ class WebTasker
         finalURL.appendPathComponent(password)
         finalURL.appendPathComponent("\(idToDelete)")
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Update user photo web task
@@ -90,7 +90,7 @@ class WebTasker
         finalURL.appendPathComponent(password)
         finalURL.appendPathComponent(base64)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Get safe user info web task
@@ -101,7 +101,7 @@ class WebTasker
         var finalURL = baseURL.appendingPathComponent("get_safe_user_info")
         finalURL.appendPathComponent(username)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Update user info web task
@@ -116,7 +116,7 @@ class WebTasker
         finalURL.appendPathComponent(password)
         finalURL.appendPathComponent(lastComponent)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Add item web task
@@ -130,7 +130,7 @@ class WebTasker
         finalURL.appendPathComponent(password)
         finalURL.appendPathComponent(lastComponent)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Update (edit) item web task
@@ -143,12 +143,12 @@ class WebTasker
         finalURL.appendPathComponent(String(itemId))
         finalURL.appendPathComponent(lastComponent)
         
-        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     
     // MARK: - Main function
-    func webTask(_ finalURL: URL, errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void, succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void )
+    func baseWebTask(_ finalURL: URL, errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void, succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void )
     {
         let urlRequest = URLRequest(url: finalURL)
         let urlSession = URLSession(configuration: .default)
