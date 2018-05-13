@@ -17,7 +17,7 @@ class ShoppingItem: NSObject, JSONable
     var about: String?
     var img: String?
     var uploaderUserName: String?
-    var subcategoryID: Int?
+    var subcategoryID: [Int]?
     
     private struct ShoppingItemStruct: Codable
     {
@@ -29,7 +29,7 @@ class ShoppingItem: NSObject, JSONable
         var image: String?
         var item_id: Int?
         var user_name: String?
-        var subcategory_id: Int?
+        var subcategory_id: [Int]?
     }
     
     
@@ -110,5 +110,9 @@ class ShoppingItem: NSObject, JSONable
         self.subcategoryID = val.subcategory_id
         
         self.img = val.image
+        if self.img == "NULL" || self.img == "null" || self.img == ""
+        {
+            self.img = nil
+        }
     }
 }

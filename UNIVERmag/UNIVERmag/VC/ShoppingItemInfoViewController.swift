@@ -37,10 +37,12 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
         
         guard let img = item.img else
         {
+            imageView.image = #imageLiteral(resourceName: "le_fu")
             return
         }
         guard let data = Data(base64Encoded: img) else
         {
+            imageView.image = #imageLiteral(resourceName: "le_fu")
             return
         }
         imageView.image = UIImage(data: data)
