@@ -146,6 +146,18 @@ class WebTasker
         baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
+    // MARK: - Sign Up web task
+    func signUpWebTask(username: String, firstName: String, lastName: String, password: String, phoneNumber: String, email: String, city: String,
+                       errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
+                       succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
+    {
+        let lastComponent = "\(username)&\(firstName)&\(lastName)&\(password)&\(phoneNumber)&\(email)&\(city)"
+        var finalURL = baseURL.appendingPathComponent("sign_up")
+        finalURL.appendPathComponent(lastComponent)
+        
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
     
     // MARK: - Main function
     func baseWebTask(_ finalURL: URL, errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void, succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void )
