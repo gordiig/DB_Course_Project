@@ -11,4 +11,9 @@ import Foundation
 class CurrentUser
 {
     private(set) static var getUser: User = User()
+    
+    static func reset()
+    {
+        getUser = User()
+    }
 }
