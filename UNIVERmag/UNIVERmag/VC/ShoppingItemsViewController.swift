@@ -262,43 +262,47 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
+                DispatchQueue.main.async
                 {
+                    guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
+                    {
+                        self.showingItems = self.savedBeforeWebTasksItems
+                        return
+                    }
+                    
+                    if page == 1
+                    {
+                        self.showingItems = [ShoppingItem]()
+                    }
+                    self.showingItems += tmpItems
+                    
+                    if (searchStr != "NULL") || (page == 1)
+                    {
+                        let range = NSMakeRange(0, self.tableView.numberOfSections)
+                        let sections = NSIndexSet(indexesIn: range)
+                        self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                    }
+                    else
+                    {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "No items for your result!")
+                    self.searchBar.text = nil
                     self.showingItems = self.savedBeforeWebTasksItems
-                    return
-                }
-                
-                if page == 1
-                {
-                    self.showingItems = [ShoppingItem]()
-                }
-                self.showingItems += tmpItems
-                
-                if (searchStr != "NULL") || (page == 1)
-                {
-                    let range = NSMakeRange(0, self.tableView.numberOfSections)
-                    let sections = NSIndexSet(indexesIn: range)
-                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
-                }
-                else
-                {
-                    self.tableView.reloadData()
                 }
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
-            {
-                self.showAlert(withString: "No items for your result!")
-                self.searchBar.text = nil
-                self.showingItems = self.savedBeforeWebTasksItems
-            }
+            
+            
         }
         
         let deferBody: () -> Void =
@@ -311,7 +315,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
+        tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     func webTaskCat()
@@ -332,28 +336,30 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                if !self.categoriesArr.decodeFromJSON(data)
+                DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Problems with decoding categories!")
+                    if !self.categoriesArr.decodeFromJSON(data)
+                    {
+                        self.showAlert(withString: "Problems with decoding categories!")
+                    }
+                    self.menuTableView.reloadData()
                 }
-                self.menuTableView.reloadData()
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "No categories!")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "No categories!")
+                }
             }
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: {})
+        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
     }
     
     // MARK: - Refresh

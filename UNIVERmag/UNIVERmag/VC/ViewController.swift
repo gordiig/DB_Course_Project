@@ -84,26 +84,29 @@ class ViewController: UIViewController, Alertable, UITextFieldDelegate
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                if !CurrentUser.getUser.decodeFromJSON(data)
+                DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Can't set current user!\n")
-                    return
+                    if !CurrentUser.getUser.decodeFromJSON(data)
+                    {
+                        self.showAlert(withString: "Can't set current user!\n")
+                        return
+                    }
+                    self.saveUserPassword(username: username, password: password)
+                    self.goToMainVC()
                 }
-                self.saveUserPassword(username: username, password: password)
-                self.goToMainVC()
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "Wrong Username or Password!")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Wrong Username or Password!")
+                }
             }
+            
         }
         
         let deferBody: () -> Void =
@@ -115,7 +118,7 @@ class ViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.loginTask(username: username, password: password, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
+        tasker.loginTask(username: username, password: password, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     

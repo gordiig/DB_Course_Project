@@ -113,28 +113,30 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                self.item.name = name
-                self.item.price = priceMon
-                self.item.about = self.aboutTextField.text
-                
-                self.showAlert(title: "Succsess!", withString: "Item was succsessfully updated!")
+                DispatchQueue.main.async
+                {
+                    self.item.name = name
+                    self.item.price = priceMon
+                    self.item.about = self.aboutTextField.text
+                    
+                    self.showAlert(title: "Succsess!", withString: "Item was succsessfully updated!")
+                }
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "No item with this id was found!")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "No item with this id was found!")
+                }
             }
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: {})
+        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
         
     }
     

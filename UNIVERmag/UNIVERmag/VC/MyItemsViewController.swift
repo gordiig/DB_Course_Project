@@ -53,30 +53,32 @@ class MyItemsViewController: UserItemsViewController
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                self.items.remove(at: row)
-                
-                self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
-                
-                // self.tableView.reloadData()
-                let range = NSMakeRange(0, self.tableView.numberOfSections)
-                let sections = NSIndexSet(indexesIn: range)
-                self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                DispatchQueue.main.async
+                {
+                    self.items.remove(at: row)
+                    
+                    self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
+                    
+                    // self.tableView.reloadData()
+                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                    let sections = NSIndexSet(indexesIn: range)
+                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                }
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "Error while deleting item!\n")
-            }
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error while deleting item!\n")
+                }
+            }   
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.deleteWebTask(username: username, password: password, idToDelete: idToDelete, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: {})
+        tasker.deleteWebTask(username: username, password: password, idToDelete: idToDelete, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
     }
 }

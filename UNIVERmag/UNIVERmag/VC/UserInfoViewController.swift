@@ -151,26 +151,28 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                self.showAlert(title: "Sucsess!", withString: "Sucsessfully updated photo!")
-                self.user.img = base64
-                self.setPic(base64: base64)
+                DispatchQueue.main.async
+                {
+                    self.showAlert(title: "Sucsess!", withString: "Sucsessfully updated photo!")
+                    self.user.img = base64
+                    self.setPic(base64: base64)
+                }
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "Something went wrong! Please try again!\n")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Something went wrong! Please try again!\n")
+                }
             }
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.updateUserPhotoWebTask(username: username, password: password, base64: newBase64, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: {})
+        tasker.updateUserPhotoWebTask(username: username, password: password, base64: newBase64, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
     }
     
     func webTask(username: String)
@@ -191,27 +193,29 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                guard let tmpUser = User(fromData: data) else
+                DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Error with decoding data\n")
-                    self.navigationController?.popViewController(animated: true)
-                    return
+                    guard let tmpUser = User(fromData: data) else
+                    {
+                        self.showAlert(withString: "Error with decoding data\n")
+                        self.navigationController?.popViewController(animated: true)
+                        return
+                    }
+                    
+                    self.user = tmpUser
+                    self.fillFromUser(self.user)
                 }
-                
-                self.user = tmpUser
-                self.fillFromUser(self.user)
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "No such user, or another error occured!\n")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "No such user, or another error occured!\n")
+                }
             }
         }
         
@@ -224,7 +228,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.getSafeUserInfoWebTask(username: username, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
+        tasker.getSafeUserInfoWebTask(username: username, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Alertable

@@ -133,19 +133,21 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                self.showAlert(title: "Succsess!", withString: "Sucsessfully uploaded an item!")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(title: "Succsess!", withString: "Sucsessfully uploaded an item!")
+                }
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "Error while uploading!\n")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error while uploading!\n")
+                }
             }
         }
         
@@ -158,7 +160,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.addItemWebTask(username: username, password: password, name: name, price: price.toCents(), about: about, img: img, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
+        tasker.addItemWebTask(username: username, password: password, name: name, price: price.toCents(), about: about, img: img, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     

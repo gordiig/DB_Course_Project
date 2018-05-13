@@ -93,32 +93,34 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
+                DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Something wrong with incame items!")
-                    print("Data: \n\(String(describing: String(data: data, encoding: .utf8)))")
-                    return
+                    guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
+                    {
+                        self.showAlert(withString: "Something wrong with incame items!")
+                        print("Data: \n\(String(describing: String(data: data, encoding: .utf8)))")
+                        return
+                    }
+                    self.items += tmpItems
+                    
+                    self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
+                    
+                    // self.tableView.reloadData()
+                    let range = NSMakeRange(0, self.tableView.numberOfSections)
+                    let sections = NSIndexSet(indexesIn: range)
+                    self.tableView.reloadSections(sections as IndexSet, with: .automatic)
                 }
-                self.items += tmpItems
-                
-                self.searchBar(self.searchBar, textDidChange: self.searchBar.text ?? "")
-                
-                // self.tableView.reloadData()
-                let range = NSMakeRange(0, self.tableView.numberOfSections)
-                let sections = NSIndexSet(indexesIn: range)
-                self.tableView.reloadSections(sections as IndexSet, with: .automatic)
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(title: "No items found", withString: "It seems you haven't uploaded any items. It's easy, just press the \"+\" button on the top bar!")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(title: "No items found", withString: "It seems you haven't uploaded any items. It's easy, just press the \"+\" button on the top bar!")
+                }
             }
         }
         
@@ -131,7 +133,7 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.userItemsWebTask(username: username, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
+        tasker.userItemsWebTask(username: username, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     
