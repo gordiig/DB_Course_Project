@@ -110,7 +110,7 @@
 				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
 				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
 				13DD0C7D209E052800F21435 /* Money.swift */,
-				131068C820A057EC0080B4C8 /* WebTasker.swift */,
+				130B4FE220A8480C0092EF23 /* WebTask */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -122,6 +122,14 @@
 				1352C9ED207F259600C72D21 /* Alertable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		130B4FE220A8480C0092EF23 /* WebTask */ = {
+			isa = PBXGroup;
+			children = (
+				131068C820A057EC0080B4C8 /* WebTasker.swift */,
+			);
+			path = WebTask;
 			sourceTree = "<group>";
 		};
 		131068CA20A075D20080B4C8 /* Singletons */ = {
