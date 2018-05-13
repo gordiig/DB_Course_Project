@@ -134,11 +134,11 @@ class WebTasker
     }
     
     // MARK: - Update (edit) item web task
-    func editItemWebTask(itemId: Int, name: String, price: Int, about: String,
+    func editItemWebTask(itemId: Int, name: String, price: Int, about: String, subcatIDs: String,
                          errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                          succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(name)&\(price)&\(about)"
+        let lastComponent = "\(name)&\(price)&\(about)&\(subcatIDs)"
         var finalURL = baseURL.appendingPathComponent("edit_item")
         finalURL.appendPathComponent(String(itemId))
         finalURL.appendPathComponent(lastComponent)
