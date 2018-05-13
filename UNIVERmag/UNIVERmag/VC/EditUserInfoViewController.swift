@@ -91,29 +91,31 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
             }
         }
         
-        let succsessHandler: (Data) -> Void =
-        { (data) in
-            DispatchQueue.main.async
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                user.firstName = firstName
-                user.lastName = lastName
-                user.city = city
-                user.email = email
-                user.phoneNumber = phone
-                user.password = newPassword
-                
-                let defaults = UserDefaults.standard
-                defaults.set(newPassword, forKey: "Password")
-                
-                self.showAlert(title: "Sucsess", withString: "Sucsessfully updated profile!")
+                DispatchQueue.main.async
+                {
+                    user.firstName = firstName
+                    user.lastName = lastName
+                    user.city = city
+                    user.email = email
+                    user.phoneNumber = phone
+                    user.password = newPassword
+                    
+                    let defaults = UserDefaults.standard
+                    defaults.set(newPassword, forKey: "Password")
+                    
+                    self.showAlert(title: "Sucsess", withString: "Sucsessfully updated profile!")
+                }
             }
-        }
-        
-        let failHandler: () -> Void =
-        {
-            DispatchQueue.main.async
+            else
             {
-                self.showAlert(withString: "Error occured while updating user info\n")
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error occured while updating user info\n")
+                }
             }
         }
         
@@ -126,7 +128,7 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.updateUserInfoWebTask(username: username, password: password, firstName: firstName, lastName: lastName, newPassword: newPassword, phone: phone, email: email, city: city, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
+        tasker.updateUserInfoWebTask(username: username, password: password, firstName: firstName, lastName: lastName, newPassword: newPassword, phone: phone, email: email, city: city, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     
