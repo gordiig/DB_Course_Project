@@ -12,6 +12,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
 {
     var item = ShoppingItem()
     
+    @IBOutlet weak var categoriesTableView: MenuTableView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var aboutTextField: UITextView!
@@ -26,6 +27,11 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         aboutTextField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         aboutTextField.layer.borderWidth = 0.5
         aboutTextField.clipsToBounds = true
+        
+        categoriesTableView.layer.cornerRadius = 5
+        categoriesTableView.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        categoriesTableView.layer.borderWidth = 0.5
+        categoriesTableView.clipsToBounds = true
         
         nameTextField.delegate = self
         priceTextField.delegate = self
@@ -128,6 +134,27 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         
         let about = aboutTextField.text ?? "NULL"
         
+        let categoriesArr = CurrentCategories.cur
+        var subcatIDs = ""
+        let oneLayer = categoriesArr.inOneLayer
+        let selectedSubcats = categoriesTableView.selectedSubcats
+        for i in 0 ..< selectedSubcats.count
+        {
+            if selectedSubcats[i] && oneLayer[i].ID != nil
+            {
+                subcatIDs += "\(oneLayer[i].ID!),"
+            }
+        }
+        if subcatIDs.isEmpty
+        {
+            showAlert(withString: "You must choose at least one category for ypour item!")
+            return
+        }
+        else
+        {
+            subcatIDs.removeLast()
+        }
+        
         let errorHandler: (Error?) -> Void =
         { (error) in
             DispatchQueue.main.async
@@ -167,7 +194,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
         
     }
     
