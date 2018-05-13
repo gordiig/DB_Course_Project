@@ -186,6 +186,9 @@
                                                 <rect key="frame" x="154" y="557" width="49" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Submit"/>
+                                                <connections>
+                                                    <action selector="submitButPressed:" destination="bzo-W4-1k0" eventType="touchUpInside" id="0rs-Lr-UOv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -225,6 +228,16 @@
                         <viewLayoutGuide key="safeArea" id="MNt-Dg-4Ss"/>
                     </view>
                     <size key="freeformSize" width="375" height="700"/>
+                    <connections>
+                        <outlet property="cityTextField" destination="uKQ-Ra-Cck" id="LdG-14-eNZ"/>
+                        <outlet property="emailTextField" destination="nHR-xw-79e" id="nWB-cf-xsV"/>
+                        <outlet property="firstNameTextField" destination="c0A-2r-4kM" id="zNe-gr-6fs"/>
+                        <outlet property="lastNameTextField" destination="gB7-4R-pJf" id="gwn-e6-gWV"/>
+                        <outlet property="passwordTextField" destination="2BU-SO-CvG" id="Ek9-zT-cbb"/>
+                        <outlet property="phoneTextField" destination="Mgh-6x-rni" id="oyy-08-pQH"/>
+                        <outlet property="submitBut" destination="cyb-gm-FPA" id="9Hi-w4-dnX"/>
+                        <outlet property="usernameTextField" destination="WKg-RP-sNx" id="onU-DG-FsU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNb-7C-pPr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
