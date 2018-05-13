@@ -67,13 +67,79 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     }
 
     
+    // MARK: - webTask
     @IBAction func submitButPressed(_ sender: Any)
     {
-        // TODO: - WebTask()
+        webTask()
+    }
+    
+    func webTask()
+    {
+        let itemId = item.ID
+        
+        guard let name = nameTextField.text else
+        {
+            showAlert(withString: "You must enter the name!")
+            return
+        }
+        
+        guard let priceText = priceTextField.text else
+        {
+            showAlert(withString: "You must enter the price!")
+            return
+        }
+        guard let priceMon = Money(string: priceText) else
+        {
+            showAlert(withString: "Something wrong with constructing the Money object!")
+            return
+        }
+        let price = priceMon.toCents()
+        
+        let about = aboutTextField.text ?? "NULL"
+        
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Can't edit an item:\n \(error!.localizedDescription)")
+            }
+        }
+        
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data!\n")
+            }
+        }
+        
+        let succsessHandler: (Data) -> Void =
+        { (data) in
+            DispatchQueue.main.async
+            {
+                self.item.name = name
+                self.item.price = priceMon
+                self.item.about = self.aboutTextField.text
+                
+                self.showAlert(title: "Succsess!", withString: "Item was succsessfully updated!")
+            }
+        }
+        
+        let failHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "No item with this id was found!")
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: {})
+        
     }
     
     // MARK: - Alertable
-    func showAlert(title: String, withString str: String)
+    func showAlert(title: String = "Error", withString str: String)
     {
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
