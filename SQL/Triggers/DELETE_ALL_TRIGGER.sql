@@ -40,31 +40,17 @@ CREATE TRIGGER restart_subcategories_sequence_after_delete
     EXECUTE PROCEDURE restart_subcategories_sequence();
 
 
--- DELETE FROM item_user AFTER DELETE IN items
-CREATE OR REPLACE FUNCTION delete_from_item() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION func_for_delete_from_item_user_trigger() RETURNS TRIGGER AS $$
 BEGIN
 
+  DELETE FROM Item_Subcategory WHERE Item_Subcategory.Item_ID = old.Item_ID;
   DELETE FROM items WHERE ID = old.item_ID;
+
   RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER delete_from_item_after_delete_from_item_user
+CREATE TRIGGER item_delete_all_info
   AFTER DELETE ON item_user FOR EACH ROW
-    EXECUTE PROCEDURE delete_from_item();
+    EXECUTE PROCEDURE func_for_delete_from_item_user_trigger();
 
--- -- USERS
--- CREATE OR REPLACE FUNCTION restart_users_sequence() RETURNS TRIGGER AS $$
--- BEGIN
---
---   IF ((select count(*) from users) = 0) THEN
---     ALTER SEQUENCE users_id_seq RESTART WITH 1;
---   END IF;
---
---   RETURN NULL;
--- END;
--- $$ LANGUAGE plpgsql;
---
--- CREATE TRIGGER restart_users_sequence_after_delete
---   AFTER DELETE ON users
---     EXECUTE PROCEDURE restart_users_sequence();
