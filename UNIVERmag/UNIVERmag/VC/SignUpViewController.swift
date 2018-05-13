@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, Alertable
+class SignUpViewController: UIViewController, Alertable, UITextFieldDelegate
 {
 
     @IBOutlet weak var usernameTextField: UITextField!
@@ -19,13 +19,68 @@ class SignUpViewController: UIViewController, Alertable
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var submitBut: UIButton!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
+        phoneTextField.delegate = self
+        cityTextField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     
+    // MARK: - UITextField
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        self.view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification)
+    {
+        adjustingHeight(true, notification: notification)
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification)
+    {
+        adjustingHeight(false, notification: notification)
+    }
+    
+    func adjustingHeight(_ show: Bool, notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        
+        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+//        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+        
+        let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
+        self.bottomConstraint.constant += changeInHeight
+    }
+    
+    
+    // MARK: - Button press (web task)
     @IBAction func submitButPressed(_ sender: Any)
     {
         guard let username = usernameTextField.text else

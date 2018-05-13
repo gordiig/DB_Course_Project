@@ -17,6 +17,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var submitBut: UIButton!
     let sendingItem = ShoppingItem()
     
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad()
     {
@@ -24,8 +25,24 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         nameTextField.delegate = self
         priceTextField.delegate = self
+        
+        aboutTextField.layer.cornerRadius = 5
+        aboutTextField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        aboutTextField.layer.borderWidth = 0.5
+        aboutTextField.clipsToBounds = true
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
 
     // MARK: - UITextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -39,6 +56,25 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.view.endEditing(true)
     }
     
+    @objc func keyboardWillShow(notification: NSNotification)
+    {
+        adjustingHeight(true, notification: notification)
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification)
+    {
+        adjustingHeight(false, notification: notification)
+    }
+    
+    func adjustingHeight(_ show: Bool, notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        
+        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        //        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+        
+        let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
+        self.bottomConstraint.constant += changeInHeight
+    }
     
     // MARK: - Delegates
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController)

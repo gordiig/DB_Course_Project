@@ -17,6 +17,8 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     
     override func viewDidLoad()
     {
@@ -34,6 +36,9 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
     {
         super.viewWillAppear(animated)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         let user = CurrentUser.getUser
         firstNameTextField.text = user.firstName
         lastNameTextField.text = user.lastName
@@ -41,6 +46,12 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
         phoneTextField.text = user.phoneNumber
         cityTextField.text = user.city
         passwordTextField.text = user.password
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     
@@ -54,6 +65,26 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         self.view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification)
+    {
+        adjustingHeight(true, notification: notification)
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification)
+    {
+        adjustingHeight(false, notification: notification)
+    }
+    
+    func adjustingHeight(_ show: Bool, notification: NSNotification) {
+        var userInfo = notification.userInfo!
+        
+        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        //        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+        
+        let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
+        self.bottomConstraint.constant += changeInHeight
     }
     
     
