@@ -7,9 +7,8 @@ CREATE OR REPLACE FUNCTION add_to_User_Item(username VARCHAR(31), itemId int) RE
   END;
 $$ LANGUAGE plpgsql;
 
-
 CREATE OR REPLACE FUNCTION add_to_Item_Subcategory(_itemId int, _subcategoryIDs int[]) RETURNS VOID AS $$
-DECLARE isThere INT; subcats INT[];
+DECLARE isThere INT;
   BEGIN
 
     SELECT count(*)
@@ -25,23 +24,23 @@ DECLARE isThere INT; subcats INT[];
       RETURN;
     END IF;
 
-    SELECT Subcategory_ID
-    FROM Item_Subcategory
-    WHERE Item_Subcategory.Item_Id = _itemId
-    INTO subcats;
+--     SELECT Subcategory_ID
+--     FROM Item_Subcategory
+--     WHERE Item_Subcategory.Item_Id = _itemId
+--     INTO subcats;
+--
+--     FOR i IN 1..array_length(_subcategoryIDs, 1)
+--     LOOP
+--
+--       IF (array_position(subcats, _subcategoryIDs[i]) IS NULL) AND (_subcategoryIDs[i] IS NOT NULL)
+--       THEN
+--         subcats = array_append(subcats, _subcategoryIDs[i]);
+--       END IF;
+--
+--     END LOOP;
 
-    FOR i IN 1..array_length(_subcategoryIDs, 1)
-    LOOP
-
-      IF (array_position(subcats, _subcategoryIDs[i]) IS NULL) AND (_subcategoryIDs[i] IS NOT NULL)
-      THEN
-        subcats = array_append(subcats, _subcategoryIDs[i]);
-      END IF;
-
-    END LOOP;
-
-    UPDATE Item_Subcategory SET Subcategory_ID = subcats
-    WHERE Item_ID = itemId;
+    UPDATE Item_Subcategory SET Subcategory_ID = _subcategoryIDs
+    WHERE Item_ID = _itemId;
 
   END;
 $$ LANGUAGE plpgsql;
@@ -69,3 +68,18 @@ DECLARE newID INT;
   END;
 $$ LANGUAGE plpgsql;
 
+
+CREATE OR REPLACE FUNCTION edit_Item(_ID INT, _name VARCHAR(255), _price INT, _about VARCHAR(1023),
+                                     _subcats INT[])
+RETURNS INT AS $$
+BEGIN
+
+  UPDATE Items
+  SET Name = _name, Price = _price, About = _about
+  WHERE ID = _id;
+
+  EXECUTE add_to_Item_Subcategory(_ID, _subcats);
+
+  RETURN 1;
+END;
+$$ LANGUAGE plpgsql;
