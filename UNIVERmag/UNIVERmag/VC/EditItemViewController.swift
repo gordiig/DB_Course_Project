@@ -147,7 +147,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         if subcatIDs.isEmpty
         {
-            showAlert(withString: "You must choose at least one category for ypour item!")
+            showAlert(withString: "You must choose at least one category for your item!")
             return
         }
         else

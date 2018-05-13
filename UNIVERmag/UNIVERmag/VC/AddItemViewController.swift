@@ -172,7 +172,8 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         if subcatIDs.isEmpty
         {
-            subcatIDs = "NULL"
+            showAlert(withString: "You must choose at least one category for your item!")
+            return
         }
         else
         {
