@@ -678,17 +678,24 @@
                                                     <rect key="frame" x="15" y="5" width="69" height="69"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420 руб" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg7-gc-S6Q">
-                                                    <rect key="frame" x="92" y="48" width="242" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping item title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-I2-KgK">
                                                     <rect key="frame" x="92" y="5" width="268" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uploader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWf-0Y-AZO">
+                                                    <rect key="frame" x="92" y="29" width="242" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420 руб" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg7-gc-S6Q">
+                                                    <rect key="frame" x="92" y="53" width="242" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -698,6 +705,7 @@
                                             <outlet property="itemImage" destination="Rp3-no-WP3" id="0KR-5i-jSl"/>
                                             <outlet property="itemPriceLabel" destination="Qg7-gc-S6Q" id="z7Z-QH-Ghz"/>
                                             <outlet property="itemTitleLabel" destination="KcH-I2-KgK" id="1fw-GZ-kcZ"/>
+                                            <outlet property="itemUploaderLabel" destination="rWf-0Y-AZO" id="L01-Vw-cf4"/>
                                             <segue destination="tZ1-FX-MJD" kind="show" identifier="ShoppingItemInfoSegue" id="D1b-49-uOn"/>
                                         </connections>
                                     </tableViewCell>
@@ -1271,10 +1279,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uploader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pw-8L-rI4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uploader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftF-cA-d3r">
                                                     <rect key="frame" x="92" y="29" width="242" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1284,7 +1292,7 @@
                                             <outlet property="itemImage" destination="tcy-Qa-Flu" id="2Gf-3n-bSY"/>
                                             <outlet property="itemPriceLabel" destination="A38-dL-o8N" id="VmJ-Lf-VTJ"/>
                                             <outlet property="itemTitleLabel" destination="dcR-HX-pR5" id="RqP-4J-bcT"/>
-                                            <outlet property="itemUploaderLabel" destination="2Pw-8L-rI4" id="W1y-4O-VDA"/>
+                                            <outlet property="itemUploaderLabel" destination="ftF-cA-d3r" id="uaH-FE-JuY"/>
                                             <segue destination="tZ1-FX-MJD" kind="show" identifier="ShoppingItemInfoSegue" id="sKS-tW-d9C"/>
                                         </connections>
                                     </tableViewCell>
@@ -1401,17 +1409,24 @@
                                                     <rect key="frame" x="15" y="5" width="69" height="69"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping item title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsh-Xh-oe9">
+                                                    <rect key="frame" x="92" y="5" width="268" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420 руб" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbc-O3-JJv">
-                                                    <rect key="frame" x="92" y="48" width="242" height="21"/>
+                                                    <rect key="frame" x="92" y="53" width="242" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping item title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsh-Xh-oe9">
-                                                    <rect key="frame" x="92" y="5" width="268" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uploader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhg-O6-usB">
+                                                    <rect key="frame" x="92" y="29" width="242" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1421,6 +1436,7 @@
                                             <outlet property="itemImage" destination="yW0-aR-52h" id="z0W-WI-3Ju"/>
                                             <outlet property="itemPriceLabel" destination="zbc-O3-JJv" id="CkF-f9-h7z"/>
                                             <outlet property="itemTitleLabel" destination="Xsh-Xh-oe9" id="MiW-xU-RSB"/>
+                                            <outlet property="itemUploaderLabel" destination="Zhg-O6-usB" id="9Y0-SY-gaX"/>
                                             <segue destination="tZ1-FX-MJD" kind="show" identifier="ShoppingItemInfoSegue" id="b9L-oO-kPH"/>
                                         </connections>
                                     </tableViewCell>

@@ -141,7 +141,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         cell.itemTitleLabel.text = showingItems[indexPath.row].name
         cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
-        cell.itemUploaderLabel?.text = showingItems[indexPath.row].uploaderUserName ?? "Debug"
+        cell.itemUploaderLabel.text = showingItems[indexPath.row].uploaderUserName ?? "Debug"
         cell.imgBase64 = showingItems[indexPath.row].img
         
         return cell
