@@ -110,5 +110,9 @@ class ShoppingItem: NSObject, JSONable
         self.subcategoryID = val.subcategory_id
         
         self.img = val.image
+        if self.img == "NULL" || self.img == "null" || self.img == ""
+        {
+            self.img = nil
+        }
     }
 }
