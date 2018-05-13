@@ -971,7 +971,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpp-ot-AfO">
-                                <rect key="frame" x="0.0" y="20" width="375" height="681"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="588"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dwt-NV-Pa6">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="701"/>
@@ -1106,7 +1106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAC-Ru-06T">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVR-Mm-e6Q">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -1257,17 +1257,24 @@
                                                     <rect key="frame" x="15" y="5" width="69" height="69"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping item title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcR-HX-pR5">
+                                                    <rect key="frame" x="92" y="5" width="268" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="420 руб" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A38-dL-o8N">
-                                                    <rect key="frame" x="92" y="48" width="242" height="21"/>
+                                                    <rect key="frame" x="92" y="53" width="242" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shopping item title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcR-HX-pR5">
-                                                    <rect key="frame" x="92" y="5" width="268" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uploader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pw-8L-rI4">
+                                                    <rect key="frame" x="92" y="29" width="242" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1277,6 +1284,7 @@
                                             <outlet property="itemImage" destination="tcy-Qa-Flu" id="2Gf-3n-bSY"/>
                                             <outlet property="itemPriceLabel" destination="A38-dL-o8N" id="VmJ-Lf-VTJ"/>
                                             <outlet property="itemTitleLabel" destination="dcR-HX-pR5" id="RqP-4J-bcT"/>
+                                            <outlet property="itemUploaderLabel" destination="2Pw-8L-rI4" id="W1y-4O-VDA"/>
                                             <segue destination="tZ1-FX-MJD" kind="show" identifier="ShoppingItemInfoSegue" id="sKS-tW-d9C"/>
                                         </connections>
                                     </tableViewCell>
@@ -1306,7 +1314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQl-b7-ZZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3207" y="-433"/>
+            <point key="canvasLocation" x="3205.5999999999999" y="-433.13343328335833"/>
         </scene>
         <!--Profile-->
         <scene sceneID="X2F-ej-im1">
@@ -1462,7 +1470,7 @@
         <image name="rzhekich" width="320" height="267"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b9L-oO-kPH"/>
+        <segue reference="sKS-tW-d9C"/>
         <segue reference="gWh-74-0TQ"/>
     </inferredMetricsTieBreakers>
 </document>

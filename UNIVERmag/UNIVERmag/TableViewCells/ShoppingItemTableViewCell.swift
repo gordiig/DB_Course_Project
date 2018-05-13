@@ -13,6 +13,8 @@ class ShoppingItemTableViewCell: UITableViewCell
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
+    @IBOutlet weak var itemUploaderLabel: UILabel!
+    
     var imgBase64: String?
     {
         didSet
