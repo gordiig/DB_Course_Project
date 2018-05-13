@@ -69,6 +69,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         defaults.removeObject(forKey: "Username")
         defaults.removeObject(forKey: "Password")
+        CurrentUser.reset()
         
         guard let logInVC = self.storyboard?.instantiateViewController(withIdentifier: "LogInNavigationController") else
         {
