@@ -98,7 +98,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         {
             let destX = trans.x > 0 ? 0 : -menuBlurView.frame.width
             let _ = trans.x > 0 ? menuDidAppear() : menuDidDissapear()
-            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations:
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveLinear, animations:
             {
                 self.menuBlurView.frame.origin.x = destX
             }, completion: nil)

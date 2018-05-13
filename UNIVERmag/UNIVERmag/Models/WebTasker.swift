@@ -133,6 +133,19 @@ class WebTasker
         webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
     }
     
+    // MARK: - Update (edit) item web task
+    func editItemWebTask(itemId: Int, name: String, price: Int, about: String,
+                         errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
+                         succsessHandler: @escaping (Data) -> Void, failHandler: @escaping () -> Void, deferBody: @escaping () -> Void)
+    {
+        let lastComponent = "\(name)&\(price)&\(about)"
+        var finalURL = baseURL.appendingPathComponent("edit_item")
+        finalURL.appendPathComponent(String(itemId))
+        finalURL.appendPathComponent(lastComponent)
+        
+        webTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, failHandler: failHandler, deferBody: deferBody)
+    }
+    
     
     // MARK: - Main function
     func webTask(_ finalURL: URL, errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void, succsessHandler: @escaping (Data) -> Void, failHandler: @escaping () -> Void, deferBody: @escaping () -> Void )
