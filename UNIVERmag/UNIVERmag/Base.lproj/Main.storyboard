@@ -1325,7 +1325,7 @@
         <!--Navigation Controller-->
         <scene sceneID="CxN-eO-gcI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fxQ-dq-707" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="LogInNavigationController" storyboardIdentifier="LogInNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fxQ-dq-707" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="chZ-V7-Pgc">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
