@@ -10,14 +10,15 @@ import UIKit
 
 class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, Alertable, UITextFieldDelegate
 {
+    @IBOutlet weak var categoriesTableView: MenuTableView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var aboutTextField: UITextView!
     @IBOutlet weak var submitBut: UIButton!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     let sendingItem = ShoppingItem()
     
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad()
     {
@@ -30,6 +31,11 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         aboutTextField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         aboutTextField.layer.borderWidth = 0.5
         aboutTextField.clipsToBounds = true
+        
+        categoriesTableView.layer.cornerRadius = 5
+        categoriesTableView.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        categoriesTableView.layer.borderWidth = 0.5
+        categoriesTableView.clipsToBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool)
