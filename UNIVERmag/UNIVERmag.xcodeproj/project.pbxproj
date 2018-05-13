@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		130075DA20774B830060CF46 /* ShoppingItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */; };
+		130B4FE420A866300092EF23 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130B4FE320A866300092EF23 /* SignUpViewController.swift */; };
 		131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131068C820A057EC0080B4C8 /* WebTasker.swift */; };
 		131068CC20A076090080B4C8 /* CurrentWebTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131068CB20A076090080B4C8 /* CurrentWebTasker.swift */; };
 		1311F2DD209CBF2C0037E6EF /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1311F2DC209CBF2C0037E6EF /* Categories.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInfoViewController.swift; sourceTree = "<group>"; };
+		130B4FE320A866300092EF23 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		131068C820A057EC0080B4C8 /* WebTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTasker.swift; sourceTree = "<group>"; };
 		131068CB20A076090080B4C8 /* CurrentWebTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWebTasker.swift; sourceTree = "<group>"; };
 		1311F2DC209CBF2C0037E6EF /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				1385738A204D442A0032054F /* ViewController.swift */,
+				130B4FE320A866300092EF23 /* SignUpViewController.swift */,
 				130075D920774B830060CF46 /* ShoppingItemInfoViewController.swift */,
 				1385739D204D9A440032054F /* ShoppingItemsViewController.swift */,
 				1338E1EE208E166E00984217 /* UserItemsViewController.swift */,
@@ -294,6 +297,7 @@
 				1390BC60209E368900831E01 /* CategoryTableViewCell.swift in Sources */,
 				1352C9EE207F259600C72D21 /* Alertable.swift in Sources */,
 				131D92EE20A6D8EF00BC55C6 /* EditItemViewController.swift in Sources */,
+				130B4FE420A866300092EF23 /* SignUpViewController.swift in Sources */,
 				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
 				13DD0C7E209E052800F21435 /* Money.swift in Sources */,
 				131068CC20A076090080B4C8 /* CurrentWebTasker.swift in Sources */,
