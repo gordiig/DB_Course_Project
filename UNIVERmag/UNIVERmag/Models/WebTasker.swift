@@ -120,11 +120,11 @@ class WebTasker
     }
     
     // MARK: - Add item web task
-    func addItemWebTask(username: String, password: String, name: String, price: Int, about: String, img: String,
+    func addItemWebTask(username: String, password: String, name: String, price: Int, about: String, subcatIDs: String, img: String,
                         errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                         succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(name)&\(price)&\(about)&\(img)"
+        let lastComponent = "\(name)&\(price)&\(about)&\(img)&\(subcatIDs)"
         var finalURL = baseURL.appendingPathComponent("upload_item")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
