@@ -52,7 +52,7 @@ CREATE TABLE Item_User
 CREATE TABLE Item_Subcategory
 (
   Item_ID INT PRIMARY KEY REFERENCES Items(ID),
-  Subcategory_ID INT REFERENCES Subcategories(ID)
+  Subcategory_ID INT[]
 );
 
 CREATE TABLE Subcategory_Category
