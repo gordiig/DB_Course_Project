@@ -62,9 +62,17 @@ class UserItemsViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         cell.itemTitleLabel.text = showingItems[indexPath.row].name
-        cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
         cell.itemUploaderLabel.text = showingItems[indexPath.row].uploaderUserName ?? "Debug"
         cell.imgBase64 = showingItems[indexPath.row].img
+        if showingItems[indexPath.row].isSold
+        {
+            cell.itemPriceLabel.text = "Sold"
+        }
+        else
+        {
+            cell.itemPriceLabel.text = String(describing: showingItems[indexPath.row].price)
+        }
+        
         return cell
     }
     
