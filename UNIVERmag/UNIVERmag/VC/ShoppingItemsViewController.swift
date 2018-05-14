@@ -271,6 +271,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
                 {
                     guard let tmpItems = ShoppingItem.itemsFactory(from: data) else
                     {
+                        self.showAlert(withString: "Something wrong with incame items!")
+                        print("Data: \n\(String(describing: String(data: data, encoding: .utf8)))")
                         self.showingItems = self.savedBeforeWebTasksItems
                         return
                     }

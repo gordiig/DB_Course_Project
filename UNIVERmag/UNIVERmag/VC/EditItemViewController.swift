@@ -12,6 +12,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
 {
     var item = ShoppingItem()
     
+    @IBOutlet weak var soldSwitch: UISwitch!
     @IBOutlet weak var categoriesTableView: MenuTableView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
@@ -42,6 +43,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        soldSwitch.isOn = item.isSold
         nameTextField.text = item.name
         priceTextField.text = String(item.price.toDouble())
         aboutTextField.text = item.about ?? ""
@@ -155,6 +157,8 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
             subcatIDs.removeLast()
         }
         
+        let isSold = soldSwitch.isOn ? "Sold" : "NotSold"
+        
         let errorHandler: (Error?) -> Void =
         { (error) in
             DispatchQueue.main.async
@@ -188,13 +192,13 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "No item with this id was found!")
+                    self.showAlert(withString: "Error while updating item info!")
                 }
             }
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, isSold: isSold, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
         
     }
     

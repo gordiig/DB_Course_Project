@@ -17,6 +17,7 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
     @IBOutlet weak var uploaderBut: UIButton!
     @IBOutlet weak var editBut: UIBarButtonItem!
     @IBOutlet weak var callBut: UIButton!
+    @IBOutlet weak var changePicBut: UIButton!
     
     var item = ShoppingItem()
     
@@ -28,9 +29,8 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
         aboutLabel.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         aboutLabel.layer.borderWidth = 0.5
         
-        callBut.layer.cornerRadius = 5
-        callBut.layer.borderColor = UIColor(red: 0, green: 0.55, blue: 0, alpha: 0.9).cgColor
-        callBut.layer.borderWidth = 1
+        changePicBut.isEnabled = item.uploaderUserName == CurrentUser.getUser.username
+        changePicBut.isHidden = !changePicBut.isEnabled
         
         self.title = item.name
         
@@ -49,6 +49,20 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
         callBut.titleLabel?.lineBreakMode = .byWordWrapping
         callBut.titleLabel?.textAlignment = .center
         callBut.setTitle("Call\n\(phoneNum)", for: .normal)
+        
+        if !item.isSold
+        {
+            callBut.layer.cornerRadius = 5
+            callBut.layer.borderColor = UIColor(red: 0, green: 0.55, blue: 0, alpha: 0.9).cgColor
+            callBut.layer.borderWidth = 1
+        }
+        else
+        {
+            callBut.setTitle("Item is sold", for: .normal)
+            callBut.titleLabel?.textColor = UIColor.black
+            callBut.layer.borderColor = UIColor.black.withAlphaComponent(0.9).cgColor
+            callBut.isEnabled = false
+        }
         
         guard let img = item.img else
         {
@@ -96,6 +110,11 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
             showAlert(withString: "Something wrong with phone number, call from phone app.")
             return
         }
+    }
+    
+    @IBAction func changePicButPressed(_ sender: Any)
+    {
+        
     }
     
     
