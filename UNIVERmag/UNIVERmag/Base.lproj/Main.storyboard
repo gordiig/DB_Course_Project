@@ -453,6 +453,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="User information" id="y5h-vg-QsX">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="SoE-Aa-vO3"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1z1-VW-B6u">
+                            <connections>
+                                <action selector="refreshButPressed:" destination="IHW-mT-cKW" id="z2C-eM-nvc"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="730"/>
                     <connections>
@@ -466,6 +471,7 @@
                         <outlet property="lastNameLabel" destination="xlb-6S-2hP" id="8Uy-XB-tCL"/>
                         <outlet property="logOutBut" destination="yQX-hQ-SlJ" id="orU-eO-I8R"/>
                         <outlet property="phoneLabel" destination="tCp-OF-PEQ" id="IBN-y5-Ipe"/>
+                        <outlet property="refreshBut" destination="1z1-VW-B6u" id="it9-gk-suW"/>
                         <outlet property="showAllBut" destination="vuG-Zs-HA9" id="9zw-oB-s6x"/>
                         <outlet property="userImage" destination="x8Y-QU-3An" id="T7q-8a-x2e"/>
                         <outlet property="usernameLabel" destination="Ec2-3O-WaZ" id="Qqx-ng-cvf"/>

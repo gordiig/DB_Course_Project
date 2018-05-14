@@ -10,6 +10,7 @@ import UIKit
 
 class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, Alertable
 {
+    @IBOutlet weak var refreshBut: UIBarButtonItem!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -32,6 +33,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         if user != CurrentUser.getUser
         {
+            refreshBut.isEnabled = false
             changePhotoBut.isEnabled = false
             changePhotoBut.isHidden = true
             editProfileBut.isEnabled = false
@@ -54,11 +56,10 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
             fillFromUser(user)
         }
     }
-
-    override func didReceiveMemoryWarning()
+    
+    override func viewWillAppear(_ animated: Bool)
     {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        fillFromUser(user)
     }
     
     
@@ -101,6 +102,12 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         destVC.user = self.user
         
         self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    
+    @IBAction func refreshButPressed(_ sender: Any)
+    {
+        activityIndicator.startAnimating()
+        refreshWebTask()
     }
     
     
@@ -208,6 +215,68 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     }
                     
                     self.user = tmpUser
+                    self.fillFromUser(self.user)
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "No such user, or another error occured!\n")
+                }
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.activityIndicator.stopAnimating()
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.getSafeUserInfoWebTask(username: username, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
+    func refreshWebTask()
+    {
+        let username = user.username
+        
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error with getting user info!\n \(error!.localizedDescription)")
+            }
+        }
+        
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+            }
+        }
+        
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
+            {
+                DispatchQueue.main.async
+                {
+                    guard let tmpUser = User(fromData: data) else
+                    {
+                        self.showAlert(withString: "Error with decoding data\n")
+                        return
+                    }
+                    
+                    self.user.username = tmpUser.username
+                    self.user.city = tmpUser.city
+                    self.user.email = tmpUser.email
+                    self.user.firstName = tmpUser.firstName
+                    self.user.lastName = tmpUser.lastName
+                    self.user.phoneNumber = tmpUser.phoneNumber
                     self.fillFromUser(self.user)
                 }
             }
