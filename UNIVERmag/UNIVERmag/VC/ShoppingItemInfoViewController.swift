@@ -36,7 +36,8 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
         editBut.isEnabled = (item.uploaderUserName == CurrentUser.getUser.username) ? true : false
         uploaderBut.setTitle(item.uploaderUserName ?? "Debug", for: .normal)
         
-        let phoneNum = item.phoneNumber ?? "None"
+        var phoneNum = item.phoneNumber ?? "None"
+        phoneNum = item.uploaderUserName == CurrentUser.getUser.username ? CurrentUser.getUser.phoneNumber : phoneNum
         callBut.titleLabel?.lineBreakMode = .byWordWrapping
         callBut.titleLabel?.textAlignment = .center
         callBut.setTitle("Call\n\(phoneNum)", for: .normal)
