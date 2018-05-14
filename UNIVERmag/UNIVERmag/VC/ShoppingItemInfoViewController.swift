@@ -11,7 +11,7 @@ import UIKit
 class ShoppingItemInfoViewController: UIViewController, Alertable
 {
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var aboutLabel: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var uploaderBut: UIButton!
@@ -23,6 +23,14 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        aboutLabel.layer.cornerRadius = 3
+        aboutLabel.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        aboutLabel.layer.borderWidth = 0.5
+        
+        callBut.layer.cornerRadius = 5
+        callBut.layer.borderColor = UIColor(red: 0, green: 0.55, blue: 0, alpha: 0.9).cgColor
+        callBut.layer.borderWidth = 1
         
         self.title = item.name
         
