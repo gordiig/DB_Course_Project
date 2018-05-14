@@ -18,6 +18,7 @@ class ShoppingItem: NSObject, JSONable
     var img: String?
     var uploaderUserName: String?
     var subcategoryID: [Int]?
+    var phoneNumber: String?
     
     private struct ShoppingItemStruct: Codable
     {
@@ -30,6 +31,7 @@ class ShoppingItem: NSObject, JSONable
         var item_id: Int?
         var user_name: String?
         var subcategory_id: [Int]?
+        var phone_number: String?
     }
     
     
@@ -108,6 +110,7 @@ class ShoppingItem: NSObject, JSONable
         self.price = Money(cents: val.price)
         
         self.subcategoryID = val.subcategory_id
+        self.phoneNumber = val.phone_number
         
         self.img = val.image
         if self.img == "NULL" || self.img == "null" || self.img == ""
