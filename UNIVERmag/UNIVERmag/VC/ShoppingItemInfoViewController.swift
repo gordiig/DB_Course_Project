@@ -16,6 +16,7 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var uploaderBut: UIButton!
     @IBOutlet weak var editBut: UIBarButtonItem!
+    @IBOutlet weak var callBut: UIButton!
     
     var item = ShoppingItem()
     
@@ -34,6 +35,11 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
         
         editBut.isEnabled = (item.uploaderUserName == CurrentUser.getUser.username) ? true : false
         uploaderBut.setTitle(item.uploaderUserName ?? "Debug", for: .normal)
+        
+        let phoneNum = item.phoneNumber ?? "None"
+        callBut.titleLabel?.lineBreakMode = .byWordWrapping
+        callBut.titleLabel?.textAlignment = .center
+        callBut.setTitle("Call\n\(phoneNum)", for: .normal)
         
         guard let img = item.img else
         {
@@ -61,6 +67,26 @@ class ShoppingItemInfoViewController: UIViewController, Alertable
         destVC.user.username = (uploaderBut.titleLabel?.text)!
         
         self.navigationController?.pushViewController(destVC, animated: true)
+    }
+    
+    @IBAction func callButPressed(_ sender: Any)
+    {
+        let phoneNumber = item.phoneNumber ?? "None"
+        guard let url = URL(string: "tel://\(phoneNumber)") else
+        {
+            showAlert(withString: "Something wrong with phone number, call from phone app.")
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(url)
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        else
+        {
+            showAlert(withString: "Something wrong with phone number, call from phone app.")
+            return
+        }
     }
     
     
