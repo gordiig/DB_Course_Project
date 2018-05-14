@@ -1,3 +1,19 @@
+CREATE OR REPLACE FUNCTION add_to_Category_Subcategory(category_ VARCHAR(255), subcategoryName VARCHAR(255)) RETURNS VOID AS $$
+  BEGIN
+
+    WITH newID AS
+    (
+      INSERT INTO Subcategories (Name)
+        VALUES (subcategoryName)
+        RETURNING ID
+    )
+    INSERT INTO Subcategory_Category
+      VALUES ((SELECT ID FROM newID), category_);
+
+  END;
+$$ LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE FUNCTION add_to_User_Item(username VARCHAR(31), itemId int) RETURNS VOID AS $$
   BEGIN
 
@@ -6,6 +22,7 @@ CREATE OR REPLACE FUNCTION add_to_User_Item(username VARCHAR(31), itemId int) RE
 
   END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION add_to_Item_Subcategory(_itemId int, _subcategoryIDs int[]) RETURNS VOID AS $$
 DECLARE isThere INT;
@@ -70,12 +87,12 @@ $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE FUNCTION edit_Item(_ID INT, _name VARCHAR(255), _price INT, _about VARCHAR(1023),
-                                     _subcats INT[])
+                                     _subcats INT[], _isSold BOOLEAN)
 RETURNS INT AS $$
 BEGIN
 
   UPDATE Items
-  SET Name = _name, Price = _price, About = _about
+  SET Name = _name, Price = _price, About = _about, Is_Sold = _isSold
   WHERE ID = _id;
 
   EXECUTE add_to_Item_Subcategory(_ID, _subcats);
