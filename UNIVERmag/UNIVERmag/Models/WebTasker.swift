@@ -158,6 +158,20 @@ class WebTasker
         baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
+    // MARK: - Change item pic
+    func changeItemPic(itemID: Int, username: String, password: String, base64: String,
+                       errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
+                       succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
+    {
+        var finalURL = baseURL.appendingPathComponent("change_item_pic")
+        finalURL.appendPathComponent(username)
+        finalURL.appendPathComponent(password)
+        finalURL.appendPathComponent(String(itemID))
+        finalURL.appendPathComponent(base64)
+        
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
     
     // MARK: - Main function
     func baseWebTask(_ finalURL: URL, errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void, succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void )
