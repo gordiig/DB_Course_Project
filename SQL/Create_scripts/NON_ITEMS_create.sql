@@ -15,7 +15,8 @@ CREATE TABLE Items
   Date_added DATE DEFAULT current_date NOT NULL,
   Price INTEGER,
   About VARCHAR(1023),
-  Image VARCHAR(100000)
+  Image VARCHAR(100000),
+  Is_Sold BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Subcategories
