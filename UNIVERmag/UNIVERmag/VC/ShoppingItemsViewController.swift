@@ -409,6 +409,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         showingItems = [ShoppingItem]()
         nextItemNumForWebTask = itemsPerPage - 1
         
+        tableView.reloadData()
+        
         showAlert(withString: "Did recieve memory warning! Refresh the item table.")
     }
 }
