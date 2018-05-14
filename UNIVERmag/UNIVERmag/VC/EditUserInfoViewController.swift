@@ -87,6 +87,15 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
         self.bottomConstraint.constant += changeInHeight
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField != phoneTextField { return true }
+        
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
     
     // MARK: - Button press (Web task)
     @IBAction func submitButPressed(_ sender: Any)
