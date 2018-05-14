@@ -98,7 +98,9 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
     
     @IBAction func callButPressed(_ sender: Any)
     {
-        let phoneNumber = item.phoneNumber ?? "None"
+        var phoneNumber = item.phoneNumber ?? "None"
+        phoneNumber = item.uploaderUserName == CurrentUser.getUser.username ? CurrentUser.getUser.phoneNumber : phoneNumber
+        
         guard let url = URL(string: "tel://\(phoneNumber)") else
         {
             showAlert(withString: "Something wrong with phone number, call from phone app.")
