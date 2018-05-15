@@ -172,6 +172,18 @@ class WebTasker
         baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
+    // MARK: - Delete account web task
+    func deleteAccount(username: String, password: String,
+                       errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
+                       succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
+    {
+        var finalURL = baseURL.appendingPathComponent("delete_account")
+        finalURL.appendPathComponent(username)
+        finalURL.appendPathComponent(password)
+        
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
     
     // MARK: - Main function
     func baseWebTask(_ finalURL: URL, errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void, succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void )

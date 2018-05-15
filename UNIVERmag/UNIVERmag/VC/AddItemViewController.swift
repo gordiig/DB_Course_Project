@@ -150,6 +150,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         guard let password = user.password else
         {
             showAlert(withString: "Log in first!")
+            submitBut.isEnabled = true
             return
         }
         
@@ -173,6 +174,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         if subcatIDs.isEmpty
         {
             showAlert(withString: "You must choose at least one category for your item!")
+            submitBut.isEnabled = true
             return
         }
         else

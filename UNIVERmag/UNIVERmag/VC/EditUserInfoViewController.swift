@@ -17,6 +17,7 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var deleteAccountBut: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     
@@ -100,6 +101,22 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
     // MARK: - Button press (Web task)
     @IBAction func submitButPressed(_ sender: Any)
     {
+        webTask()
+    }
+    
+    @IBAction func deleteAccountButPressed(_ sender: Any)
+    {
+        let alert = UIAlertController(title: "Are you sure?", message: "This will delete all your items too.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {_ in self.deleteWebTask()}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - Web task
+    func webTask()
+    {
         let user = CurrentUser.getUser
         let username = user.username
         guard let password = user.password else
@@ -118,8 +135,73 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
         let errorHandler: (Error?) -> Void =
         { (error) in
             DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Can't update! Please try again!:\n \(error!.localizedDescription)")
+            }
+        }
+        
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+                {
+                    self.showAlert(withString: "Error in downloaded data! Please try again!\n")
+            }
+        }
+        
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
             {
-                self.showAlert(withString: "Can't update! Please try again!:\n \(error!.localizedDescription)")
+                DispatchQueue.main.async
+                    {
+                        user.firstName = firstName
+                        user.lastName = lastName
+                        user.city = city
+                        user.email = email
+                        user.phoneNumber = phone
+                        user.password = newPassword
+                        
+                        let defaults = UserDefaults.standard
+                        defaults.set(newPassword, forKey: "Password")
+                        
+                        self.showAlert(title: "Sucsess", withString: "Sucsessfully updated profile!")
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                    {
+                        self.showAlert(withString: "Error occured while updating user info\n")
+                }
+            }
+        }
+        
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+                {
+                    self.submitButton.isEnabled = true
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.updateUserInfoWebTask(username: username, password: password, firstName: firstName, lastName: lastName, newPassword: newPassword, phone: phone, email: email, city: city, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
+    func deleteWebTask()
+    {
+        let username = CurrentUser.getUser.username
+        guard let password = CurrentUser.getUser.password else
+        {
+            showAlert(withString: "Log in first!")
+            return
+        }
+        
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
+            {
+                self.showAlert(withString: "Error occured! Please try again!:\n \(error!.localizedDescription)")
             }
         }
         
@@ -137,40 +219,26 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
             {
                 DispatchQueue.main.async
                 {
-                    user.firstName = firstName
-                    user.lastName = lastName
-                    user.city = city
-                    user.email = email
-                    user.phoneNumber = phone
-                    user.password = newPassword
-                    
-                    let defaults = UserDefaults.standard
-                    defaults.set(newPassword, forKey: "Password")
-                    
-                    self.showAlert(title: "Sucsess", withString: "Sucsessfully updated profile!")
+                    guard let destVC = self.storyboard?.instantiateViewController(withIdentifier: "LogInNavigationController") else
+                    {
+                        self.showAlert(withString: "Can't instantiate LogIn VC!")
+                        return
+                    }
+                    self.present(destVC, animated: true, completion: nil)
                 }
             }
             else
             {
                 DispatchQueue.main.async
                 {
-                    self.showAlert(withString: "Error occured while updating user info\n")
+                    self.showAlert(withString: "Error occured while deleting\n")
                 }
             }
         }
         
-        let deferBody: () -> Void =
-        {
-            DispatchQueue.main.async
-            {
-                self.submitButton.isEnabled = true
-            }
-        }
-        
         let tasker = CurrentWebTasker.tasker
-        tasker.updateUserInfoWebTask(username: username, password: password, firstName: firstName, lastName: lastName, newPassword: newPassword, phone: phone, email: email, city: city, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.deleteAccount(username: username, password: password, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
     }
-    
     
     // MARK: - Alertable
     func showAlert(title: String = "Error", withString str: String)
