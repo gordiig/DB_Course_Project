@@ -1,11 +1,14 @@
 DROP TRIGGER IF EXISTS restart_item_sequence_after_delete ON items;
 DROP TRIGGER IF EXISTS restart_subcategories_sequence_after_delete ON subcategories;
-DROP TRIGGER IF EXISTS delete_from_item_after_delete_from_item_user ON item_user;
--- DROP TRIGGER IF EXISTS restart_users_sequence_after_delete ON users;
+DROP TRIGGER IF EXISTS item_delete_all_info ON Items;
+DROP TRIGGER IF EXISTS User_Delete_All ON Users;
+
 DROP FUNCTION IF EXISTS restart_item_sequence();
 DROP FUNCTION IF EXISTS restart_subcategories_sequence();
-DROP FUNCTION IF EXISTS delete_from_item();
--- DROP FUNCTION IF EXISTS restart_users_sequence();
+DROP FUNCTION IF EXISTS func_for_delete_from_items_trigger();
+DROP FUNCTION IF EXISTS func_for_delete_from_users_trigger();
+
+
 
 -- ITEMS
 CREATE OR REPLACE FUNCTION restart_item_sequence() RETURNS TRIGGER AS $$
@@ -40,17 +43,47 @@ CREATE TRIGGER restart_subcategories_sequence_after_delete
     EXECUTE PROCEDURE restart_subcategories_sequence();
 
 
-CREATE OR REPLACE FUNCTION func_for_delete_from_item_user_trigger() RETURNS TRIGGER AS $$
+--------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION func_for_delete_from_items_trigger() RETURNS TRIGGER AS $$
 BEGIN
 
-  DELETE FROM Item_Subcategory WHERE Item_Subcategory.Item_ID = old.Item_ID;
-  DELETE FROM items WHERE ID = old.item_ID;
+  DELETE FROM Item_Subcategory WHERE Item_Subcategory.Item_ID = OLD.ID;
+  DELETE FROM Item_User WHERE Item_User.Item_ID = OLD.ID;
 
-  RETURN NULL;
+  RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER item_delete_all_info
-  AFTER DELETE ON item_user FOR EACH ROW
-    EXECUTE PROCEDURE func_for_delete_from_item_user_trigger();
+  BEFORE DELETE ON Items FOR EACH ROW
+    EXECUTE PROCEDURE func_for_delete_from_items_trigger();
+---------------------------------------------------------------------------------------------------------------
 
+ ---------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION func_for_delete_from_users_trigger() RETURNS TRIGGER AS $$
+ DECLARE _User_Name VARCHAR(255);
+BEGIN
+
+   _User_Name := old.User_Name;
+
+  DELETE
+  FROM Items
+  WHERE ID IN
+        (
+          SELECT ID
+          FROM Items JOIN Item_User ON ID = Item_ID
+          WHERE User_Name = _User_Name
+        );
+
+  DELETE
+  FROM Item_User
+  WHERE Item_User.User_name = old.User_name;
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER User_Delete_All
+  BEFORE DELETE ON Users FOR EACH ROW
+    EXECUTE PROCEDURE func_for_delete_from_users_trigger();
+---------------------------------------------------------------------------------------------------------------
