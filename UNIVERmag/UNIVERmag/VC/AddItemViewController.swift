@@ -57,6 +57,22 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField != priceTextField { return true }
+        
+        var allowedStr = "0123456789."
+        let text = textField.text ?? ""
+        if text.contains(".")
+        {
+            allowedStr.removeLast()
+        }
+        
+        let allowedCharacters = CharacterSet(charactersIn: allowedStr)
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         self.view.endEditing(true)
