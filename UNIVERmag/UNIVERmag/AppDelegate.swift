@@ -17,19 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         let defaults = UserDefaults.standard
         let username = defaults.object(forKey: "Username") as? String
         let password = defaults.object(forKey: "Password") as? String
         
         if (username != nil) && (password != nil)
         {
-            readUser()
+            if readUser()
+            {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let initialVC = storyboard.instantiateViewController(withIdentifier: "mainTapBarViewController")
+                self.window?.rootViewController = initialVC
+                self.window?.makeKeyAndVisible()
+            }
         }
         else
         {
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
         }
         
         return true
@@ -50,8 +54,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        let defaults = UserDefaults.standard
+        let username = defaults.object(forKey: "Username") as? String
+        let password = defaults.object(forKey: "Password") as? String
         
-        self.readUser()
+        if (username != nil) && (password != nil)
+        {
+            if !readUser()
+            {
+                removeUserDefaults()
+                shouldGoToLogInVC()
+            }
+        }
+        else
+        {
+            removeUserDefaults()
+            shouldGoToLogInVC()
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -73,9 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let user = CurrentUser.getUser
         guard let data = user.encodeToJSON() else
         {
-            let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
             print("user.encodeToJSONData returned nil!")
             return
         }
@@ -90,17 +107,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         catch
         {
-            let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
             print("Didn't write userinfo!")
             return
         }
     }
     
-    func readUser()
+    func readUser() -> Bool
     {
-        let defaults = UserDefaults.standard
         let user = CurrentUser.getUser
         
         let fileManager = FileManager.default
@@ -115,22 +129,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if !user.decodeFromJSON(data)
             {
-                defaults.removeObject(forKey: "Username")
-                defaults.removeObject(forKey: "Password")
+                removeUserDefaults()
                 print("Can't set user from readed data!")
+                return false
             }
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "mainTapBarViewController")
-            self.window?.rootViewController = initialVC
-            self.window?.makeKeyAndVisible()
         }
         catch
         {
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
             print("Can't read from userinfo.json, or delete file!")
+            return false
         }
+        
+        return true
+    }
+    
+    func removeUserDefaults()
+    {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "Username")
+        defaults.removeObject(forKey: "Password")
+    }
+    
+    func shouldGoToLogInVC()
+    {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(withIdentifier: "LogInNavigationController")
+        self.window?.rootViewController = initialVC
+        self.window?.makeKeyAndVisible()
     }
 
     
