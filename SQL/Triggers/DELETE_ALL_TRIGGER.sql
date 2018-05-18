@@ -87,3 +87,35 @@ CREATE TRIGGER User_Delete_All
   BEFORE DELETE ON Users FOR EACH ROW
     EXECUTE PROCEDURE func_for_delete_from_users_trigger();
 ---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION func_for_delete_from_categories_trigger() RETURNS TRIGGER AS $$
+BEGIN
+
+  DELETE FROM subcategory_category
+  WHERE Category_Name = OLD.Name;
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Categories_Delete_All
+  BEFORE DELETE ON Categories FOR EACH ROW
+    EXECUTE PROCEDURE func_for_delete_from_categories_trigger();
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION func_for_delete_from_subcategories_trigger() RETURNS TRIGGER AS $$
+BEGIN
+
+  DELETE FROM subcategory_category
+  WHERE Subcategory_ID = OLD.ID;
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Subcategories_Delete_All
+  BEFORE DELETE ON Subcategories FOR EACH ROW
+    EXECUTE PROCEDURE func_for_delete_from_subcategories_trigger();
+---------------------------------------------------------------------------------------------------------------
