@@ -59,5 +59,5 @@ CREATE TABLE Item_Subcategory
 CREATE TABLE Subcategory_Category
 (
   Subcategory_ID INT PRIMARY KEY REFERENCES Subcategories(ID),
-  Category_ID VARCHAR(255) REFERENCES Categories(Name)
+  Category_Name VARCHAR(255) REFERENCES Categories(Name)
 );
