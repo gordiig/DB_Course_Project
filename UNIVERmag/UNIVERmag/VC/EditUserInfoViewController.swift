@@ -219,6 +219,10 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
             {
                 DispatchQueue.main.async
                 {
+                    let defaults = UserDefaults.standard
+                    defaults.removeObject(forKey: "Username")
+                    defaults.removeObject(forKey: "Password")
+                    
                     guard let destVC = self.storyboard?.instantiateViewController(withIdentifier: "LogInNavigationController") else
                     {
                         self.showAlert(withString: "Can't instantiate LogIn VC!")
