@@ -2,12 +2,15 @@ DROP TRIGGER IF EXISTS restart_item_sequence_after_delete ON items;
 DROP TRIGGER IF EXISTS restart_subcategories_sequence_after_delete ON subcategories;
 DROP TRIGGER IF EXISTS item_delete_all_info ON Items;
 DROP TRIGGER IF EXISTS User_Delete_All ON Users;
+DROP TRIGGER IF EXISTS Categories_Delete_All ON categories;
+DROP TRIGGER IF EXISTS Subcategories_Delete_All ON subcategories;
 
 DROP FUNCTION IF EXISTS restart_item_sequence();
 DROP FUNCTION IF EXISTS restart_subcategories_sequence();
 DROP FUNCTION IF EXISTS func_for_delete_from_items_trigger();
 DROP FUNCTION IF EXISTS func_for_delete_from_users_trigger();
-
+DROP FUNCTION IF EXISTS func_for_delete_from_categories_trigger();
+DROP FUNCTION IF EXISTS func_for_delete_from_subcategories_trigger();
 
 
 -- ITEMS
