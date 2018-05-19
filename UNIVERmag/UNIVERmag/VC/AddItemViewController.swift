@@ -171,6 +171,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
             return
         }
         
+        let exchange = exchangeSwitch.isOn ? "true" : "false"
         let name = sendingItem.name
         let price = sendingItem.price
         let about = sendingItem.about ?? "NULL"
@@ -242,7 +243,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.addItemWebTask(username: username, password: password, name: name, price: price.toCents(), about: about, subcatIDs: subcatIDs, img: img, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.addItemWebTask(username: username, password: password, name: name, price: price.toCents(), about: about, subcatIDs: subcatIDs, img: img, exchange: exchange, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     

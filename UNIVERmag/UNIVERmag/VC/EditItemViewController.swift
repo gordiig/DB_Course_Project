@@ -48,6 +48,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         nameTextField.text = item.name
         priceTextField.text = String(item.price.toDouble())
         aboutTextField.text = item.about ?? ""
+        exchangeSwitch.isOn = item.isExchangeable
     }
 
     override func viewWillDisappear(_ animated: Bool)
@@ -136,6 +137,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         let price = priceMon.toCents()
         
         let about = aboutTextField.text ?? "NULL"
+        let isExchangeable = exchangeSwitch.isOn ? "true" : "false"
         
         let categoriesArr = CurrentCategories.cur
         var subcatIDs = ""
@@ -199,7 +201,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, isSold: isSold, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, isSold: isSold, isExchangeable: isExchangeable, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
         
     }
     
