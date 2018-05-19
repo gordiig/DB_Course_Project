@@ -162,6 +162,13 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     
+    // MARK: - UISwitch
+    @IBAction func onlyExchangeableSwitchValChanged(_ sender: Any)
+    {
+        searchBarSearchButtonClicked(self.searchBar)
+    }
+    
+    
     // MARK: - UISearchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
@@ -217,6 +224,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     func webTask(page: Int, searchStr: String = "NULL")
     {
         let search_str = searchStr.lowercased()
+        
+        let isOnlyEx = onlyExchangeableSwitch.isOn ? "true" : "false"
         
         let minText = minPriceField.text ?? "."
         var minPrice = -1
@@ -326,7 +335,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     func webTaskCat()
