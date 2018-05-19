@@ -17,6 +17,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var aboutTextField: UITextView!
     @IBOutlet weak var submitBut: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var exchangeSwitch: UISwitch!
     let sendingItem = ShoppingItem()
     
     

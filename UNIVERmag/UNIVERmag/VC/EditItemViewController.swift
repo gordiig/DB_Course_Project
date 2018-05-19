@@ -19,6 +19,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     @IBOutlet weak var aboutTextField: UITextView!
     @IBOutlet weak var submitBut: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var exchangeSwitch: UISwitch!
     
     override func viewDidLoad()
     {

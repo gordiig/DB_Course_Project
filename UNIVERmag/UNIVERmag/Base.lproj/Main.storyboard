@@ -1050,6 +1050,7 @@
                         <outlet property="aboutTextField" destination="apZ-mh-0Wq" id="fHS-Sc-pdK"/>
                         <outlet property="bottomConstraint" destination="gYb-pA-cOJ" id="j4y-He-7Kj"/>
                         <outlet property="categoriesTableView" destination="d2Q-zQ-Ntb" id="0xA-DL-KL0"/>
+                        <outlet property="exchangeSwitch" destination="9xE-Sv-IME" id="yxc-IO-UQR"/>
                         <outlet property="imageView" destination="g2G-uj-S3I" id="fCo-7h-Jb2"/>
                         <outlet property="nameTextField" destination="Kvg-D8-DDQ" id="o9F-AW-HzY"/>
                         <outlet property="priceTextField" destination="1Gk-8j-P9h" id="Ray-LL-XUX"/>
@@ -1396,6 +1397,7 @@
                         <outlet property="aboutTextField" destination="Na8-es-4Tt" id="eY7-rF-sVW"/>
                         <outlet property="bottomConstraint" destination="Sed-az-tfJ" id="j5n-hN-fJk"/>
                         <outlet property="categoriesTableView" destination="x3A-dz-pjD" id="ffX-BZ-vSK"/>
+                        <outlet property="exchangeSwitch" destination="4fj-kY-WSh" id="EcL-dA-4CL"/>
                         <outlet property="nameTextField" destination="t11-ak-LmE" id="eYJ-By-zT2"/>
                         <outlet property="priceTextField" destination="F9i-Qq-yWF" id="2pv-cx-IVf"/>
                         <outlet property="soldSwitch" destination="l1V-sQ-w1o" id="zL3-rF-vUk"/>
