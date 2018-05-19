@@ -120,11 +120,11 @@ class WebTasker
     }
     
     // MARK: - Add item web task
-    func addItemWebTask(username: String, password: String, name: String, price: Int, about: String, subcatIDs: String, img: String,
+    func addItemWebTask(username: String, password: String, name: String, price: Int, about: String, subcatIDs: String, img: String, exchange: String,
                         errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                         succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(name)&\(price)&\(about)&\(img)&\(subcatIDs)"
+        let lastComponent = "\(name)&\(price)&\(about)&\(img)&\(subcatIDs)&\(exchange)"
         var finalURL = baseURL.appendingPathComponent("upload_item")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
@@ -134,11 +134,11 @@ class WebTasker
     }
     
     // MARK: - Update (edit) item web task
-    func editItemWebTask(itemId: Int, name: String, price: Int, about: String, subcatIDs: String, isSold: String,
+    func editItemWebTask(itemId: Int, name: String, price: Int, about: String, subcatIDs: String, isSold: String, isExchangeable: String,
                          errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                          succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(name)&\(price)&\(about)&\(subcatIDs)&\(isSold)"
+        let lastComponent = "\(name)&\(price)&\(about)&\(subcatIDs)&\(isSold)&\(isExchangeable)"
         var finalURL = baseURL.appendingPathComponent("edit_item")
         finalURL.appendPathComponent(String(itemId))
         finalURL.appendPathComponent(lastComponent)
