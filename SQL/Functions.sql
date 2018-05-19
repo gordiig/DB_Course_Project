@@ -62,9 +62,10 @@ DECLARE isThere INT;
   END;
 $$ LANGUAGE plpgsql;
 
-
+DROP FUNCTION IF EXISTS add_Item();
 CREATE OR REPLACE FUNCTION add_Item(_username VARCHAR(31), _password VARCHAR(127), _name VARCHAR(255),
-                                    _price INT, _about VARCHAR(1023), _img VARCHAR(100000), _subcats INT[])
+                                    _price INT, _about VARCHAR(1023), _img VARCHAR(100000), _subcats INT[],
+                                    _exchangeable BOOLEAN)
 RETURNS INT AS $$
 DECLARE newID INT;
   BEGIN
@@ -73,8 +74,8 @@ DECLARE newID INT;
       RETURN -1;
     END IF;
 
-    INSERT INTO Items (Name, Price, About, Image)
-    VALUES (_name, _price, _about, _img)
+    INSERT INTO Items (Name, Price, About, Image, Is_Exchangeable)
+    VALUES (_name, _price, _about, _img, _exchangeable)
     RETURNING ID INTO newID;
 
     EXECUTE add_to_User_Item(_username, newID);
@@ -86,13 +87,14 @@ DECLARE newID INT;
 $$ LANGUAGE plpgsql;
 
 
+DROP FUNCTION IF EXISTS edit_Item();
 CREATE OR REPLACE FUNCTION edit_Item(_ID INT, _name VARCHAR(255), _price INT, _about VARCHAR(1023),
-                                     _subcats INT[], _isSold BOOLEAN)
+                                     _subcats INT[], _isSold BOOLEAN, _isEx BOOLEAN)
 RETURNS INT AS $$
 BEGIN
 
   UPDATE Items
-  SET Name = _name, Price = _price, About = _about, Is_Sold = _isSold
+  SET Name = _name, Price = _price, About = _about, Is_Sold = _isSold, Is_Exchangeable = _isEx
   WHERE ID = _id;
 
   EXECUTE add_to_Item_Subcategory(_ID, _subcats);
