@@ -14,7 +14,7 @@ class WebTasker
     
     
     // MARK: - Shopping Items web task
-    func shoppingItemsWebTask(page: Int, search: String, minPrice: Int, maxPrice: Int, subcatIDs: String,
+    func shoppingItemsWebTask(page: Int, search: String, minPrice: Int, maxPrice: Int, subcatIDs: String, isOnlyEx: String,
                               errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                               succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
@@ -27,6 +27,7 @@ class WebTasker
         finalURL.appendPathComponent("\(maxPrice)")
         finalURL.appendPathComponent("categories")
         finalURL.appendPathComponent("\(subcatIDs)")
+        finalURL.appendPathComponent(isOnlyEx)
         
         baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
