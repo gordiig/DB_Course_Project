@@ -57,7 +57,7 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
         
         dateLabel.text = formatter.string(from: item.dateAdded)
         aboutLabel.text = item.about
-        priceLabel.text = String(describing: item.price)
+        priceLabel.text = String(describing: item.price) + (item.isExchangeable ? " (ex)" : "")
         
         var phoneNum = item.phoneNumber ?? "None"
         phoneNum = item.uploaderUserName == CurrentUser.getUser.username ? CurrentUser.getUser.phoneNumber : phoneNum
