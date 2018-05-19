@@ -758,17 +758,12 @@
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                         </textField>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EIU-IM-5JV">
-                                            <rect key="frame" x="0.0" y="99" width="228" height="1"/>
+                                            <rect key="frame" x="0.0" y="131" width="228" height="1"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Zn-Yi-qNp">
-                                            <rect key="frame" x="0.0" y="390" width="228" height="1"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="menuTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0ww-yR-BQR" customClass="MenuTableView" customModule="UNIVERmag" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="139" width="212" height="243"/>
+                                            <rect key="frame" x="7" y="171" width="212" height="375"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <prototypes>
@@ -816,12 +811,23 @@
                                             <sections/>
                                         </tableView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item category:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MO-Z3-wxd">
-                                            <rect key="frame" x="51" y="108" width="127" height="23"/>
+                                            <rect key="frame" x="50" y="140" width="127" height="23"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Only exchangeable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KY9-IL-UcD">
+                                            <rect key="frame" x="8" y="77" width="146" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zXW-ZE-Tfi">
+                                            <rect key="frame" x="162" y="77" width="49" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </switch>
                                     </subviews>
                                 </view>
                                 <blurEffect style="light"/>
@@ -849,6 +855,7 @@
                         <outlet property="menuBlurView" destination="2A8-aV-Awy" id="jnK-vZ-06a"/>
                         <outlet property="menuTableView" destination="0ww-yR-BQR" id="VRg-ID-Wl0"/>
                         <outlet property="minPriceField" destination="oAf-mn-rAq" id="DT3-rS-qEu"/>
+                        <outlet property="onlyExchangeableSwitch" destination="zXW-ZE-Tfi" id="UTA-IP-VSB"/>
                         <outlet property="searchBar" destination="Pjs-Tn-R3C" id="dCP-mq-VaD"/>
                         <outlet property="tableView" destination="qSy-OY-rxJ" id="GdS-HX-hCL"/>
                     </connections>

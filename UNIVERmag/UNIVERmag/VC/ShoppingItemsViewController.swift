@@ -17,6 +17,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
     @IBOutlet weak var menuTableView: MenuTableView!
+    @IBOutlet weak var onlyExchangeableSwitch: UISwitch!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
