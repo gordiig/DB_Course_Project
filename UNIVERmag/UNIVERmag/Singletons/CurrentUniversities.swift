@@ -10,5 +10,5 @@ import Foundation
 
 class CurrentUniversities
 {
-    private(set) static var cur = [University]()
+    static var cur = [University]()
 }
