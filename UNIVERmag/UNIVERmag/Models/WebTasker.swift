@@ -185,6 +185,15 @@ class WebTasker
         baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
+    // MARK: - Get universities web task
+    func getUniversities(errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
+                         succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
+    {
+        let finalURL = baseURL.appendingPathComponent("get_universities")
+        
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
     
     // MARK: - Main function
     func baseWebTask(_ finalURL: URL, errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void, succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void )
