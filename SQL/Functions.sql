@@ -25,10 +25,25 @@ $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE FUNCTION add_to_Item_University(itemID INT, universityID INT) RETURNS VOID AS $$
+DECLARE isThere INT;
 BEGIN
 
-  INSERT INTO Item_University
+  SELECT count(*)
+  FROM Item_University
+  WHERE Item_ID = itemID
+  INTO isThere;
+
+  IF isThere = 0
+  THEN
+    INSERT INTO Item_University
     VALUES (itemID, universityID);
+
+    RETURN;
+  END IF;
+
+  UPDATE Item_University
+  SET University_ID = universityID
+  WHERE Item_ID = itemID;
 
 END;
 $$ LANGUAGE plpgsql;
@@ -81,6 +96,7 @@ DECLARE isThere INT;
 
   END;
 $$ LANGUAGE plpgsql;
+
 
 DROP FUNCTION IF EXISTS add_Item();
 CREATE OR REPLACE FUNCTION add_Item(_username VARCHAR(31), _password VARCHAR(127), _name VARCHAR(255),
