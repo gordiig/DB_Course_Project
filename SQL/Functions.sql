@@ -24,6 +24,26 @@ CREATE OR REPLACE FUNCTION add_to_User_Item(username VARCHAR(31), itemId int) RE
 $$ LANGUAGE plpgsql;
 
 
+CREATE OR REPLACE FUNCTION add_to_Item_University(itemID INT, universityID INT) RETURNS VOID AS $$
+BEGIN
+
+  INSERT INTO Item_University
+    VALUES (itemID, universityID);
+
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION add_to_User_University(username VARCHAR(31), universityID INT) RETURNS VOID AS $$
+BEGIN
+
+  INSERT INTO User_University
+    VALUES (username, universityID);
+
+END;
+$$ LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE FUNCTION add_to_Item_Subcategory(_itemId int, _subcategoryIDs int[]) RETURNS VOID AS $$
 DECLARE isThere INT;
   BEGIN
