@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController, Alertable, UITextFieldDelegate
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var submitBut: UIButton!
+    @IBOutlet weak var universityPickerView: UniversityPickerView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad()

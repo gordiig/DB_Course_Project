@@ -284,6 +284,7 @@
                         <outlet property="passwordTextField" destination="2BU-SO-CvG" id="Ek9-zT-cbb"/>
                         <outlet property="phoneTextField" destination="Mgh-6x-rni" id="oyy-08-pQH"/>
                         <outlet property="submitBut" destination="cyb-gm-FPA" id="9Hi-w4-dnX"/>
+                        <outlet property="universityPickerView" destination="1Y0-vN-fFJ" id="eTb-DF-P82"/>
                         <outlet property="usernameTextField" destination="WKg-RP-sNx" id="onU-DG-FsU"/>
                     </connections>
                 </viewController>
