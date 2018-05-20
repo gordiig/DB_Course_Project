@@ -19,7 +19,7 @@ class University: NSObject, JSONable
     {
         var id: Int
         var full_name: String
-        var short_name: String
+        var small_name: String
     }
     
     override init()
@@ -85,6 +85,6 @@ class University: NSObject, JSONable
     {
         self.ID = val.id
         self.fullName = val.full_name
-        self.shortName = val.short_name
+        self.shortName = val.small_name
     }
 }
