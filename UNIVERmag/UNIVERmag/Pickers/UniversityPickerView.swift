@@ -12,6 +12,26 @@ class UniversityPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
 {
     let curUn = CurrentUniversities.cur
     
+    
+    // MARK: - inits
+    override init(frame: CGRect)
+    {
+        super.init(frame: frame)
+        
+        self.delegate = self
+        self.dataSource = self
+    }
+    
+    required init?(coder: NSCoder)
+    {
+        super.init(coder: coder)
+        
+        self.delegate = self
+        self.dataSource = self
+    }
+    
+    
+    // MARK: - delegate
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
         return 1
