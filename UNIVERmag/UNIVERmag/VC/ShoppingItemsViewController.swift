@@ -383,7 +383,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         let deferBody: () -> Void =
         {
-            self.menuRefreshControl.endRefreshing()
+            DispatchQueue.main.async
+            {
+                self.menuRefreshControl.endRefreshing()
+            }
         }
         
         let tasker = CurrentWebTasker.tasker
