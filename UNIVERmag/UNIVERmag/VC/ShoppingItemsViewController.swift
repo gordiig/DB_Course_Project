@@ -391,7 +391,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.nextItemNumForWebTask = itemsPerPage - 1
         self.webTask(page: 1)
-        self.webTaskCat()
+//        self.webTaskCat()
     }
     
     
