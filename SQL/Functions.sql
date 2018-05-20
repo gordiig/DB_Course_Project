@@ -85,7 +85,7 @@ $$ LANGUAGE plpgsql;
 DROP FUNCTION IF EXISTS add_Item();
 CREATE OR REPLACE FUNCTION add_Item(_username VARCHAR(31), _password VARCHAR(127), _name VARCHAR(255),
                                     _price INT, _about VARCHAR(1023), _img VARCHAR(100000), _subcats INT[],
-                                    _exchangeable BOOLEAN)
+                                    _exchangeable BOOLEAN, _university INT)
 RETURNS INT AS $$
 DECLARE newID INT;
   BEGIN
@@ -100,6 +100,7 @@ DECLARE newID INT;
 
     EXECUTE add_to_User_Item(_username, newID);
     EXECUTE add_to_Item_Subcategory(newID, _subcats);
+    EXECUTE add_to_Item_University(newID, _university);
 
     RETURN 1;
 
