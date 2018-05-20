@@ -140,3 +140,22 @@ BEGIN
   RETURN 1;
 END;
 $$ LANGUAGE plpgsql;
+
+
+DROP FUNCTION IF EXISTS add_User();
+CREATE OR REPLACE FUNCTION add_User(_username VARCHAR(31), _firstName VARCHAR(63), _lastName VARCHAR(63),
+                                    _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
+                                    _city VARCHAR(63), _universityID INT)
+RETURNS INT AS $$
+DECLARE newID VARCHAR(31);
+BEGIN
+
+  INSERT INTO Users (User_Name, First_Name, Last_Name, Password, Phone_Number, Email, City)
+    VALUES (_username, _firstName, _lastName, _password, _phoneNumber, _email, _city)
+  RETURNING User_Name INTO newID;
+
+  EXECUTE add_to_User_University(newID, _universityID);
+
+  RETURN 1;
+END;
+$$ LANGUAGE plpgsql;
