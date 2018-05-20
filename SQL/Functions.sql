@@ -50,10 +50,25 @@ $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE FUNCTION add_to_User_University(username VARCHAR(31), universityID INT) RETURNS VOID AS $$
+DECLARE isThere INT;
 BEGIN
 
-  INSERT INTO User_University
+  SELECT count(*)
+  FROM User_University
+  WHERE User_Name = username
+  INTO isThere;
+
+  IF isThere = 0
+  THEN
+    INSERT INTO User_University
     VALUES (username, universityID);
+
+    RETURN;
+  END IF;
+
+  UPDATE User_University
+  SET University_ID = universityID
+  WHERE User_Name = username;
 
 END;
 $$ LANGUAGE plpgsql;
@@ -147,14 +162,12 @@ CREATE OR REPLACE FUNCTION add_User(_username VARCHAR(31), _firstName VARCHAR(63
                                     _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
                                     _city VARCHAR(63), _universityID INT)
 RETURNS INT AS $$
-DECLARE newID VARCHAR(31);
 BEGIN
 
   INSERT INTO Users (User_Name, First_Name, Last_Name, Password, Phone_Number, Email, City)
-    VALUES (_username, _firstName, _lastName, _password, _phoneNumber, _email, _city)
-  RETURNING User_Name INTO newID;
+    VALUES (_username, _firstName, _lastName, _password, _phoneNumber, _email, _city;
 
-  EXECUTE add_to_User_University(newID, _universityID);
+  EXECUTE add_to_User_University(_username, _universityID);
 
   RETURN 1;
 END;
@@ -166,7 +179,6 @@ CREATE OR REPLACE FUNCTION edit_User(_username VARCHAR(31), _firstName VARCHAR(6
                                     _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
                                     _city VARCHAR(63), _universityID INT)
 RETURNS INT AS $$
-DECLARE newID VARCHAR(31);
 BEGIN
 
   UPDATE Users
