@@ -107,11 +107,11 @@ class WebTasker
     
     // MARK: - Update user info web task
     func updateUserInfoWebTask(username: String, password: String, firstName: String, lastName: String, newPassword: String, phone: String, email: String,
-                               city: String,
+                               city: String, unID: Int,
                                errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                                succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(firstName)&\(lastName)&\(newPassword)&\(phone)&\(email)&\(city)"
+        let lastComponent = "\(firstName)&\(lastName)&\(newPassword)&\(phone)&\(email)&\(city)&\(unID)"
         var finalURL = baseURL.appendingPathComponent("update_user_info")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
