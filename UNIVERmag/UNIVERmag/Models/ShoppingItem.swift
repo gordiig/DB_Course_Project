@@ -21,6 +21,7 @@ class ShoppingItem: NSObject, JSONable
     var phoneNumber: String?
     var isSold: Bool = false
     var isExchangeable: Bool = false
+    var universityID: Int = 1
     
     private struct ShoppingItemStruct: Codable
     {
@@ -36,6 +37,7 @@ class ShoppingItem: NSObject, JSONable
         var phone_number: String?
         var is_sold: Bool
         var is_exchangeable: Bool
+        var university_id: Int
     }
     
     
@@ -117,6 +119,7 @@ class ShoppingItem: NSObject, JSONable
         self.phoneNumber = val.phone_number
         self.isSold = val.is_sold
         self.isExchangeable = val.is_exchangeable
+        self.universityID = val.university_id
         
         self.img = val.image
         if self.img == "NULL" || self.img == "null" || self.img == ""
