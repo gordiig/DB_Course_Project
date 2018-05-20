@@ -199,11 +199,22 @@ $$ LANGUAGE plpgsql;
 
 --------------------------------------------------------------------------------------------------------------
 DROP FUNCTION IF EXISTS edit_User();
-CREATE OR REPLACE FUNCTION edit_User(_username VARCHAR(31), _firstName VARCHAR(63), _lastName VARCHAR(63),
-                                    _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
-                                    _city VARCHAR(63), _universityID INT)
+CREATE OR REPLACE FUNCTION edit_User(_firstName VARCHAR(63), _lastName VARCHAR(63), _password VARCHAR(127),
+                                      _phoneNumber VARCHAR(63), _email VARCHAR(127), _city VARCHAR(63),
+                                      _universityID INT, _username VARCHAR(31), _curPassword VARCHAR(127))
 RETURNS INT AS $$
+DECLARE isIn INT;
 BEGIN
+
+  SELECT count(*)
+  FROM Users
+  WHERE User_Name = _username AND Password = _curPassword
+  INTO isIn;
+
+  IF isIn != 1
+  THEN
+    RETURN 0;
+  END IF;
 
   UPDATE Users
   SET First_Name = _firstName, Last_Name = _lastName, Password = _password, Phone_Number = _phoneNumber,
