@@ -515,13 +515,13 @@
         <!--Edit-->
         <scene sceneID="Wlr-4o-fnU">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="aky-Vh-zvd" customClass="EditUserInfoViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aky-Vh-zvd" customClass="EditUserInfoViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kcb-pR-WPk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="825"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7we-It-WtT">
-                                <rect key="frame" x="0.0" y="64" width="375" height="761"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="712"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0aZ-uv-CVq" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="825"/>
