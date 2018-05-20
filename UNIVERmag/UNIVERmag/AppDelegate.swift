@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        universitiesWebTask()
+        
         let defaults = UserDefaults.standard
         let username = defaults.object(forKey: "Username") as? String
         let password = defaults.object(forKey: "Password") as? String
@@ -157,6 +159,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initialVC = storyboard.instantiateViewController(withIdentifier: "LogInNavigationController")
         self.window?.rootViewController = initialVC
         self.window?.makeKeyAndVisible()
+    }
+    
+    
+    func universitiesWebTask()
+    {
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
+            {
+                print("Error on getting universities")
+            }
+        }
+        
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                print("Error in downloaded data!\n")
+            }
+        }
+        
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
+            {
+                DispatchQueue.main.async
+                {
+                    guard let newUn = University.universitiesFactory(fromData: data) else
+                    {
+                        print("Error on decoding universities")
+                        return
+                    }
+                    CurrentUniversities.cur = newUn
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    print("Error in getting universities!")
+                }
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.getUniversities(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
     }
 
     
