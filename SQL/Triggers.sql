@@ -122,3 +122,22 @@ CREATE TRIGGER Subcategories_Delete_All
   BEFORE DELETE ON Subcategories FOR EACH ROW
     EXECUTE PROCEDURE func_for_delete_from_subcategories_trigger();
 ---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION func_for_delete_from_universities_trigger() RETURNS TRIGGER AS $$
+BEGIN
+
+  DELETE FROM Item_University
+  WHERE University_ID = OLD.ID;
+
+  DELETE FROM User_University
+  WHERE University_ID = OLD.ID;
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Universities_Delete_All
+  BEFORE DELETE ON Universities FOR EACH ROW
+    EXECUTE PROCEDURE func_for_delete_from_universities_trigger();
+---------------------------------------------------------------------------------------------------------------
