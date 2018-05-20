@@ -339,7 +339,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         phoneLabel.text = user.phoneNumber
         cityLabel.text = user.city
         dateLabel.text = formatter.string(from: user.dateOfRegistration)
-        universityLabel.text = CurrentUniversities.getUniversityByID(user.universityID)?.fullName
+        universityLabel.text = CurrentUniversities.getUniversityByID(user.universityID)?.shortName
         
         self.setPic(base64: user.img)
     }
