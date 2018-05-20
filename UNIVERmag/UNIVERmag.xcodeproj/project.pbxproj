@@ -39,6 +39,8 @@
 		13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F2206C0A4B00446339 /* JSONable.swift */; };
 		13DD0C7E209E052800F21435 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C7D209E052800F21435 /* Money.swift */; };
 		13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */; };
+		13F3D99B20B1F7F5008F8A4F /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F3D99A20B1F7F5008F8A4F /* University.swift */; };
+		13F3D99D20B1FB28008F8A4F /* CurrentUniversities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F3D99C20B1FB28008F8A4F /* CurrentUniversities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		13DCB6F2206C0A4B00446339 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		13DD0C7D209E052800F21435 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleToIntegers.swift; sourceTree = "<group>"; };
+		13F3D99A20B1F7F5008F8A4F /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
+		13F3D99C20B1FB28008F8A4F /* CurrentUniversities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUniversities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 			children = (
 				13C0F0F2206912DC00CC5084 /* User.swift */,
 				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
+				13F3D99A20B1F7F5008F8A4F /* University.swift */,
 				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
 				13DD0C7D209E052800F21435 /* Money.swift */,
 				131068C820A057EC0080B4C8 /* WebTasker.swift */,
@@ -133,6 +138,7 @@
 				1369B0172069322B00B480D2 /* CurrentUser.swift */,
 				13CEF8A820A037B000A6442B /* CurrentCategories.swift */,
 				131068CB20A076090080B4C8 /* CurrentWebTasker.swift */,
+				13F3D99C20B1FB28008F8A4F /* CurrentUniversities.swift */,
 			);
 			path = Singletons;
 			sourceTree = "<group>";
@@ -306,10 +312,12 @@
 				13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */,
 				131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */,
 				1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */,
+				13F3D99D20B1FB28008F8A4F /* CurrentUniversities.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
 				13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */,
 				1390BC62209E36F700831E01 /* SubcategoryTableViewCell.swift in Sources */,
 				13C0F0F3206912DC00CC5084 /* User.swift in Sources */,
+				13F3D99B20B1F7F5008F8A4F /* University.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
