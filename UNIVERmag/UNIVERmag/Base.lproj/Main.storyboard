@@ -912,11 +912,11 @@
             <objects>
                 <viewController restorationIdentifier="AddItemViewController" storyboardIdentifier="AddItemViewController" title="Upload item" id="md8-c6-jJn" customClass="AddItemViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="65l-1t-Zon">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1050"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GlX-Iu-0bW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="987"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="937"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2z-yu-uLj">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
@@ -1110,7 +1110,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Q2R-XY-jEa"/>
                     </view>
-                    <size key="freeformSize" width="375" height="1100"/>
+                    <size key="freeformSize" width="375" height="1050"/>
                     <connections>
                         <outlet property="aboutTextField" destination="apZ-mh-0Wq" id="fHS-Sc-pdK"/>
                         <outlet property="bottomConstraint" destination="6fW-Fj-mKl" id="Tj6-gu-dA0"/>
