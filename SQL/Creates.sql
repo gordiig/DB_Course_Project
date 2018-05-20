@@ -47,7 +47,8 @@ CREATE TABLE Users
 CREATE TABLE Universities
 (
   ID SERIAL PRIMARY KEY,
-  Name VARCHAR(127) NOT NULL
+  Full_Name VARCHAR(127) NOT NULL,
+  Small_Name VARCHAR(32)
 );
 
   -- Connections
