@@ -297,14 +297,14 @@
             <objects>
                 <viewController restorationIdentifier="UserInfoVC" storyboardIdentifier="UserInfoVC" id="IHW-mT-cKW" customClass="UserInfoViewController" customModule="UNIVERmag" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gyo-2N-wrE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="780"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kud-qZ-MK2">
-                                <rect key="frame" x="0.0" y="64" width="375" height="617"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqn-kb-Z0K">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="780"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rzhekich" translatesAutoresizingMaskIntoConstraints="NO" id="x8Y-QU-3An">
                                                 <rect key="frame" x="67" y="0.0" width="240" height="240"/>
@@ -401,22 +401,28 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="University" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmC-7i-cKd">
+                                                <rect key="frame" x="8" y="529" width="159" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="University" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7S2-el-sJ5">
+                                                <rect key="frame" x="175" y="529" width="192" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQX-hQ-SlJ">
-                                                <rect key="frame" x="103" y="567" width="168" height="30"/>
+                                                <rect key="frame" x="103" y="617" width="168" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Log out">
                                                     <color key="titleColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="logOutButPressed:" destination="IHW-mT-cKW" eventType="touchUpInside" id="tiu-uL-7DH"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3d-3f-f6R">
-                                                <rect key="frame" x="103" y="529" width="168" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Edit profile"/>
-                                                <connections>
-                                                    <segue destination="aky-Vh-zvd" kind="show" id="qyr-Ac-dZt"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ERo-AN-pKj">
@@ -437,11 +443,19 @@
                                                 <color key="color" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </activityIndicatorView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuG-Zs-HA9">
-                                                <rect key="frame" x="67" y="529" width="240" height="30"/>
+                                                <rect key="frame" x="67" y="579" width="240" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Show all user's items"/>
                                                 <connections>
                                                     <action selector="showAllButPressed:" destination="IHW-mT-cKW" eventType="touchUpInside" id="i8x-G9-Pli"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3d-3f-f6R">
+                                                <rect key="frame" x="103" y="579" width="168" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Edit profile"/>
+                                                <connections>
+                                                    <segue destination="aky-Vh-zvd" kind="show" id="qyr-Ac-dZt"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -475,7 +489,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <size key="freeformSize" width="375" height="730"/>
+                    <size key="freeformSize" width="375" height="780"/>
                     <connections>
                         <outlet property="activityIndicator" destination="0QX-Ih-nTq" id="0ek-sy-Nfb"/>
                         <outlet property="changePhotoBut" destination="ERo-AN-pKj" id="Cgp-Jb-DL4"/>
@@ -489,6 +503,7 @@
                         <outlet property="phoneLabel" destination="tCp-OF-PEQ" id="IBN-y5-Ipe"/>
                         <outlet property="refreshBut" destination="1z1-VW-B6u" id="it9-gk-suW"/>
                         <outlet property="showAllBut" destination="vuG-Zs-HA9" id="9zw-oB-s6x"/>
+                        <outlet property="universityLabel" destination="7S2-el-sJ5" id="suw-g7-NfM"/>
                         <outlet property="userImage" destination="x8Y-QU-3An" id="T7q-8a-x2e"/>
                         <outlet property="usernameLabel" destination="Ec2-3O-WaZ" id="Qqx-ng-cvf"/>
                     </connections>

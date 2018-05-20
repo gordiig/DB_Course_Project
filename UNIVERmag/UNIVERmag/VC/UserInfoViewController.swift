@@ -19,6 +19,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var universityLabel: UILabel!
     @IBOutlet weak var changePhotoBut: UIButton!
     @IBOutlet weak var editProfileBut: UIButton!
     @IBOutlet weak var logOutBut: UIButton!
@@ -337,6 +338,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         phoneLabel.text = user.phoneNumber
         cityLabel.text = user.city
         dateLabel.text = formatter.string(from: user.dateOfRegistration)
+        universityLabel.text = CurrentUniversities.cur[user.universityID-1].fullName
         
         self.setPic(base64: user.img)
     }
