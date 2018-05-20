@@ -1,3 +1,4 @@
+--------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION add_to_Category_Subcategory(category_ VARCHAR(255), subcategoryName VARCHAR(255)) RETURNS VOID AS $$
   BEGIN
 
@@ -12,8 +13,9 @@ CREATE OR REPLACE FUNCTION add_to_Category_Subcategory(category_ VARCHAR(255), s
 
   END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
-
+--------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION add_to_User_Item(username VARCHAR(31), itemId int) RETURNS VOID AS $$
   BEGIN
 
@@ -22,8 +24,9 @@ CREATE OR REPLACE FUNCTION add_to_User_Item(username VARCHAR(31), itemId int) RE
 
   END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
-
+--------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION add_to_Item_University(itemID INT, universityID INT) RETURNS VOID AS $$
 DECLARE isThere INT;
 BEGIN
@@ -47,8 +50,9 @@ BEGIN
 
 END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
-
+--------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION add_to_User_University(username VARCHAR(31), universityID INT) RETURNS VOID AS $$
 DECLARE isThere INT;
 BEGIN
@@ -72,8 +76,9 @@ BEGIN
 
 END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
-
+--------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION add_to_Item_Subcategory(_itemId int, _subcategoryIDs int[]) RETURNS VOID AS $$
 DECLARE isThere INT;
   BEGIN
@@ -111,8 +116,10 @@ DECLARE isThere INT;
 
   END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
 
+--------------------------------------------------------------------------------------------------------------
 DROP FUNCTION IF EXISTS add_Item();
 CREATE OR REPLACE FUNCTION add_Item(_username VARCHAR(31), _password VARCHAR(127), _name VARCHAR(255),
                                     _price INT, _about VARCHAR(1023), _img VARCHAR(100000), _subcats INT[],
@@ -137,8 +144,10 @@ DECLARE newID INT;
 
   END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
 
+--------------------------------------------------------------------------------------------------------------
 DROP FUNCTION IF EXISTS edit_Item();
 CREATE OR REPLACE FUNCTION edit_Item(_ID INT, _name VARCHAR(255), _price INT, _about VARCHAR(1023),
                                      _subcats INT[], _isSold BOOLEAN, _isEx BOOLEAN, _universityID INT)
@@ -155,8 +164,10 @@ BEGIN
   RETURN 1;
 END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
 
+--------------------------------------------------------------------------------------------------------------
 DROP FUNCTION IF EXISTS add_User();
 CREATE OR REPLACE FUNCTION add_User(_username VARCHAR(31), _firstName VARCHAR(63), _lastName VARCHAR(63),
                                     _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
@@ -172,8 +183,10 @@ BEGIN
   RETURN 1;
 END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
 
 
+--------------------------------------------------------------------------------------------------------------
 DROP FUNCTION IF EXISTS edit_User();
 CREATE OR REPLACE FUNCTION edit_User(_username VARCHAR(31), _firstName VARCHAR(63), _lastName VARCHAR(63),
                                     _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
@@ -191,3 +204,4 @@ BEGIN
   RETURN 1;
 END;
 $$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------
