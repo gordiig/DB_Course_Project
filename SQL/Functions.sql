@@ -126,7 +126,7 @@ $$ LANGUAGE plpgsql;
 
 DROP FUNCTION IF EXISTS edit_Item();
 CREATE OR REPLACE FUNCTION edit_Item(_ID INT, _name VARCHAR(255), _price INT, _about VARCHAR(1023),
-                                     _subcats INT[], _isSold BOOLEAN, _isEx BOOLEAN)
+                                     _subcats INT[], _isSold BOOLEAN, _isEx BOOLEAN, _universityID INT)
 RETURNS INT AS $$
 BEGIN
 
@@ -135,6 +135,7 @@ BEGIN
   WHERE ID = _id;
 
   EXECUTE add_to_Item_Subcategory(_ID, _subcats);
+  EXECUTE add_to_Item_University(_ID, _universityID);
 
   RETURN 1;
 END;
