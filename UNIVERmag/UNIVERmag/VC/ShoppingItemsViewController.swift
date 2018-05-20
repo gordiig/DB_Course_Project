@@ -26,6 +26,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
+    private let menuRefreshControl = UIRefreshControl()
     private var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
     private var panRecognizer: UIPanGestureRecognizer!
     private var categoriesForFilter = [Int]()
@@ -42,6 +43,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         
         menuTableView.alertDelegate = self
+        menuRefreshControl.addTarget(self, action: #selector(webTaskCat), for: .valueChanged)
+        menuTableView.refreshControl = menuRefreshControl
         
         maxPriceField.delegate = self
         minPriceField.delegate = self
@@ -338,7 +341,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
-    func webTaskCat()
+    @objc func webTaskCat()
     {
         let errorHandler: (Error?) -> Void =
         { (error) in
@@ -378,8 +381,13 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
+        let deferBody: () -> Void =
+        {
+            self.menuRefreshControl.endRefreshing()
+        }
+        
         let tasker = CurrentWebTasker.tasker
-        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Refresh
