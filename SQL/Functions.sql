@@ -159,3 +159,23 @@ BEGIN
   RETURN 1;
 END;
 $$ LANGUAGE plpgsql;
+
+
+DROP FUNCTION IF EXISTS edit_User();
+CREATE OR REPLACE FUNCTION edit_User(_username VARCHAR(31), _firstName VARCHAR(63), _lastName VARCHAR(63),
+                                    _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
+                                    _city VARCHAR(63), _universityID INT)
+RETURNS INT AS $$
+DECLARE newID VARCHAR(31);
+BEGIN
+
+  UPDATE Users
+  SET First_Name = _firstName, Last_Name = _lastName, Password = _password, Phone_Number = _phoneNumber,
+    Email = _email, City = _city
+  WHERE User_Name = _username;
+
+  EXECUTE add_to_User_University(_username, _universityID);
+
+  RETURN 1;
+END;
+$$ LANGUAGE plpgsql;
