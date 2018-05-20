@@ -131,6 +131,9 @@ class SignUpViewController: UIViewController, Alertable, UITextFieldDelegate
         let firstName = firstNameTextField.text ?? "NULL"
         let lastName = lastNameTextField.text ?? "NULL"
         
+        let unNum = universityPickerView.selectedRow(inComponent: 0)
+        let unID = CurrentUniversities.cur[unNum].ID
+        
         let errorHandler: (Error?) -> Void =
         { (error) in
             DispatchQueue.main.async
@@ -181,7 +184,7 @@ class SignUpViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.signUpWebTask(username: username, firstName: firstName, lastName: lastName, password: password, phoneNumber: phoneNumber, email: email, city: city, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.signUpWebTask(username: username, firstName: firstName, lastName: lastName, password: password, phoneNumber: phoneNumber, email: email, city: city, unID: unID, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
     }
     
     
