@@ -44,6 +44,12 @@ CREATE TABLE Users
   City VARCHAR(63) NOT NULL
 );
 
+CREATE TABLE Universities
+(
+  ID SERIAL PRIMARY KEY,
+  Name VARCHAR(127) NOT NULL
+);
+
   -- Connections
 CREATE TABLE Item_User
 (
@@ -61,4 +67,16 @@ CREATE TABLE Subcategory_Category
 (
   Subcategory_ID INT PRIMARY KEY REFERENCES Subcategories(ID),
   Category_Name VARCHAR(255) REFERENCES Categories(Name)
+);
+
+CREATE TABLE User_University
+(
+  User_Name VARCHAR(31) REFERENCES Users(User_Name),
+  University_ID INT REFERENCES Universities(ID)
+);
+
+CREATE TABLE Item_University
+(
+  Item_ID INT PRIMARY KEY REFERENCES Items(ID),
+  University_ID INT REFERENCES Universities(ID)
 );
