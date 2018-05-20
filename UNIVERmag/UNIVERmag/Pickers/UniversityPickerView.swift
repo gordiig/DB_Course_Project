@@ -46,4 +46,20 @@ class UniversityPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
     {
         return curUn[row].fullName
     }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
+    {
+        var label = view as? UILabel
+        
+        if label == nil
+        {
+            label = UILabel()
+            label?.font = UIFont(descriptor: UIFontDescriptor(name: "Helvetica", size: 12), size: 12)
+            label?.textAlignment = .center
+        }
+        
+        label?.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+        
+        return label!
+    }
 }
