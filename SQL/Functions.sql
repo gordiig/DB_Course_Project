@@ -173,7 +173,18 @@ CREATE OR REPLACE FUNCTION add_User(_username VARCHAR(31), _firstName VARCHAR(63
                                     _password VARCHAR(127), _phoneNumber VARCHAR(63), _email VARCHAR(127),
                                     _city VARCHAR(63), _universityID INT)
 RETURNS INT AS $$
+DECLARE isIn INT;
 BEGIN
+
+  SELECT count(*)
+  FROM Users
+  WHERE User_Name = _username
+  INTO isIn;
+
+  IF isIn > 0
+  THEN
+    RETURN 0;
+  END IF;
 
   INSERT INTO Users (User_Name, First_Name, Last_Name, Password, Phone_Number, Email, City)
     VALUES (_username, _firstName, _lastName, _password, _phoneNumber, _email, _city);
