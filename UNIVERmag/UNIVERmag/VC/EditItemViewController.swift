@@ -20,6 +20,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     @IBOutlet weak var submitBut: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var exchangeSwitch: UISwitch!
+    @IBOutlet weak var universityPickerView: UniversityPickerView!
     
     override func viewDidLoad()
     {
@@ -161,6 +162,8 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let isSold = soldSwitch.isOn ? "Sold" : "NotSold"
+        let unNum = universityPickerView.selectedRow(inComponent: 0)
+        let unID = CurrentUniversities.cur[unNum].ID
         
         let errorHandler: (Error?) -> Void =
         { (error) in
@@ -201,7 +204,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, isSold: isSold, isExchangeable: isExchangeable, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, isSold: isSold, isExchangeable: isExchangeable, unID: unID, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
         
     }
     
