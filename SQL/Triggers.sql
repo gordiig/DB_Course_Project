@@ -54,6 +54,7 @@ BEGIN
 
   DELETE FROM Item_Subcategory WHERE Item_Subcategory.Item_ID = OLD.ID;
   DELETE FROM Item_User WHERE Item_User.Item_ID = OLD.ID;
+  DELETE FROM Item_University WHERE Item_University.Item_ID = OLD.ID;
 
   RETURN OLD;
 END;
