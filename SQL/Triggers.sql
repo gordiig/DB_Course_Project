@@ -65,6 +65,7 @@ CREATE TRIGGER item_delete_all_info
 ---------------------------------------------------------------------------------------------------------------
 
  ---------------------------------------------------------------------------------------------------------------
+DROP FUNCTION IF EXISTS func_for_delete_from_users_trigger();
 CREATE OR REPLACE FUNCTION func_for_delete_from_users_trigger() RETURNS TRIGGER AS $$
  DECLARE _User_Name VARCHAR(255);
 BEGIN
@@ -83,6 +84,10 @@ BEGIN
   DELETE
   FROM Item_User
   WHERE Item_User.User_name = old.User_name;
+
+  DELETE
+  FROM User_University
+  WHERE User_Name = OLD.User_Name;
 
   RETURN OLD;
 END;
