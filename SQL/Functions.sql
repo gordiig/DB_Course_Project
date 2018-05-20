@@ -176,7 +176,7 @@ RETURNS INT AS $$
 BEGIN
 
   INSERT INTO Users (User_Name, First_Name, Last_Name, Password, Phone_Number, Email, City)
-    VALUES (_username, _firstName, _lastName, _password, _phoneNumber, _email, _city;
+    VALUES (_username, _firstName, _lastName, _password, _phoneNumber, _email, _city);
 
   EXECUTE add_to_User_University(_username, _universityID);
 
