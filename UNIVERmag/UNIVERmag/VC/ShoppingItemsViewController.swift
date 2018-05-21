@@ -121,7 +121,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     func menuDidDissapear()
     {
         tableView.isUserInteractionEnabled = true
-        addBut.isEnabled = true
+        if !(CurrentUser.getUser is LookingUser)
+        {
+            addBut.isEnabled = true
+        }
     }
     
     

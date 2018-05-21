@@ -10,12 +10,14 @@ import UIKit
 
 class MyItemsViewController: UserItemsViewController
 {
-
+    @IBOutlet weak var addBut: UIBarButtonItem!
+    
     override func viewDidLoad()
     {
         user = CurrentUser.getUser
         if user is LookingUser
         {
+            addBut.isEnabled = false
             self.showAlert(withString: "You are not registered!")
             return
         }

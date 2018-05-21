@@ -1648,6 +1648,7 @@ Unicode: U+1F440, UTF-8: F0 9F 91 80</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBut" destination="EZ1-s6-lT6" id="QRB-iU-wKx"/>
                         <outlet property="searchBar" destination="DJM-9e-Q1v" id="30N-cS-INA"/>
                         <outlet property="tableView" destination="hSu-rm-Sht" id="6eL-Gt-mId"/>
                     </connections>
@@ -1818,7 +1819,7 @@ Unicode: U+1F440, UTF-8: F0 9F 91 80</string>
         <image name="rzhekich" width="320" height="267"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="D1b-49-uOn"/>
-        <segue reference="Kyz-DN-Typ"/>
+        <segue reference="sKS-tW-d9C"/>
+        <segue reference="gWh-74-0TQ"/>
     </inferredMetricsTieBreakers>
 </document>
