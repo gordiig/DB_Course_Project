@@ -18,6 +18,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
     @IBOutlet weak var menuTableView: MenuTableView!
     @IBOutlet weak var onlyExchangeableSwitch: UISwitch!
+    @IBOutlet weak var searchSegmentControl: UISegmentedControl!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
@@ -26,6 +27,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
+    private let menuRefreshControl = UIRefreshControl()
     private var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
     private var panRecognizer: UIPanGestureRecognizer!
     private var categoriesForFilter = [Int]()
@@ -42,6 +44,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         
         menuTableView.alertDelegate = self
+        menuRefreshControl.addTarget(self, action: #selector(webTaskCat), for: .valueChanged)
+        menuTableView.refreshControl = menuRefreshControl
         
         maxPriceField.delegate = self
         minPriceField.delegate = self
@@ -243,6 +247,21 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             maxPrice = mon.toCents()
         }
         
+        var searchField = ""
+        let segment = searchSegmentControl.selectedSegmentIndex
+        switch segment
+        {
+        case 0:
+            searchField = "item_name"
+        case 1:
+            searchField = "user_name"
+        case 2:
+            searchField = "university_name"
+        default:
+            self.showAlert(withString: "Wrong segment was chosen!")
+            return
+        }
+        
         var subcatIDs = ""
         let oneLayer = categoriesArr.inOneLayer
         let selectedSubcats = menuTableView.selectedSubcats
@@ -335,10 +354,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.shoppingItemsWebTask(page: page, whatToSearch: searchField, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
-    func webTaskCat()
+    @objc func webTaskCat()
     {
         let errorHandler: (Error?) -> Void =
         { (error) in
@@ -378,8 +397,16 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.menuRefreshControl.endRefreshing()
+            }
+        }
+        
         let tasker = CurrentWebTasker.tasker
-        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Refresh
@@ -391,7 +418,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.nextItemNumForWebTask = itemsPerPage - 1
         self.webTask(page: 1)
-        self.webTaskCat()
+//        self.webTaskCat()
     }
     
     

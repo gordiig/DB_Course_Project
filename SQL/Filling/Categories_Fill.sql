@@ -2,73 +2,77 @@ DELETE FROM Categories;
 DELETE FROM Subcategories;
 
 INSERT INTO Categories VALUES
-  ('Items for study'),
-  ('Transport'),
-  ('Services'),
-  ('Clothes'),
-  ('Food'),
-  ('Items for home'),
-  ('Electronics'),
-  ('Hobby');
+  ('Товары для учебы'),
+  ('Транспорт'),
+  ('Услуги'),
+  ('Одежда'),
+  ('Еда'),
+  ('Товары для дома'),
+  ('Электроника'),
+  ('Хобби');
 
-SELECT add_to_Category_Subcategory('Items for study', 'Stationery');
-SELECT add_to_Category_Subcategory('Items for study', 'Electronics');
-SELECT add_to_Category_Subcategory('Items for study', 'Clothes');
-SELECT add_to_Category_Subcategory('Items for study', 'Misc');
+SELECT add_to_Category_Subcategory('Товары для учебы', 'Канцтовары');
+SELECT add_to_Category_Subcategory('Товары для учебы', 'Электроника');
+SELECT add_to_Category_Subcategory('Товары для учебы', 'Одежда');
+SELECT add_to_Category_Subcategory('Товары для учебы', 'Остальное');
 
-SELECT add_to_Category_Subcategory('Transport', 'Cars');
-SELECT add_to_Category_Subcategory('Transport', 'Motorbikes');
-SELECT add_to_Category_Subcategory('Transport', 'Bikes');
-SELECT add_to_Category_Subcategory('Transport', 'Skateboards');
-SELECT add_to_Category_Subcategory('Transport', 'E-transport');
-SELECT add_to_Category_Subcategory('Transport', 'Spare parts');
-SELECT add_to_Category_Subcategory('Transport', 'Tools');
-SELECT add_to_Category_Subcategory('Transport', 'Misc');
+SELECT add_to_Category_Subcategory('Транспорт', 'Машины');
+SELECT add_to_Category_Subcategory('Транспорт', 'Мотоциклы');
+SELECT add_to_Category_Subcategory('Транспорт', 'Велосипеды');
+SELECT add_to_Category_Subcategory('Транспорт', 'Скейтборды');
+SELECT add_to_Category_Subcategory('Транспорт', 'Електрический транспорт');
+SELECT add_to_Category_Subcategory('Транспорт', 'Запчасти');
+SELECT add_to_Category_Subcategory('Транспорт', 'Инструменты');
+SELECT add_to_Category_Subcategory('Транспорт', 'Остальное');
 
-SELECT add_to_Category_Subcategory('Clothes', 'T-shirts');
-SELECT add_to_Category_Subcategory('Clothes', 'Jeans');
-SELECT add_to_Category_Subcategory('Clothes', 'Pants');
-SELECT add_to_Category_Subcategory('Clothes', 'Shoes');
-SELECT add_to_Category_Subcategory('Clothes', 'Sneakers');
-SELECT add_to_Category_Subcategory('Clothes', 'Hats');
-SELECT add_to_Category_Subcategory('Clothes', 'Socks');
-SELECT add_to_Category_Subcategory('Clothes', 'Sport wear');
-SELECT add_to_Category_Subcategory('Clothes', 'Accessories');
-SELECT add_to_Category_Subcategory('Clothes', 'Misc');
+SELECT add_to_Category_Subcategory('Одежда', 'Футболки');
+SELECT add_to_Category_Subcategory('Одежда', 'Джинсы');
+SELECT add_to_Category_Subcategory('Одежда', 'Брюки');
+SELECT add_to_Category_Subcategory('Одежда', 'Обувь');
+SELECT add_to_Category_Subcategory('Одежда', 'Кроссовки');
+SELECT add_to_Category_Subcategory('Одежда', 'Головные уборы');
+SELECT add_to_Category_Subcategory('Одежда', 'Носки');
+SELECT add_to_Category_Subcategory('Одежда', 'Спортивная одежда');
+SELECT add_to_Category_Subcategory('Одежда', 'Аксессуары');
+SELECT add_to_Category_Subcategory('Одежда', 'Остальное');
 
-SELECT add_to_Category_Subcategory('Services', 'Cleaning');
-SELECT add_to_Category_Subcategory('Services', 'Repairing');
-SELECT add_to_Category_Subcategory('Services', 'Cooking');
-SELECT add_to_Category_Subcategory('Services', 'Solving');
-SELECT add_to_Category_Subcategory('Services', 'Misc');
+SELECT add_to_Category_Subcategory('Услуги', 'Уборка');
+SELECT add_to_Category_Subcategory('Услуги', 'Починка');
+SELECT add_to_Category_Subcategory('Услуги', 'Готовка');
+SELECT add_to_Category_Subcategory('Услуги', 'Решения');
+SELECT add_to_Category_Subcategory('Услуги', 'Остальное');
 
-SELECT add_to_Category_Subcategory('Food', 'Fruits');
-SELECT add_to_Category_Subcategory('Food', 'Vegetables');
-SELECT add_to_Category_Subcategory('Food', 'Meat');
-SELECT add_to_Category_Subcategory('Food', 'Fish');
-SELECT add_to_Category_Subcategory('Food', 'Noodles');
-SELECT add_to_Category_Subcategory('Food', 'Ready');
-SELECT add_to_Category_Subcategory('Food', 'Snacks');
-SELECT add_to_Category_Subcategory('Food', 'Expired');
-SELECT add_to_Category_Subcategory('Food', 'Misc');
+SELECT add_to_Category_Subcategory('Еда', 'Фрукты');
+SELECT add_to_Category_Subcategory('Еда', 'Овощи');
+SELECT add_to_Category_Subcategory('Еда', 'Мясо');
+SELECT add_to_Category_Subcategory('Еда', 'Рыба');
+SELECT add_to_Category_Subcategory('Еда', 'Макароны');
+SELECT add_to_Category_Subcategory('Еда', 'Готовая еда');
+SELECT add_to_Category_Subcategory('Еда', 'Снеки');
+SELECT add_to_Category_Subcategory('Еда', 'Просрочка');
+SELECT add_to_Category_Subcategory('Еда', 'Остальное');
 
-SELECT add_to_Category_Subcategory('Items for home', 'Electronics');
-SELECT add_to_Category_Subcategory('Items for home', 'Furniture');
-SELECT add_to_Category_Subcategory('Items for home', 'Tools');
-SELECT add_to_Category_Subcategory('Items for home', 'Misc');
+SELECT add_to_Category_Subcategory('Товары для дома', 'Электроника');
+SELECT add_to_Category_Subcategory('Товары для дома', 'Мебель');
+SELECT add_to_Category_Subcategory('Товары для дома', 'Инструменты');
+SELECT add_to_Category_Subcategory('Товары для дома', 'Остальное');
 
-SELECT add_to_Category_Subcategory('Electronics', 'Phones');
-SELECT add_to_Category_Subcategory('Electronics', 'Tablets');
-SELECT add_to_Category_Subcategory('Electronics', 'Items for gadgets');
-SELECT add_to_Category_Subcategory('Electronics', 'PCs');
-SELECT add_to_Category_Subcategory('Electronics', 'Laptops');
-SELECT add_to_Category_Subcategory('Electronics', 'Items for computer');
-SELECT add_to_Category_Subcategory('Electronics', 'Audio/Video');
-SELECT add_to_Category_Subcategory('Electronics', 'Misc');
+SELECT add_to_Category_Subcategory('Электроника', 'Телефоны');
+SELECT add_to_Category_Subcategory('Электроника', 'Планшеты');
+SELECT add_to_Category_Subcategory('Электроника', 'Товары для гаджетов');
+SELECT add_to_Category_Subcategory('Электроника', 'Настольные компьютеры');
+SELECT add_to_Category_Subcategory('Электроника', 'Ноутбуки');
+SELECT add_to_Category_Subcategory('Электроника', 'Товары для компьютеров');
+SELECT add_to_Category_Subcategory('Электроника', 'Аудио/Видео');
+SELECT add_to_Category_Subcategory('Электроника', 'Остальное');
 
-SELECT add_to_Category_Subcategory('Hobby', 'Radioparts');
-SELECT add_to_Category_Subcategory('Hobby', 'Fishing');
-SELECT add_to_Category_Subcategory('Hobby', 'Books');
-SELECT add_to_Category_Subcategory('Hobby', 'Sport');
-SELECT add_to_Category_Subcategory('Hobby', 'Music');
-SELECT add_to_Category_Subcategory('Hobby', 'Misc');
+SELECT add_to_Category_Subcategory('Хобби', 'Радиодетали');
+SELECT add_to_Category_Subcategory('Хобби', 'Рыбалка');
+SELECT add_to_Category_Subcategory('Хобби', 'Книги');
+SELECT add_to_Category_Subcategory('Хобби', 'Спорт');
+SELECT add_to_Category_Subcategory('Хобби', 'Музыка');
+SELECT add_to_Category_Subcategory('Хобби', 'Остальное');
+
+
+SELECT *
+FROM Subcategories S1 JOIN Subcategory_Category S2 ON S1.ID = S2.Subcategory_ID;

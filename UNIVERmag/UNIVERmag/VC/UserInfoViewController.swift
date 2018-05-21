@@ -19,6 +19,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var universityLabel: UILabel!
     @IBOutlet weak var changePhotoBut: UIButton!
     @IBOutlet weak var editProfileBut: UIButton!
     @IBOutlet weak var logOutBut: UIButton!
@@ -277,6 +278,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                     self.user.firstName = tmpUser.firstName
                     self.user.lastName = tmpUser.lastName
                     self.user.phoneNumber = tmpUser.phoneNumber
+                    self.user.universityID = tmpUser.universityID
                     self.fillFromUser(self.user)
                 }
             }
@@ -337,6 +339,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         phoneLabel.text = user.phoneNumber
         cityLabel.text = user.city
         dateLabel.text = formatter.string(from: user.dateOfRegistration)
+        universityLabel.text = CurrentUniversities.getUniversityByID(user.universityID)?.shortName
         
         self.setPic(base64: user.img)
     }

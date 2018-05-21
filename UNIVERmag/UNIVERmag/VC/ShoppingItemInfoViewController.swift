@@ -18,6 +18,8 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
     @IBOutlet weak var editBut: UIBarButtonItem!
     @IBOutlet weak var callBut: UIButton!
     @IBOutlet weak var changePicBut: UIButton!
+    @IBOutlet weak var universityLabel: UILabel!
+    
     
     var item = ShoppingItem()
     
@@ -64,6 +66,7 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
         callBut.titleLabel?.lineBreakMode = .byWordWrapping
         callBut.titleLabel?.textAlignment = .center
         callBut.setTitle("Call\n\(phoneNum)", for: .normal)
+        universityLabel.text = CurrentUniversities.getUniversityByID(item.universityID)?.shortName
         
         if !item.isSold
         {

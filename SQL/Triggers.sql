@@ -1,16 +1,20 @@
 DROP TRIGGER IF EXISTS restart_item_sequence_after_delete ON items;
 DROP TRIGGER IF EXISTS restart_subcategories_sequence_after_delete ON subcategories;
+DROP TRIGGER IF EXISTS restart_universities_sequence_after_delete ON Universities;
 DROP TRIGGER IF EXISTS item_delete_all_info ON Items;
 DROP TRIGGER IF EXISTS User_Delete_All ON Users;
 DROP TRIGGER IF EXISTS Categories_Delete_All ON categories;
 DROP TRIGGER IF EXISTS Subcategories_Delete_All ON subcategories;
+DROP TRIGGER IF EXISTS Universities_Delete_All ON Universities;
 
 DROP FUNCTION IF EXISTS restart_item_sequence();
 DROP FUNCTION IF EXISTS restart_subcategories_sequence();
+DROP FUNCTION IF EXISTS restart_universities_sequence();
 DROP FUNCTION IF EXISTS func_for_delete_from_items_trigger();
 DROP FUNCTION IF EXISTS func_for_delete_from_users_trigger();
 DROP FUNCTION IF EXISTS func_for_delete_from_categories_trigger();
 DROP FUNCTION IF EXISTS func_for_delete_from_subcategories_trigger();
+DROP FUNCTION IF EXISTS func_for_delete_from_universities_trigger();
 
 
 -- ITEMS
@@ -45,6 +49,22 @@ CREATE TRIGGER restart_subcategories_sequence_after_delete
   AFTER DELETE ON subcategories
     EXECUTE PROCEDURE restart_subcategories_sequence();
 
+-- Universities
+CREATE OR REPLACE FUNCTION restart_universities_sequence() RETURNS TRIGGER AS $$
+BEGIN
+
+  IF ((select count(*) from subcategories) = 0) THEN
+    ALTER SEQUENCE universities_id_seq RESTART WITH 1;
+  END IF;
+
+  RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER restart_universities_sequence_after_delete
+  AFTER DELETE ON Universities
+    EXECUTE PROCEDURE restart_universities_sequence();
+
 
 --------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION func_for_delete_from_items_trigger() RETURNS TRIGGER AS $$
@@ -52,6 +72,7 @@ BEGIN
 
   DELETE FROM Item_Subcategory WHERE Item_Subcategory.Item_ID = OLD.ID;
   DELETE FROM Item_User WHERE Item_User.Item_ID = OLD.ID;
+  DELETE FROM Item_University WHERE Item_University.Item_ID = OLD.ID;
 
   RETURN OLD;
 END;
@@ -62,7 +83,7 @@ CREATE TRIGGER item_delete_all_info
     EXECUTE PROCEDURE func_for_delete_from_items_trigger();
 ---------------------------------------------------------------------------------------------------------------
 
- ---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION func_for_delete_from_users_trigger() RETURNS TRIGGER AS $$
  DECLARE _User_Name VARCHAR(255);
 BEGIN
@@ -81,6 +102,10 @@ BEGIN
   DELETE
   FROM Item_User
   WHERE Item_User.User_name = old.User_name;
+
+  DELETE
+  FROM User_University
+  WHERE User_Name = OLD.User_Name;
 
   RETURN OLD;
 END;
@@ -121,4 +146,23 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER Subcategories_Delete_All
   BEFORE DELETE ON Subcategories FOR EACH ROW
     EXECUTE PROCEDURE func_for_delete_from_subcategories_trigger();
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION func_for_delete_from_universities_trigger() RETURNS TRIGGER AS $$
+BEGIN
+
+  DELETE FROM Item_University
+  WHERE University_ID = OLD.ID;
+
+  DELETE FROM User_University
+  WHERE University_ID = OLD.ID;
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Universities_Delete_All
+  BEFORE DELETE ON Universities FOR EACH ROW
+    EXECUTE PROCEDURE func_for_delete_from_universities_trigger();
 ---------------------------------------------------------------------------------------------------------------
