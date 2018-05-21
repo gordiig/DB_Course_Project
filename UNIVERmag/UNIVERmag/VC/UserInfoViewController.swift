@@ -34,7 +34,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         if user != CurrentUser.getUser
         {
-            refreshBut.isEnabled = false
+            refreshBut.isEnabled = true
             changePhotoBut.isEnabled = false
             changePhotoBut.isHidden = true
             editProfileBut.isEnabled = false
@@ -52,16 +52,16 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
                 webTask(username: user.username)
             }
         }
-        else if user is LookingUser
-        {
-            refreshBut.isEnabled = false
-            editProfileBut.isEnabled = false
-            changePhotoBut.isEnabled = false
-            logOutBut.setTitle("Log in or sign up", for: .normal)
-            fillFromUser(user)
-        }
         else
         {
+            if user is LookingUser
+            {
+                refreshBut.isEnabled = false
+                editProfileBut.isEnabled = false
+                changePhotoBut.isEnabled = false
+                changePhotoBut.isHidden = true
+                logOutBut.setTitle("Log in or sign up", for: .normal)
+            }
             fillFromUser(user)
         }
     }
