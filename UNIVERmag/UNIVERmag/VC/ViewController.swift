@@ -136,6 +136,7 @@ class ViewController: UIViewController, Alertable, UITextFieldDelegate
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
+        LogInButton.isEnabled = true
         self.present(alert, animated: true, completion: nil)
     }
     
