@@ -92,6 +92,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveUser()
     {
         let user = CurrentUser.getUser
+        if user is LookingUser
+        {
+            return
+        }
+        
         guard let data = user.encodeToJSON() else
         {
             removeUserDefaults()
@@ -141,6 +146,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             removeUserDefaults()
             print("Can't read from userinfo.json, or delete file!")
             return false
+        }
+        
+        if user.username == "👀"
+        {
+            CurrentUser.makeJustLooking()
         }
         
         return true
