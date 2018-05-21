@@ -20,6 +20,7 @@ class LookingUser: User
         super.email = String.randomEmoji()
         super.firstName = String.randomEmoji()
         super.lastName = String.randomEmoji()
+        super.phoneNumber = String.randomEmoji()
     }
     
     
