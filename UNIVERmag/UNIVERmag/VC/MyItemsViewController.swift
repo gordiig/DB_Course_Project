@@ -14,7 +14,23 @@ class MyItemsViewController: UserItemsViewController
     override func viewDidLoad()
     {
         user = CurrentUser.getUser
+        if user is LookingUser
+        {
+            self.showAlert(withString: "You are not registered!")
+            return
+        }
+        
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        user = CurrentUser.getUser
+        if user is LookingUser
+        {
+            self.showAlert(withString: "You are not registered!")
+            return
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)

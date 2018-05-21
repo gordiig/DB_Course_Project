@@ -37,6 +37,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         super.viewDidLoad()
         
+        addBut.isEnabled = !(CurrentUser.getUser is LookingUser)
+        
         searchBar.delegate = self
         searchBar.showsCancelButton = true
 
