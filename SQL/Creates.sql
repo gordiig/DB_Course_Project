@@ -13,11 +13,13 @@ CREATE TABLE Items
   ID SERIAL PRIMARY KEY,
   Name VARCHAR(255) NOT NULL,
   Date_added DATE DEFAULT current_date NOT NULL,
-  Price INTEGER,
+  Price INTEGER CONSTRAINT positive_price CHECK (Price > 0),
   About VARCHAR(1023),
   Image VARCHAR(100000),
   Is_Sold BOOLEAN NOT NULL DEFAULT FALSE,
-  Is_Exchangeable BOOLEAN NOT NULL DEFAULT FALSE
+  Is_Exchangeable BOOLEAN NOT NULL DEFAULT FALSE,
+
+  CONSTRAINT with_price_or_exchangeable CHECK ((Price IS NOT NULL) OR Is_Exchangeable)
 );
 
 CREATE TABLE Subcategories
@@ -37,10 +39,10 @@ CREATE TABLE Users
   First_Name VARCHAR(63),
   Last_Name VARCHAR(63),
   Date_Of_Registration DATE DEFAULT current_date NOT NULL,
-  Password VARCHAR(127) NOT NULL,
+  Password VARCHAR(127) NOT NULL CONSTRAINT password_len CHECK (length(Password) >= 6),
   Image VARCHAR(100000),
   Phone_Number VARCHAR(63) NOT NULL,
-  EMAIL VARCHAR(127) NOT NULL,
+  EMAIL VARCHAR(127) NOT NULL CONSTRAINT contains_email_characters CHECK(EMAIL LIKE '%@%.%'),
   City VARCHAR(63) NOT NULL
 );
 
