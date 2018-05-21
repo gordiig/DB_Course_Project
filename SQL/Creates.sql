@@ -2,10 +2,13 @@
 DROP TABLE IF EXISTS Item_User;
 DROP TABLE IF EXISTS Item_Subcategory;
 DROP TABLE IF EXISTS Subcategory_Category;
+DROP TABLE IF EXISTS User_University;
+DROP TABLE IF EXISTS Item_University;
 DROP TABLE IF EXISTS Items;
 DROP TABLE IF EXISTS Subcategories;
 DROP TABLE IF EXISTS Categories;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Universities;
 
 -- Creating
 CREATE TABLE Items
