@@ -69,6 +69,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5Y-Eo-Cul">
+                                <rect key="frame" x="52" y="608" width="271" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <string key="title">I'm just looking 👀
+глаза
+Unicode: U+1F440, UTF-8: F0 9F 91 80</string>
+                                </state>
+                                <connections>
+                                    <action selector="justLookingButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fA7-Xv-Vd6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -76,13 +88,14 @@
                     <navigationItem key="navigationItem" title="Log in" id="lKP-af-v45"/>
                     <connections>
                         <outlet property="LogInButton" destination="3Js-Mu-mXr" id="uzn-fY-H0Z"/>
+                        <outlet property="justLookingButton" destination="V5Y-Eo-Cul" id="i55-iq-h4H"/>
                         <outlet property="passwordTextField" destination="PbJ-SM-yc6" id="6VD-mi-YO7"/>
                         <outlet property="usernameTextField" destination="9YR-jK-ZUm" id="ZNd-7l-pud"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-801" y="8"/>
+            <point key="canvasLocation" x="-802.39999999999998" y="7.6461769115442282"/>
         </scene>
         <!--Sign up-->
         <scene sceneID="Nyh-8J-hPU">

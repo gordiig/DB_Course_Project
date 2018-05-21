@@ -34,7 +34,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         if user != CurrentUser.getUser
         {
-            refreshBut.isEnabled = false
+            refreshBut.isEnabled = true
             changePhotoBut.isEnabled = false
             changePhotoBut.isHidden = true
             editProfileBut.isEnabled = false
@@ -54,6 +54,14 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         else
         {
+            if user is LookingUser
+            {
+                refreshBut.isEnabled = false
+                editProfileBut.isEnabled = false
+                changePhotoBut.isEnabled = false
+                changePhotoBut.isHidden = true
+                logOutBut.setTitle("Log in or sign up", for: .normal)
+            }
             fillFromUser(user)
         }
     }
@@ -338,9 +346,16 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         emailLabel.text = user.email
         phoneLabel.text = user.phoneNumber
         cityLabel.text = user.city
-        dateLabel.text = formatter.string(from: user.dateOfRegistration)
-        universityLabel.text = CurrentUniversities.getUniversityByID(user.universityID)?.shortName
-        
+        if user is LookingUser
+        {
+            dateLabel.text = String.randomEmoji()
+            universityLabel.text = String.randomEmoji()
+        }
+        else
+        {
+            dateLabel.text = formatter.string(from: user.dateOfRegistration)
+            universityLabel.text = CurrentUniversities.getUniversityByID(user.universityID)?.shortName
+        }
         self.setPic(base64: user.img)
     }
     

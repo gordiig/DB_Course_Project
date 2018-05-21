@@ -35,6 +35,7 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
         changePicBut.isHidden = !changePicBut.isEnabled
         
         editBut.isEnabled = (item.uploaderUserName == CurrentUser.getUser.username) ? true : false
+        editBut.isEnabled = !(CurrentUser.getUser is LookingUser)
         uploaderBut.setTitle(item.uploaderUserName ?? "Debug", for: .normal)
         
         guard let img = item.img else
