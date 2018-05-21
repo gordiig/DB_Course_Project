@@ -14,13 +14,14 @@ class WebTasker
     
     
     // MARK: - Shopping Items web task
-    func shoppingItemsWebTask(page: Int, search: String, minPrice: Int, maxPrice: Int, subcatIDs: String, isOnlyEx: String,
+    func shoppingItemsWebTask(page: Int, whatToSearch: String, search: String, minPrice: Int, maxPrice: Int, subcatIDs: String, isOnlyEx: String,
                               errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                               succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
         var finalURL = baseURL.appendingPathComponent("get_shopping_items")
         finalURL.appendPathComponent("\(page)")
         finalURL.appendPathComponent("search")
+        finalURL.appendPathComponent(whatToSearch)
         finalURL.appendPathComponent("\(search)")
         finalURL.appendPathComponent("price")
         finalURL.appendPathComponent("\(minPrice)")
