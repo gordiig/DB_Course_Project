@@ -19,6 +19,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var menuTableView: MenuTableView!
     @IBOutlet weak var onlyExchangeableSwitch: UISwitch!
     @IBOutlet weak var searchSegmentControl: UISegmentedControl!
+    @IBOutlet weak var sortKeySegmentControl: UISegmentedControl!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
@@ -253,7 +254,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         var searchField = ""
-        let segment = searchSegmentControl.selectedSegmentIndex
+        var segment = searchSegmentControl.selectedSegmentIndex
         switch segment
         {
         case 0:
@@ -262,6 +263,21 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             searchField = "user_name"
         case 2:
             searchField = "university_name"
+        default:
+            self.showAlert(withString: "Wrong segment was chosen!")
+            return
+        }
+        
+        var sortKey = "ID"
+        segment = sortKeySegmentControl.selectedSegmentIndex
+        switch segment
+        {
+        case 0:
+            sortKey = "ID"
+        case 1:
+            sortKey = "university"
+        case 2:
+            sortKey = "price"
         default:
             self.showAlert(withString: "Wrong segment was chosen!")
             return
@@ -359,7 +375,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.shoppingItemsWebTask(page: page, whatToSearch: searchField, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.shoppingItemsWebTask(page: page, whatToSearch: searchField, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, sortKey: sortKey, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     @objc func webTaskCat()
