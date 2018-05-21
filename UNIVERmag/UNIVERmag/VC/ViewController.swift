@@ -13,6 +13,7 @@ class ViewController: UIViewController, Alertable, UITextFieldDelegate
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var LogInButton: UIButton!
+    @IBOutlet weak var justLookingButton: UIButton!
     
     override func viewDidLoad()
     {
@@ -119,6 +120,12 @@ class ViewController: UIViewController, Alertable, UITextFieldDelegate
         
         let tasker = CurrentWebTasker.tasker
         tasker.loginTask(username: username, password: password, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
+    
+    @IBAction func justLookingButtonPressed(_ sender: Any)
+    {
+        
     }
     
     
