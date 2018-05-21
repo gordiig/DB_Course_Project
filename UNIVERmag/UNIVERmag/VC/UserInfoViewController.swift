@@ -170,7 +170,7 @@ class UserInfoViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let succsessHandler: (Data, String?) -> Void =
         { (data, ans) in
-            if ans?.first != "0"
+            if ans?.first == "1"
             {
                 DispatchQueue.main.async
                 {

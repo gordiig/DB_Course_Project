@@ -38,7 +38,7 @@ CREATE TABLE Categories
 
 CREATE TABLE Users
 (
-  User_Name VARCHAR(31) DEFAULT CONCAT('USER', cast(random()*10000 AS TEXT)) PRIMARY KEY,
+  User_Name VARCHAR(31) PRIMARY KEY,
   First_Name VARCHAR(63),
   Last_Name VARCHAR(63),
   Date_Of_Registration DATE DEFAULT current_date NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE Subcategory_Category
 
 CREATE TABLE User_University
 (
-  User_Name VARCHAR(31) REFERENCES Users(User_Name),
+  User_Name VARCHAR(31) PRIMARY KEY REFERENCES Users(User_Name),
   University_ID INT REFERENCES Universities(ID)
 );
 

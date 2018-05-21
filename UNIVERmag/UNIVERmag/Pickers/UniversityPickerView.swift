@@ -20,6 +20,8 @@ class UniversityPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
         
         self.delegate = self
         self.dataSource = self
+        
+        for_border()
     }
     
     required init?(coder: NSCoder)
@@ -28,6 +30,16 @@ class UniversityPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewData
         
         self.delegate = self
         self.dataSource = self
+        
+        for_border()
+    }
+    
+    func for_border()
+    {
+        self.layer.cornerRadius = 5
+        self.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        self.layer.borderWidth = 0.5
+        self.clipsToBounds = true
     }
     
     

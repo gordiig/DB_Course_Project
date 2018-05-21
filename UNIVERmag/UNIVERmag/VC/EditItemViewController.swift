@@ -70,10 +70,11 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     {
         if textField != priceTextField { return true }
         
-        var allowedStr = "0123456789."
+        var allowedStr = "0123456789.,"
         let text = textField.text ?? ""
-        if text.contains(".")
+        if text.contains(".") || text.contains(",")
         {
+            allowedStr.removeLast()
             allowedStr.removeLast()
         }
         

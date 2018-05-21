@@ -20,6 +20,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var onlyExchangeableSwitch: UISwitch!
     @IBOutlet weak var searchSegmentControl: UISegmentedControl!
     @IBOutlet weak var sortKeySegmentControl: UISegmentedControl!
+    @IBOutlet weak var showSoldSwitch: UISwitch!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
@@ -283,6 +284,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             return
         }
         
+        let showSold = showSoldSwitch.isOn ? "true" : "false"
+        
         var subcatIDs = ""
         let oneLayer = categoriesArr.inOneLayer
         let selectedSubcats = menuTableView.selectedSubcats
@@ -375,7 +378,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.shoppingItemsWebTask(page: page, whatToSearch: searchField, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, sortKey: sortKey, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.shoppingItemsWebTask(page: page, whatToSearch: searchField, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, sortKey: sortKey, showSold: showSold, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     @objc func webTaskCat()
@@ -465,6 +468,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
+        self.refreshControl.endRefreshing()
+        self.menuRefreshControl.endRefreshing()
         self.present(alert, animated: true, completion: nil)
     }
 
