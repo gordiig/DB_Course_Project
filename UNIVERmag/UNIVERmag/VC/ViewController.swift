@@ -125,7 +125,8 @@ class ViewController: UIViewController, Alertable, UITextFieldDelegate
     
     @IBAction func justLookingButtonPressed(_ sender: Any)
     {
-        
+        CurrentUser.makeJustLooking()
+        goToMainVC()
     }
     
     
