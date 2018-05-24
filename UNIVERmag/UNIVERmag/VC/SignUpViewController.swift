@@ -134,6 +134,12 @@ class SignUpViewController: UIViewController, Alertable, UITextFieldDelegate
         let unNum = universityPickerView.selectedRow(inComponent: 0)
         let unID = CurrentUniversities.cur[unNum].ID
         
+        if (email.index(of: "@") == nil) || (email.index(of: ".") == nil)
+        {
+            showAlert(withString: "Not valid email adress!")
+            return
+        }
+        
         let errorHandler: (Error?) -> Void =
         { (error) in
             DispatchQueue.main.async
