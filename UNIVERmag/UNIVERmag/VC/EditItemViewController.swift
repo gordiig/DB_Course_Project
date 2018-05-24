@@ -19,6 +19,8 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     @IBOutlet weak var aboutTextField: UITextView!
     @IBOutlet weak var submitBut: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var exchangeSwitch: UISwitch!
+    @IBOutlet weak var universityPickerView: UniversityPickerView!
     
     override func viewDidLoad()
     {
@@ -47,6 +49,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         nameTextField.text = item.name
         priceTextField.text = String(item.price.toDouble())
         aboutTextField.text = item.about ?? ""
+        exchangeSwitch.isOn = item.isExchangeable
     }
 
     override func viewWillDisappear(_ animated: Bool)
@@ -67,10 +70,11 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
     {
         if textField != priceTextField { return true }
         
-        var allowedStr = "0123456789."
+        var allowedStr = "0123456789.,"
         let text = textField.text ?? ""
-        if text.contains(".")
+        if text.contains(".") || text.contains(",")
         {
+            allowedStr.removeLast()
             allowedStr.removeLast()
         }
         
@@ -135,6 +139,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         let price = priceMon.toCents()
         
         let about = aboutTextField.text ?? "NULL"
+        let isExchangeable = exchangeSwitch.isOn ? "true" : "false"
         
         let categoriesArr = CurrentCategories.cur
         var subcatIDs = ""
@@ -158,6 +163,8 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let isSold = soldSwitch.isOn ? "Sold" : "NotSold"
+        let unNum = universityPickerView.selectedRow(inComponent: 0)
+        let unID = CurrentUniversities.cur[unNum].ID
         
         let errorHandler: (Error?) -> Void =
         { (error) in
@@ -198,7 +205,7 @@ class EditItemViewController: UIViewController, Alertable, UITextFieldDelegate
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, isSold: isSold, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.editItemWebTask(itemId: itemId, name: name, price: price, about: about, subcatIDs: subcatIDs, isSold: isSold, isExchangeable: isExchangeable, unID: unID, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
         
     }
     

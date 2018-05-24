@@ -14,19 +14,24 @@ class WebTasker
     
     
     // MARK: - Shopping Items web task
-    func shoppingItemsWebTask(page: Int, search: String, minPrice: Int, maxPrice: Int, subcatIDs: String,
+    func shoppingItemsWebTask(page: Int, whatToSearch: String, search: String, minPrice: Int, maxPrice: Int, subcatIDs: String, isOnlyEx: String,
+                              sortKey: String, showSold: String,
                               errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                               succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
         var finalURL = baseURL.appendingPathComponent("get_shopping_items")
         finalURL.appendPathComponent("\(page)")
         finalURL.appendPathComponent("search")
+        finalURL.appendPathComponent(whatToSearch)
         finalURL.appendPathComponent("\(search)")
         finalURL.appendPathComponent("price")
         finalURL.appendPathComponent("\(minPrice)")
         finalURL.appendPathComponent("\(maxPrice)")
         finalURL.appendPathComponent("categories")
         finalURL.appendPathComponent("\(subcatIDs)")
+        finalURL.appendPathComponent(isOnlyEx)
+        finalURL.appendPathComponent(sortKey)
+        finalURL.appendPathComponent(showSold)
         
         baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
@@ -106,11 +111,11 @@ class WebTasker
     
     // MARK: - Update user info web task
     func updateUserInfoWebTask(username: String, password: String, firstName: String, lastName: String, newPassword: String, phone: String, email: String,
-                               city: String,
+                               city: String, unID: Int,
                                errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                                succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(firstName)&\(lastName)&\(newPassword)&\(phone)&\(email)&\(city)"
+        let lastComponent = "\(firstName)&\(lastName)&\(newPassword)&\(phone)&\(email)&\(city)&\(unID)"
         var finalURL = baseURL.appendingPathComponent("update_user_info")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
@@ -120,11 +125,12 @@ class WebTasker
     }
     
     // MARK: - Add item web task
-    func addItemWebTask(username: String, password: String, name: String, price: Int, about: String, subcatIDs: String, img: String,
+    func addItemWebTask(username: String, password: String, name: String, price: Int, about: String, subcatIDs: String, img: String, exchange: String,
+                        unID: Int,
                         errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                         succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(name)&\(price)&\(about)&\(img)&\(subcatIDs)"
+        let lastComponent = "\(name)&\(price)&\(about)&\(img)&\(subcatIDs)&\(exchange)&\(unID)"
         var finalURL = baseURL.appendingPathComponent("upload_item")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
@@ -134,11 +140,11 @@ class WebTasker
     }
     
     // MARK: - Update (edit) item web task
-    func editItemWebTask(itemId: Int, name: String, price: Int, about: String, subcatIDs: String, isSold: String,
+    func editItemWebTask(itemId: Int, name: String, price: Int, about: String, subcatIDs: String, isSold: String, isExchangeable: String, unID: Int,
                          errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                          succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(name)&\(price)&\(about)&\(subcatIDs)&\(isSold)"
+        let lastComponent = "\(name)&\(price)&\(about)&\(subcatIDs)&\(isSold)&\(isExchangeable)&\(unID)"
         var finalURL = baseURL.appendingPathComponent("edit_item")
         finalURL.appendPathComponent(String(itemId))
         finalURL.appendPathComponent(lastComponent)
@@ -147,11 +153,11 @@ class WebTasker
     }
     
     // MARK: - Sign Up web task
-    func signUpWebTask(username: String, firstName: String, lastName: String, password: String, phoneNumber: String, email: String, city: String,
+    func signUpWebTask(username: String, firstName: String, lastName: String, password: String, phoneNumber: String, email: String, city: String, unID: Int,
                        errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
                        succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
     {
-        let lastComponent = "\(username)&\(firstName)&\(lastName)&\(password)&\(phoneNumber)&\(email)&\(city)"
+        let lastComponent = "\(username)&\(firstName)&\(lastName)&\(password)&\(phoneNumber)&\(email)&\(city)&\(unID)"
         var finalURL = baseURL.appendingPathComponent("sign_up")
         finalURL.appendPathComponent(lastComponent)
         
@@ -180,6 +186,15 @@ class WebTasker
         var finalURL = baseURL.appendingPathComponent("delete_account")
         finalURL.appendPathComponent(username)
         finalURL.appendPathComponent(password)
+        
+        baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+    }
+    
+    // MARK: - Get universities web task
+    func getUniversities(errorHandler: @escaping (Error?) -> Void, dataErrorHandler: @escaping () -> Void,
+                         succsessHandler: @escaping (Data, String?) -> Void, deferBody: @escaping () -> Void)
+    {
+        let finalURL = baseURL.appendingPathComponent("get_universities")
         
         baseWebTask(finalURL, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }

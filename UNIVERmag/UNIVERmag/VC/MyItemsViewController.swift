@@ -10,11 +10,29 @@ import UIKit
 
 class MyItemsViewController: UserItemsViewController
 {
-
+    @IBOutlet weak var addBut: UIBarButtonItem!
+    
     override func viewDidLoad()
     {
         user = CurrentUser.getUser
+        if user is LookingUser
+        {
+            addBut.isEnabled = false
+            self.showAlert(withString: "You are not registered!")
+            return
+        }
+        
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        user = CurrentUser.getUser
+        if user is LookingUser
+        {
+            self.showAlert(withString: "You are not registered!")
+            return
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        universitiesWebTask()
         
         let defaults = UserDefaults.standard
         let username = defaults.object(forKey: "Username") as? String
@@ -24,12 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (username != nil) && (password != nil)
         {
-            readUser()
+            if readUser()
+            {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let initialVC = storyboard.instantiateViewController(withIdentifier: "mainTapBarViewController")
+                self.window?.rootViewController = initialVC
+                self.window?.makeKeyAndVisible()
+            }
         }
         else
         {
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
         }
         
         return true
@@ -50,8 +56,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        let defaults = UserDefaults.standard
+        let username = defaults.object(forKey: "Username") as? String
+        let password = defaults.object(forKey: "Password") as? String
         
-        self.readUser()
+        if (username != nil) && (password != nil)
+        {
+            if !readUser()
+            {
+                removeUserDefaults()
+                shouldGoToLogInVC()
+            }
+        }
+        else
+        {
+            removeUserDefaults()
+            shouldGoToLogInVC()
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -71,11 +92,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveUser()
     {
         let user = CurrentUser.getUser
+        if user is LookingUser
+        {
+            return
+        }
+        
         guard let data = user.encodeToJSON() else
         {
-            let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
             print("user.encodeToJSONData returned nil!")
             return
         }
@@ -90,17 +114,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         catch
         {
-            let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
             print("Didn't write userinfo!")
             return
         }
     }
     
-    func readUser()
+    func readUser() -> Bool
     {
-        let defaults = UserDefaults.standard
         let user = CurrentUser.getUser
         
         let fileManager = FileManager.default
@@ -115,22 +136,85 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if !user.decodeFromJSON(data)
             {
-                defaults.removeObject(forKey: "Username")
-                defaults.removeObject(forKey: "Password")
+                removeUserDefaults()
                 print("Can't set user from readed data!")
+                return false
             }
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyboard.instantiateViewController(withIdentifier: "mainTapBarViewController")
-            self.window?.rootViewController = initialVC
-            self.window?.makeKeyAndVisible()
         }
         catch
         {
-            defaults.removeObject(forKey: "Username")
-            defaults.removeObject(forKey: "Password")
+            removeUserDefaults()
             print("Can't read from userinfo.json, or delete file!")
+            return false
         }
+        
+        if user.username == "👀"
+        {
+            CurrentUser.makeJustLooking()
+        }
+        
+        return true
+    }
+    
+    func removeUserDefaults()
+    {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "Username")
+        defaults.removeObject(forKey: "Password")
+    }
+    
+    func shouldGoToLogInVC()
+    {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC = storyboard.instantiateViewController(withIdentifier: "LogInNavigationController")
+        self.window?.rootViewController = initialVC
+        self.window?.makeKeyAndVisible()
+    }
+    
+    
+    func universitiesWebTask()
+    {
+        let errorHandler: (Error?) -> Void =
+        { (error) in
+            DispatchQueue.main.async
+            {
+                print("Error on getting universities")
+            }
+        }
+        
+        let dataErrorHandler: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                print("Error in downloaded data!\n")
+            }
+        }
+        
+        let succsessHandler: (Data, String?) -> Void =
+        { (data, ans) in
+            if ans?.first != "0"
+            {
+                DispatchQueue.main.async
+                {
+                    guard let newUn = University.universitiesFactory(fromData: data) else
+                    {
+                        print("Error on decoding universities")
+                        return
+                    }
+                    CurrentUniversities.cur = newUn
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async
+                {
+                    print("Error in getting universities!")
+                }
+            }
+        }
+        
+        let tasker = CurrentWebTasker.tasker
+        tasker.getUniversities(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
     }
 
     

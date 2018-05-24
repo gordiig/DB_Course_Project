@@ -21,6 +21,7 @@ class User: NSObject, JSONable
     var email = "zzz@zzz.zz"
     var city = "City"
     var img: String?
+    var universityID: Int = 1
     
     // MARK: - Decodable struct
     private struct UserStruct: Codable
@@ -34,6 +35,7 @@ class User: NSObject, JSONable
         var phone_number: String
         var email: String
         var city: String
+        var university_id: Int
         
         init(fromUser user: User)
         {
@@ -49,6 +51,7 @@ class User: NSObject, JSONable
             self.phone_number = user.phoneNumber
             self.email = user.email
             self.city = user.city
+            self.university_id = user.universityID
         }
     }
  
@@ -125,6 +128,7 @@ class User: NSObject, JSONable
         self.phoneNumber = val.phone_number
         self.email = val.email
         self.city = val.city
+        self.universityID = val.university_id
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

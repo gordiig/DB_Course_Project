@@ -17,6 +17,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBlurView: UIVisualEffectView!
     @IBOutlet weak var menuTableView: MenuTableView!
+    @IBOutlet weak var onlyExchangeableSwitch: UISwitch!
+    @IBOutlet weak var searchSegmentControl: UISegmentedControl!
+    @IBOutlet weak var sortKeySegmentControl: UISegmentedControl!
+    @IBOutlet weak var showSoldSwitch: UISwitch!
     
     var showingItems = [ShoppingItem]()
     var savedBeforeWebTasksItems = [ShoppingItem]()
@@ -25,6 +29,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     private let itemsPerPage: Int = 20
     private var nextItemNumForWebTask = 19
     private let refreshControl = UIRefreshControl()
+    private let menuRefreshControl = UIRefreshControl()
     private var edgePanRecognizer: UIScreenEdgePanGestureRecognizer!
     private var panRecognizer: UIPanGestureRecognizer!
     private var categoriesForFilter = [Int]()
@@ -34,6 +39,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         super.viewDidLoad()
         
+        addBut.isEnabled = !(CurrentUser.getUser is LookingUser)
+        
         searchBar.delegate = self
         searchBar.showsCancelButton = true
 
@@ -41,6 +48,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         
         menuTableView.alertDelegate = self
+        menuRefreshControl.addTarget(self, action: #selector(webTaskCat), for: .valueChanged)
+        menuTableView.refreshControl = menuRefreshControl
         
         maxPriceField.delegate = self
         minPriceField.delegate = self
@@ -114,7 +123,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     func menuDidDissapear()
     {
         tableView.isUserInteractionEnabled = true
-        addBut.isEnabled = true
+        if !(CurrentUser.getUser is LookingUser)
+        {
+            addBut.isEnabled = true
+        }
     }
     
     
@@ -160,6 +172,13 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         cell?.isSelected = false
     }
 
+    
+    // MARK: - UISwitch
+    @IBAction func onlyExchangeableSwitchValChanged(_ sender: Any)
+    {
+        searchBarSearchButtonClicked(self.searchBar)
+    }
+    
     
     // MARK: - UISearchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
@@ -217,6 +236,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
     {
         let search_str = searchStr.lowercased()
         
+        let isOnlyEx = onlyExchangeableSwitch.isOn ? "true" : "false"
+        
         let minText = minPriceField.text ?? "."
         var minPrice = -1
         if minText != "." && !minText.isEmpty
@@ -232,6 +253,38 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             let mon = Money(string: maxText)!
             maxPrice = mon.toCents()
         }
+        
+        var searchField = ""
+        var segment = searchSegmentControl.selectedSegmentIndex
+        switch segment
+        {
+        case 0:
+            searchField = "item_name"
+        case 1:
+            searchField = "user_name"
+        case 2:
+            searchField = "university_name"
+        default:
+            self.showAlert(withString: "Wrong segment was chosen!")
+            return
+        }
+        
+        var sortKey = "ID"
+        segment = sortKeySegmentControl.selectedSegmentIndex
+        switch segment
+        {
+        case 0:
+            sortKey = "ID"
+        case 1:
+            sortKey = "university"
+        case 2:
+            sortKey = "price"
+        default:
+            self.showAlert(withString: "Wrong segment was chosen!")
+            return
+        }
+        
+        let showSold = showSoldSwitch.isOn ? "true" : "false"
         
         var subcatIDs = ""
         let oneLayer = categoriesArr.inOneLayer
@@ -325,10 +378,10 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.shoppingItemsWebTask(page: page, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.shoppingItemsWebTask(page: page, whatToSearch: searchField, search: search_str, minPrice: minPrice, maxPrice: maxPrice, subcatIDs: subcatIDs, isOnlyEx: isOnlyEx, sortKey: sortKey, showSold: showSold, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
-    func webTaskCat()
+    @objc func webTaskCat()
     {
         let errorHandler: (Error?) -> Void =
         { (error) in
@@ -368,8 +421,16 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
+        let deferBody: () -> Void =
+        {
+            DispatchQueue.main.async
+            {
+                self.menuRefreshControl.endRefreshing()
+            }
+        }
+        
         let tasker = CurrentWebTasker.tasker
-        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: {})
+        tasker.categoriesWebTask(errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     // MARK: - Refresh
@@ -381,7 +442,7 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.nextItemNumForWebTask = itemsPerPage - 1
         self.webTask(page: 1)
-        self.webTaskCat()
+//        self.webTaskCat()
     }
     
     
@@ -407,6 +468,8 @@ class ShoppingItemsViewController: UIViewController, UITableViewDelegate, UITabl
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
+        self.refreshControl.endRefreshing()
+        self.menuRefreshControl.endRefreshing()
         self.present(alert, animated: true, completion: nil)
     }
 

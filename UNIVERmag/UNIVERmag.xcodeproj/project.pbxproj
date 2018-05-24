@@ -15,6 +15,8 @@
 		131D92EE20A6D8EF00BC55C6 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131D92ED20A6D8EF00BC55C6 /* EditItemViewController.swift */; };
 		133855A4206A9E19009AC737 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */; };
 		1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338E1EE208E166E00984217 /* UserItemsViewController.swift */; };
+		133A95C120B2D10100EAE85B /* LookingUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133A95C020B2D10100EAE85B /* LookingUser.swift */; };
+		133A95C320B2D27800EAE85B /* RandomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133A95C220B2D27800EAE85B /* RandomEmoji.swift */; };
 		134DB01F207D0D45006D7E73 /* UIImageStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */; };
 		1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352C9EB207F215200C72D21 /* AddItemViewController.swift */; };
 		1352C9EE207F259600C72D21 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1352C9ED207F259600C72D21 /* Alertable.swift */; };
@@ -39,6 +41,9 @@
 		13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DCB6F2206C0A4B00446339 /* JSONable.swift */; };
 		13DD0C7E209E052800F21435 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C7D209E052800F21435 /* Money.swift */; };
 		13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */; };
+		13F3D99B20B1F7F5008F8A4F /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F3D99A20B1F7F5008F8A4F /* University.swift */; };
+		13F3D99D20B1FB28008F8A4F /* CurrentUniversities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F3D99C20B1FB28008F8A4F /* CurrentUniversities.swift */; };
+		13F3D9A020B20006008F8A4F /* UniversityPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F3D99F20B20006008F8A4F /* UniversityPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +55,8 @@
 		131D92ED20A6D8EF00BC55C6 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		133855A3206A9E19009AC737 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
 		1338E1EE208E166E00984217 /* UserItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemsViewController.swift; sourceTree = "<group>"; };
+		133A95C020B2D10100EAE85B /* LookingUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookingUser.swift; sourceTree = "<group>"; };
+		133A95C220B2D27800EAE85B /* RandomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomEmoji.swift; sourceTree = "<group>"; };
 		134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageStringExtension.swift; sourceTree = "<group>"; };
 		1352C9EB207F215200C72D21 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		1352C9ED207F259600C72D21 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
@@ -76,6 +83,9 @@
 		13DCB6F2206C0A4B00446339 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		13DD0C7D209E052800F21435 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleToIntegers.swift; sourceTree = "<group>"; };
+		13F3D99A20B1F7F5008F8A4F /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
+		13F3D99C20B1FB28008F8A4F /* CurrentUniversities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUniversities.swift; sourceTree = "<group>"; };
+		13F3D99F20B20006008F8A4F /* UniversityPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +121,11 @@
 			children = (
 				13C0F0F2206912DC00CC5084 /* User.swift */,
 				13DCB6F0206C083E00446339 /* ShoppingItem.swift */,
+				13F3D99A20B1F7F5008F8A4F /* University.swift */,
 				1311F2DC209CBF2C0037E6EF /* Categories.swift */,
 				13DD0C7D209E052800F21435 /* Money.swift */,
 				131068C820A057EC0080B4C8 /* WebTasker.swift */,
+				133A95C020B2D10100EAE85B /* LookingUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -133,6 +145,7 @@
 				1369B0172069322B00B480D2 /* CurrentUser.swift */,
 				13CEF8A820A037B000A6442B /* CurrentCategories.swift */,
 				131068CB20A076090080B4C8 /* CurrentWebTasker.swift */,
+				13F3D99C20B1FB28008F8A4F /* CurrentUniversities.swift */,
 			);
 			path = Singletons;
 			sourceTree = "<group>";
@@ -159,6 +172,7 @@
 				131068CA20A075D20080B4C8 /* Singletons */,
 				13CEF8AA20A046C600A6442B /* Delegates */,
 				13CEF8A520A036C200A6442B /* TableViews */,
+				13F3D99E20B1FFD1008F8A4F /* Pickers */,
 				1390BC63209E3F4A00831E01 /* TableViewCells */,
 				13DD0C7F209E067600F21435 /* Extensions */,
 				130075D820774B430060CF46 /* Protocols */,
@@ -205,8 +219,17 @@
 			children = (
 				134DB01E207D0D45006D7E73 /* UIImageStringExtension.swift */,
 				13DD0C80209E071A00F21435 /* DoubleToIntegers.swift */,
+				133A95C220B2D27800EAE85B /* RandomEmoji.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		13F3D99E20B1FFD1008F8A4F /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				13F3D99F20B20006008F8A4F /* UniversityPickerView.swift */,
+			);
+			path = Pickers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,19 +320,24 @@
 				1390BC60209E368900831E01 /* CategoryTableViewCell.swift in Sources */,
 				1352C9EE207F259600C72D21 /* Alertable.swift in Sources */,
 				131D92EE20A6D8EF00BC55C6 /* EditItemViewController.swift in Sources */,
+				13F3D9A020B20006008F8A4F /* UniversityPickerView.swift in Sources */,
 				130B4FE420A866300092EF23 /* SignUpViewController.swift in Sources */,
 				1385739E204D9A440032054F /* ShoppingItemsViewController.swift in Sources */,
 				13DD0C7E209E052800F21435 /* Money.swift in Sources */,
 				131068CC20A076090080B4C8 /* CurrentWebTasker.swift in Sources */,
+				133A95C320B2D27800EAE85B /* RandomEmoji.swift in Sources */,
+				133A95C120B2D10100EAE85B /* LookingUser.swift in Sources */,
 				13DCB6F3206C0A4B00446339 /* JSONable.swift in Sources */,
 				1352C9EC207F215200C72D21 /* AddItemViewController.swift in Sources */,
 				13DD0C81209E071A00F21435 /* DoubleToIntegers.swift in Sources */,
 				131068C920A057EC0080B4C8 /* WebTasker.swift in Sources */,
 				1338E1EF208E166E00984217 /* UserItemsViewController.swift in Sources */,
+				13F3D99D20B1FB28008F8A4F /* CurrentUniversities.swift in Sources */,
 				13DCB6F1206C083E00446339 /* ShoppingItem.swift in Sources */,
 				13CEF8A720A036EC00A6442B /* MenuTableView.swift in Sources */,
 				1390BC62209E36F700831E01 /* SubcategoryTableViewCell.swift in Sources */,
 				13C0F0F3206912DC00CC5084 /* User.swift in Sources */,
+				13F3D99B20B1F7F5008F8A4F /* University.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

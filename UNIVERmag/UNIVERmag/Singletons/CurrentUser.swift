@@ -16,4 +16,9 @@ class CurrentUser
     {
         getUser = User()
     }
+    
+    static func makeJustLooking()
+    {
+        getUser = LookingUser()
+    }
 }

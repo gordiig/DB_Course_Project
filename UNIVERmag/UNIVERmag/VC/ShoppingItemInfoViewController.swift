@@ -18,6 +18,8 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
     @IBOutlet weak var editBut: UIBarButtonItem!
     @IBOutlet weak var callBut: UIButton!
     @IBOutlet weak var changePicBut: UIButton!
+    @IBOutlet weak var universityLabel: UILabel!
+    
     
     var item = ShoppingItem()
     
@@ -32,7 +34,15 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
         changePicBut.isEnabled = item.uploaderUserName == CurrentUser.getUser.username
         changePicBut.isHidden = !changePicBut.isEnabled
         
-        editBut.isEnabled = (item.uploaderUserName == CurrentUser.getUser.username) ? true : false
+        if (item.uploaderUserName != CurrentUser.getUser.username) || (CurrentUser.getUser is LookingUser)
+        {
+            editBut.isEnabled = false
+        }
+        else
+        {
+            editBut.isEnabled = true
+        }
+        
         uploaderBut.setTitle(item.uploaderUserName ?? "Debug", for: .normal)
         
         guard let img = item.img else
@@ -57,13 +67,14 @@ class ShoppingItemInfoViewController: UIViewController, Alertable, UIImagePicker
         
         dateLabel.text = formatter.string(from: item.dateAdded)
         aboutLabel.text = item.about
-        priceLabel.text = String(describing: item.price)
+        priceLabel.text = String(describing: item.price) + (item.isExchangeable ? " (ex)" : "")
         
         var phoneNum = item.phoneNumber ?? "None"
         phoneNum = item.uploaderUserName == CurrentUser.getUser.username ? CurrentUser.getUser.phoneNumber : phoneNum
         callBut.titleLabel?.lineBreakMode = .byWordWrapping
         callBut.titleLabel?.textAlignment = .center
         callBut.setTitle("Call\n\(phoneNum)", for: .normal)
+        universityLabel.text = CurrentUniversities.getUniversityByID(item.universityID)?.shortName
         
         if !item.isSold
         {

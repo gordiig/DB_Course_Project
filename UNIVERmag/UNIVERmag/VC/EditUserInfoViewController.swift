@@ -18,6 +18,7 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var deleteAccountBut: UIButton!
+    @IBOutlet weak var universityPickerView: UniversityPickerView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     
@@ -131,6 +132,14 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
         let phone = phoneTextField.text ?? user.phoneNumber
         let email = emailTextField.text ?? user.email
         let city = cityTextField.text ?? user.city
+        let unNum = universityPickerView.selectedRow(inComponent: 0)
+        let unID = CurrentUniversities.cur[unNum].ID
+        
+        if (email.index(of: "@") == nil) || (email.index(of: ".") == nil)
+        {
+            showAlert(withString: "Not valid email adress!")
+            return
+        }
         
         let errorHandler: (Error?) -> Void =
         { (error) in
@@ -185,7 +194,7 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.updateUserInfoWebTask(username: username, password: password, firstName: firstName, lastName: lastName, newPassword: newPassword, phone: phone, email: email, city: city, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.updateUserInfoWebTask(username: username, password: password, firstName: firstName, lastName: lastName, newPassword: newPassword, phone: phone, email: email, city: city, unID: unID, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     func deleteWebTask()
@@ -219,6 +228,10 @@ class EditUserInfoViewController: UIViewController, Alertable, UITextFieldDelega
             {
                 DispatchQueue.main.async
                 {
+                    let defaults = UserDefaults.standard
+                    defaults.removeObject(forKey: "Username")
+                    defaults.removeObject(forKey: "Password")
+                    
                     guard let destVC = self.storyboard?.instantiateViewController(withIdentifier: "LogInNavigationController") else
                     {
                         self.showAlert(withString: "Can't instantiate LogIn VC!")

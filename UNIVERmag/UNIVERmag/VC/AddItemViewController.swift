@@ -17,6 +17,8 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var aboutTextField: UITextView!
     @IBOutlet weak var submitBut: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var universityPickerView: UniversityPickerView!
+    @IBOutlet weak var exchangeSwitch: UISwitch!
     let sendingItem = ShoppingItem()
     
     
@@ -61,10 +63,11 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         if textField != priceTextField { return true }
         
-        var allowedStr = "0123456789."
+        var allowedStr = "0123456789.,"
         let text = textField.text ?? ""
-        if text.contains(".")
+        if text.contains(".") || text.contains(",")
         {
+            allowedStr.removeLast()
             allowedStr.removeLast()
         }
         
@@ -170,11 +173,14 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
             return
         }
         
+        let exchange = exchangeSwitch.isOn ? "true" : "false"
         let name = sendingItem.name
         let price = sendingItem.price
         let about = sendingItem.about ?? "NULL"
         let _img = sendingItem.img ?? "NULL"
         let img = _img.replacingOccurrences(of: "/", with: "$")
+        let unNum = universityPickerView.selectedRow(inComponent: 0)
+        let unID = CurrentUniversities.cur[unNum].ID
         
         let categoriesArr = CurrentCategories.cur
         var subcatIDs = ""
@@ -241,7 +247,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         let tasker = CurrentWebTasker.tasker
-        tasker.addItemWebTask(username: username, password: password, name: name, price: price.toCents(), about: about, subcatIDs: subcatIDs, img: img, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
+        tasker.addItemWebTask(username: username, password: password, name: name, price: price.toCents(), about: about, subcatIDs: subcatIDs, img: img, exchange: exchange, unID: unID, errorHandler: errorHandler, dataErrorHandler: dataErrorHandler, succsessHandler: succsessHandler, deferBody: deferBody)
     }
     
     
@@ -251,6 +257,7 @@ class AddItemViewController: UIViewController, UIImagePickerControllerDelegate, 
         let alert = UIAlertController(title: title, message: str, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
+        self.submitBut.isEnabled = true
         self.present(alert, animated: true, completion: nil)
     }
 }
